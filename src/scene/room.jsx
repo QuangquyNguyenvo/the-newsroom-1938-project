@@ -138,22 +138,27 @@ function Outside() {
   const texture = useTexture(`${base}assets/references/saigon-1930.jpg`);
   useEffect(() => {
     texture.colorSpace = THREE.SRGBColorSpace;
-    texture.repeat.set(.58, 1);
-    texture.offset.set(.21, 0);
+    // Crop the postcard mount; only the photographed street is visible.
+    texture.repeat.set(.47, .8);
+    texture.offset.set(.28, .1);
     texture.needsUpdate = true;
   }, [texture]);
-  return <mesh position={[0, 2.6, -3.015]}>
-    <planeGeometry args={[1.48, 1.94]} />
-    <meshBasicMaterial map={texture} color="#b8ad91" />
+  return <mesh position={[0, 2.6, -5.2]}>
+    <planeGeometry args={[2.7, 3.45]} />
+    <meshBasicMaterial map={texture} color="#eee6d3" toneMapped={false} />
   </mesh>;
 }
 
 function Shutter({ side, material, register, hingeRef }) {
-  return <Target id="window" register={register} position={[side * .76, 2.6, -2.82]}>
-    <group ref={hingeRef}>
-      <group position={[-side * .17, 0, 0]}>
-        {[-.17, .17].map((edge, index) => <Box key={index} size={[.035, 1.96, .045]} position={[edge, 0, 0]} material={material} tiles="wood" />)}
-        {Array.from({ length: 16 }, (_, index) => <Box key={index} size={[.34, .085, .028]} position={[0, -.88 + index * .118, 0]} rotation={[-.35, 0, 0]} material={material} tiles="wood" />)}
+  return <Target id="window" register={register} position={[side * .84, 2.6, -2.88]}>
+    <group ref={hingeRef} rotation={[0, side * 1.42, 0]}>
+      <group position={[-side * .36, 0, 0]}>
+        {[-.36, .36].map(edge => <Box key={edge} size={[.065, 2.08, .075]} position={[edge, 0, 0]} material={material} tiles="wood" />)}
+        {[-1.005, 0, 1.005].map(edge => <Box key={edge} size={[.73, .065, .075]} position={[0, edge, 0]} material={material} tiles="wood" />)}
+        {Array.from({ length: 15 }, (_, index) => <Box key={index} size={[.64, .092, .04]} position={[0, -.91 + index * .13, 0]} rotation={[-.45, 0, 0]} material={material} tiles="wood" />)}
+        <mesh position={[side * .24, -.03, .058]} material={material} castShadow>
+          <sphereGeometry args={[.022, 8, 6]} />
+        </mesh>
       </group>
     </group>
   </Target>;
@@ -162,11 +167,14 @@ function Shutter({ side, material, register, hingeRef }) {
 function Window({ m, register, shutterRefs }) {
   return <>
     <Target id="window" register={register}>
-      <Box size={[1.7, 2.15, .1]} position={[0, 2.6, -3.08]} material={m.wood} tiles="wood" />
+      {[-.91, .91].map(x => <Box key={x} size={[.14, 2.37, .22]} position={[x, 2.6, -3.1]} material={m.wood} tiles="wood" />)}
+      {[1.43, 3.77].map(y => <Box key={y} size={[1.92, .14, .22]} position={[0, y, -3.1]} material={m.wood} tiles="wood" />)}
+      <Box size={[1.98, .1, .38]} position={[0, 1.39, -2.99]} material={m.wood} tiles="wood" />
     </Target>
     <Asset><Outside /></Asset>
-    <Box size={[.08, 2, .15]} position={[0, 2.6, -2.92]} material={m.wood} tiles="wood" />
-    <Box size={[1.6, .08, .15]} position={[0, 2.6, -2.92]} material={m.wood} tiles="wood" />
+    {[-3.23, -3.04].map(z => <React.Fragment key={z}>
+      {[-.83, .83].map(x => <Box key={x} size={[.045, 2.25, .045]} position={[x, 2.6, z]} material={m.wood} tiles="wood" />)}
+    </React.Fragment>)}
     {[-1, 1].map((side, index) => <Shutter key={side} side={side} material={m.wood} register={register} hingeRef={node => { shutterRefs.current[index] = node; }} />)}
   </>;
 }
@@ -314,7 +322,7 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
     interact(id) {
       propState.current[id] = !propState.current[id];
       const active = propState.current[id];
-      if (id === 'window') shutterRefs.current.forEach((hinge, index) => animate(hinge?.rotation, { y: active ? index === 0 ? -.95 : .95 : 0 }));
+      if (id === 'window') shutterRefs.current.forEach((hinge, index) => animate(hinge?.rotation, { y: active ? 0 : index === 0 ? -1.42 : 1.42 }));
       if (id === 'lamp') animate(lampLightRef.current, { intensity: active ? 0 : .7 });
       if (id === 'chair') animate(chairRef.current?.position, { z: active ? -.55 : -.85 });
       if (id === 'ink') animate(capRef.current?.position, { x: active ? .12 : 0, y: active ? .011 : .12 });
@@ -331,11 +339,14 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
     m.dispose();
     for (const material of Object.values(m)) if (material?.isMaterial) material.dispose();
   }, [m]);
-  const sunTarget = useMemo(() => { const object = new THREE.Object3D(); object.position.set(0, .7, -.7); return object; }, []);
+  const sunTarget = useMemo(() => { const object = new THREE.Object3D(); object.position.set(.25, .65, -1.15); return object; }, []);
   const interactionHandlers = useMemo(() => ({pick:onObjectPick,hover:onObjectHover}), [onObjectPick, onObjectHover]);
   return <InteractionContext.Provider value={interactionHandlers}><group scale={.75}>
     <Box size={[8, .12, 8]} position={[0, -.07, 0]} material={m.tile} tiles="tile" />
-    <Box size={[8, 4.5, .15]} position={[0, 2.2, -3.2]} material={m.wall} tiles="wall" />
+    <Box size={[3.09, 4.5, .15]} position={[-2.455, 2.2, -3.2]} material={m.wall} tiles="wall" />
+    <Box size={[3.09, 4.5, .15]} position={[2.455, 2.2, -3.2]} material={m.wall} tiles="wall" />
+    <Box size={[1.82, 1.45, .15]} position={[0, .725, -3.2]} material={m.wall} tiles="wall" />
+    <Box size={[1.82, .76, .15]} position={[0, 4.12, -3.2]} material={m.wall} tiles="wall" />
     <Box size={[.15, 4.5, 7]} position={[-4, 2.2, -.2]} material={m.wall} tiles="wall" />
     <Box size={[.15, 4.5, 7]} position={[4, 2.2, -.2]} material={m.wall} tiles="wall" />
     <Box size={[8, .12, 7]} position={[0, 4.48, -.2]} material={m.ceiling} />
@@ -351,10 +362,13 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
     <Document id="letter" size={[.235, .333]} position={[-1.05, 1.085, -1.65]} title="BẢN THẢO" subtitle="DÂN SINH · DÂN CHỦ" angle={.12} m={m} register={register} clipped />
     <Document id="photo" size={[.31, .42]} position={[-.65, 1.085, -2.4]} title="ẢNH SƯU TẬP" subtitle="THAM KHẢO THỊ GIÁC" angle={-.15} m={m} register={register} />
     <ModelAt id="drawer" register={register} asset="painted_wooden_cabinet" size={[.8, .91, .55]} position={[-2.1, 0, -.8]} />
+    <Asset><Model asset="wicker_basket_01" size={[.43, .36, .43]} position={[-2.9, 0, -.12]} /></Asset>
     <Document id="board" size={[.46, .63]} position={[-.2, 1.085, -1.85]} title="DÂN CHÚNG" subtitle="SÀI GÒN · DÂN SINH · DÂN CHỦ" m={m} register={register} />
     <ModelAt id="lamp" register={register} asset="vintage_oil_lamp" size={[.24, .5, .24]} position={[-1.25, 1.08, -2.65]} />
+    <Asset><Model asset="jug_01" size={[.19, .26, .19]} position={[1.33, 1.08, -2.65]} /></Asset>
     <pointLight ref={lampLightRef} color="#ffc075" intensity={.7} distance={1.8} position={[-1.25, 1.34, -2.65]} />
     <Asset><Model asset="wooden_bookshelf_worn" size={[1.5, 2.35, .6]} position={[-2.65, 0, -2.2]} /></Asset>
+    <Asset><Model asset="wooden_crate_01" size={[.5, .3, .36]} position={[-2.64, 1.16, -2.13]} /></Asset>
     <Notebook m={m} register={register} addLod={addLod} />
     <Archive m={m} register={register} />
     {Array.from({ length: 5 }, (_, index) => <Box key={index} size={[.08, .25 + index * .02, .26]} position={[-3.15 + index * .17, 1.89 + (.25 + index * .02) / 2, -2.18]} material={index % 2 ? m.dark : m.red} tiles={index % 2 ? 'dark' : undefined} />)}
@@ -367,6 +381,7 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
     <Calendar m={m} register={register} materialRef={calendarMaterialRef} mapRef={calendarMaps} />
     <hemisphereLight args={['#e7e5df', '#322b24', .9]} />
     <primitive object={sunTarget} />
-    <directionalLight color="#eee5d4" intensity={1.45} position={[0, 3.8, -2.85]} target={sunTarget} castShadow shadow-mapSize={[1024, 1024]} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5} shadow-bias={-.001} />
+    <directionalLight color="#ffe4b1" intensity={2.1} position={[-1.8, 4.6, -5.1]} target={sunTarget} castShadow shadow-mapSize={[1024, 1024]} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5} shadow-bias={-.001} />
+    <pointLight color="#ffe5bd" intensity={.65} distance={3.2} position={[0, 2.8, -2.8]} />
   </group></InteractionContext.Provider>;
 }

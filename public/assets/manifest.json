@@ -714,6 +714,126 @@
       "note": "StarNinjas",
       "sha256": "3fd510b29e52ea6f47a87472707d1e159b09dfeada5ae9e25a3525071ecc2a6a",
       "historicalEvidence": false
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/wicker_basket_01.bin",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "sha256": "8e96025ffcdc64a7e75d1aa980f2491b1219912a4554272cd1e192a966c399f8",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/wicker_basket_01_1k.gltf",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "sha256": "9ad86c33f00f46a18c9bc8bfc28c0036090ee819f7270d0028ec408512c04094",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/textures/wicker_basket_01_arm_1k.jpg",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "sha256": "5150638cbcd8f1bc07b76af3b60b31a4c5e7d38ce66ac8906b9c3192f3283b9a",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/textures/wicker_basket_01_diff_1k.jpg",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "sha256": "15156c7855d5642f6bb594edfad5bcdcfe11f87f3e109956cb9e8fdb15fef921",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/textures/wicker_basket_01_nor_gl_1k.jpg",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "sha256": "d06024a37ef330d05bf128b8488f72769af05e72d266ffbc810d7f09ea2b32f9",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/wooden_crate_01.bin",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "sha256": "85f381f8035f7a6f2f3b848640894c6d3333b261946dd8a338c0fe19e0bea21e",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/wooden_crate_01_1k.gltf",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "sha256": "fd9c6073acfc671e12b64666053f2805ae33aff5d3dbbcfe5c97c08c06644927",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/textures/wooden_crate_01_arm_1k.jpg",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "sha256": "cd0b031c3924905e16ffd78ead062c2cc274148c4104d09635310097738b4679",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/textures/wooden_crate_01_diff_1k.jpg",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "sha256": "16653f4abaf4c1d9bca94bde3bd8c54d0ea9a5298d1648abcf57de1f7ecc34cc",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/textures/wooden_crate_01_nor_gl_1k.jpg",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "sha256": "f4ea44c7dc1686123d337039cb713d74e8a2dbc6d1bd2beeac276d06f5df3fab",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/jug_01/jug_01.bin",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "sha256": "2dd3772547ae41cc7beeaa5f002e741cfe2c014ed4717731c5076810154bedb9",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/jug_01/jug_01_1k.gltf",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "sha256": "87dc40eb3e45b0185699f18cf5988b81fe5b1a01f0cf76c1daa93774878d7e44",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/jug_01/textures/jug_01_arm_1k.jpg",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "sha256": "ca3559de912341bf0661ea89d2b33c8b804344124e1f0ba65f1d34cd2859f947",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/jug_01/textures/jug_01_diff_1k.jpg",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "sha256": "c716b455f46c1fa06745383f4237bb587a196c919e0af8b19fe207db192b74e4",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/models/jug_01/textures/jug_01_nor_gl_1k.jpg",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "sha256": "f06aef6c2cbb434beee5323ce28b30c9f03bbc72bc1bfe291f6a2db926e027d7",
+      "historicalEvidence": false,
+      "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
     }
   ],
   "pending": [
