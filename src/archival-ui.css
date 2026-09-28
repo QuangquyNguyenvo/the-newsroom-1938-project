@@ -1,0 +1,71 @@
+/* Shared print vocabulary for HUD, every dialog, reader, notebook and story. */
+:root {--paper:#eadbb9;--ink:#2b251b;--red:#77262b;--rule:#6d5b3d}
+button {border-radius:0;font-family:'Noto Serif',serif;box-shadow:none;transition:background .15s,color .15s}
+button:focus-visible,a:focus-visible {outline:2px solid #8a302b;outline-offset:3px}
+.masthead {padding:22px 28px;background:linear-gradient(#211910b3,transparent)}
+.masthead>div {color:#f4e7c8;text-shadow:0 2px 2px #21170f}
+.masthead .eyebrow {font-family:'Noto Serif',serif;font-weight:400;letter-spacing:.08em;color:#e6d2a9}
+.masthead h1 {font-size:27px;letter-spacing:-.04em}
+.edition {font:10px 'Noto Serif',serif;letter-spacing:.13em;color:#e6d2a9}
+.light-button,.mission,.thought,.hover-label,.navigation,dialog {color:var(--ink);background:var(--paper) url('/assets/textures/archival-paper.png') center/780px;border-radius:0}
+.light-button {border:1px solid var(--rule);box-shadow:inset 0 0 0 3px #e5d5ae;font-size:13px}
+.mission {width:260px;top:133px;left:28px;padding:18px 20px;border:1px solid #8b7856;box-shadow:2px 4px 7px #21170f40}
+.mission::before {content:'PHIẾU BIÊN TẬP';display:block;font:700 10px 'Noto Serif',serif;letter-spacing:.1em;border-bottom:3px double var(--rule);padding-bottom:8px;margin-bottom:10px}
+.mission .eyebrow {color:#685239;letter-spacing:.06em;font-family:'Noto Serif',serif;font-weight:400;font-size:11px;margin-bottom:8px}
+.mission h2 {font-size:23px;line-height:1.3;margin-bottom:10px;color:#2b251b}
+.mission p {font-family:'Noto Serif',serif;font-size:12px;line-height:1.7}
+.mission button {width:100%;border:1px solid #77262b;background:transparent;color:#77262b;font-weight:700;min-height:42px;padding:9px}
+.mission button:hover {background:#77262b;color:#f5e6c9}
+.mission .small {color:#5e503a;font-size:10px;text-align:right;border-top:1px solid #8b785666;padding-top:9px;margin-top:12px}
+.thought {bottom:96px;width:min(570px,calc(100% - 38px));padding:12px 22px 13px;text-align:left;border:1px solid #8b7856;box-shadow:2px 3px 7px #21170f40;pointer-events:none}
+.thought::before {content:'Ghi bên lề';display:block;font:400 10px 'Noto Serif',serif;color:#806448;margin-bottom:4px}
+.thought .eyebrow {display:none}
+.thought p {font:400 14px/1.65 'Noto Serif',serif;color:#332a1f;margin:0;border-left:2px solid #7b302b;padding-left:12px}
+.navigation {padding:13px 24px;gap:12px;background-color:#d2bf97;border-top:3px double #6d5b3d;box-shadow:0 -3px 12px #21170f35}
+.navigation nav button {color:#51412c;background:transparent;border:1px solid #907955;font-size:12px;padding:9px 13px}
+.navigation nav button:hover {background:#bf9d5d30}
+.navigation nav button[aria-pressed=true] {color:#77262b;border:1px solid #77262b;background:#77262b0c;box-shadow:inset 0 -2px #77262b}
+.controls-note {color:#5f4d35;font-family:'Noto Serif',serif;font-size:10px}
+.hover-label {top:54%;border:1px solid #806a43;padding:7px 12px;font-family:'Noto Serif',serif;box-shadow:2px 3px 8px #21170f40}
+dialog {padding:27px 30px;border:1px solid #8b7856;border-top:1px solid #8b7856;box-shadow:5px 9px 0 #2b1c1126,0 20px 70px #0008}
+dialog::backdrop {background:#1c130bb5;backdrop-filter:blur(2px)}
+.dialog-head {border-bottom:3px double #786444;margin-bottom:18px;padding-bottom:6px}
+.dialog-head .eyebrow,dialog>.eyebrow {font-family:'Noto Serif',serif;letter-spacing:.09em;color:#67533b;font-size:10px}
+.dialog-head button {width:36px;min-height:36px;border:1px solid #816d4d;color:#5d332b;font:18px 'Noto Serif',serif}
+.dialog-head button:hover {background:#77262b12}
+dialog h2 {color:#2b251b;font-size:28px;line-height:1.35;letter-spacing:-.035em;margin-bottom:20px}
+dialog p {font-family:'Noto Serif',serif;font-size:15px;line-height:1.85}
+dialog .small {font-size:11px;color:#6c573e}
+.document {background:transparent;border:0;border-top:1px solid #7a6445;border-bottom:1px solid #7a6445;padding:21px 0}
+.document h3 {font-size:22px;color:#2b251b}
+.source {padding-top:10px;border-top:1px solid #a48c663f;font:10px/1.7 'Noto Serif',serif!important;color:#68533c}
+.source a {color:#6e3028;text-decoration-thickness:1px;text-underline-offset:3px}
+.page-controls {gap:0;border-bottom:1px solid #8c7754;padding-bottom:10px}
+.page-controls button {border:1px solid #8b7651;color:#58482f;margin-right:-1px;font-size:12px;background:transparent;min-height:38px;padding:8px 15px}
+.page-controls button.active {color:#7b292b;background:#7b292b09;box-shadow:inset 0 -2px #7b292b}
+.object-list {gap:0;border-top:1px solid #8d7956}
+.object-list button {background:transparent;color:#342b1e;text-align:left;border-bottom:1px solid #8d79566e;padding:16px 12px;font-size:15px}
+.object-list button::before {content:'↳';margin-right:14px;color:#8a302b}
+.object-list button:hover {background:#856a3220}
+.note {padding:19px 0;border-bottom:1px solid #8f755b66}
+.note .eyebrow {font-family:'Noto Serif',serif;color:#715a40;letter-spacing:.04em;font-weight:400}
+.note h3 {font-size:20px;margin:6px 0 12px}
+.note p {font-size:14px}
+.feedback {border-left:2px solid #83342e;padding:8px 12px;background:#77262b07;font-family:'Noto Serif',serif;font-size:12px;font-weight:400;color:#71332b}
+.story-frame {text-align:left;background:transparent;border:0;border-top:3px double #7e6849;padding:24px 0;animation:none}
+.story-frame h3 {font-size:28px}
+.story-image {background:transparent;text-align:center;border-bottom:1px solid #8e7753;padding-bottom:12px}
+.story-image img {animation:none}
+.stamp {font-family:'Noto Serif',serif;letter-spacing:.06em;font-size:12px;padding:7px 10px;margin-bottom:20px;border:3px double #77262b}
+.video-placeholder {background:transparent;color:#423322;border:1px dashed #816b47;padding:24px;margin-bottom:20px}
+.video-placeholder .eyebrow {font-family:'Noto Serif',serif;color:#77262b}
+.final-page {background:transparent;border:1px solid #756044}
+#intro {padding:30px 36px;max-width:540px;border:1px solid #826c4a}
+#intro>.eyebrow {border-bottom:3px double #786444;padding-bottom:10px}
+#intro h2 {font-size:39px;line-height:1.25;color:#2b251b;margin:20px 0}
+#intro p {font-size:14px}
+#intro button {border:3px double #eed7a5;background:#77262b;outline:1px solid #77262b;font-size:14px}
+.editor-panel {background:var(--paper) url('/assets/textures/archival-paper.png') center/780px;border:1px solid #8b7856}
+.editor-panel>#panel-title {font-size:20px}
+@media(max-width:850px){.mission{left:20px;top:124px;width:228px;padding:15px}.masthead{padding:20px}.navigation{padding:12px}.controls-note{display:none}}
+@media(max-width:550px){.masthead h1{font-size:21px}.masthead .eyebrow{font-size:8px}.mission{top:110px;left:15px;width:190px;padding:12px 14px}.mission::before{font-size:8px;padding-bottom:6px;margin-bottom:7px}.mission h2{font-size:18px}.mission p{font-size:11px}.mission .eyebrow{font-size:10px}.mission button{font-size:11px;padding:7px}.thought{bottom:131px;padding:10px 14px}.thought p{font-size:12px}.navigation{padding:10px}.navigation nav button{font-size:10px;padding:8px}.navigation .light-button{font-size:11px}dialog{padding:20px}.editor-panel{padding:16px 12px}#intro{padding:25px}#intro h2{font-size:32px}}

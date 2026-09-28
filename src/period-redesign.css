@@ -1,0 +1,147 @@
+/* Material-specific paper: newsprint for print, folder board for tools. */
+:root {--newsprint:url('/assets/textures/newsprint-stock.png');--folder:url('/assets/textures/archive-folder.png')}
+.mission,.navigation,.type-case,dialog {background-image:var(--folder);background-size:900px;color:#2e261c}
+.thought,.hover-label,.word-piece,.evidence-card,.document,.note {background-image:var(--newsprint);background-size:900px}
+.thought {box-shadow:1px 3px 9px #0003;border:0;border-left:3px solid #77262b}
+.document {padding:24px 22px;border:1px solid #9b8b6c;box-shadow:2px 4px 7px #30251920}
+.note {padding:20px;margin-bottom:12px}
+.type-case {border:1px solid #715c3d;box-shadow:inset 0 0 0 4px #b7a078}
+.type-case .eyebrow {color:#593b25}
+.editor-panel {background-image:var(--folder);padding:18px 24px}
+.editor-panel>#panel-title {font:400 13px 'Noto Serif',serif;margin:0 0 12px;color:#564331}
+.editor-panel .dialog-head {margin-bottom:8px}
+.newspaper {background:#e5dfd0 var(--newsprint) center/1050px;color:#201f1b;transform:none;padding:18px 22px 12px;border:1px solid #a69c87;box-shadow:4px 6px 0 #362c2126}
+.paper-meta {font:400 9px/1.5 'Noto Serif',serif;letter-spacing:0;border-bottom:1px solid #302d25;padding-bottom:5px}
+.paper-name {font:700 clamp(48px,6vw,85px)/1.03 'Noto Serif',serif;letter-spacing:-.065em;transform:scaleX(.9);margin:9px 0 0;text-shadow:.4px 0 #242018}
+.paper-motto {text-align:center;font:italic 12px 'Noto Serif',serif;margin:5px 0 10px}
+.paper-deck {font:700 10px/1.5 'Noto Serif',serif;padding:6px;border-top:1px solid #302d25;border-bottom:4px double #302d25}
+.paper-issue {font:400 9px 'Noto Serif',serif}
+.paper-headline {font:700 29px/1.22 'Noto Serif',serif;text-align:left;padding:12px 0 10px;letter-spacing:-.045em;color:#211e18}
+.paper-columns {gap:14px;grid-template-columns:1fr 1.45fr 1fr;padding:12px 0 16px}
+.paper-column+.paper-column {padding-left:14px;border-left:1px solid #635d4f}
+.paper-column h4 {font:700 18px/1.2 'Noto Serif',serif;letter-spacing:-.035em;margin:0 0 9px}
+.paper-column p {font:400 12px/1.55 'Noto Serif',serif;text-align:justify;hyphens:auto;margin:10px 0}
+.word-slot {background:transparent;border:0;border-top:1px solid #4a4438;border-bottom:1px solid #4a4438;min-height:60px;padding:7px 3px;color:#34291d;font-size:21px}
+.slot-number {font:400 8px 'Noto Serif',serif;letter-spacing:.035em}
+.word-slot:hover,.word-slot.drop-target {background:#a77b2520}
+.word-slot.filled {font:700 19px/1.2 'Noto Serif',serif;border-top:1px solid #4a4438;border-bottom:1px solid #4a4438}
+.word-slot.filled .slot-number {display:none}
+.archive-figure img {max-height:240px;object-fit:contain;filter:grayscale(1) contrast(1.25);mix-blend-mode:multiply}
+.paper-bottom {text-align:left;font:400 8px/1.5 'Noto Serif',serif}
+.final-page {background-image:var(--newsprint)}
+@media(max-width:550px){.newspaper{padding:13px 12px}.paper-columns{grid-template-columns:1fr 1fr;gap:10px}.paper-column:last-child{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid #635d4f;padding-top:12px}.paper-headline{font-size:24px}.paper-name{font-size:49px}.paper-column p{font-size:12px}.document{padding:16px}}
+
+/* Compact room HUD keeps props visible. Expand only the current assignment. */
+.masthead {padding:18px 22px;background:linear-gradient(#17171399,transparent)}
+.masthead .eyebrow {display:none}.masthead h1 {font-size:21px}.edition {font-size:9px}
+.masthead .light-button {background:#e8e0ce;border:0;box-shadow:none;min-height:44px}
+.mission {top:96px;left:22px;width:235px;padding:12px 14px;background:#e8e0ce var(--newsprint) center/1100px;border:0;box-shadow:0 2px 8px #0003;display:grid;grid-template-columns:1fr auto;gap:5px 8px}
+.mission::before {display:none}.mission .eyebrow {font-size:9px;margin:0;grid-column:1}.mission h2 {font-size:17px;line-height:1.35;margin:0;grid-column:1}
+#mission-toggle {display:block;grid-column:2;grid-row:1/3;width:44px;min-height:44px;padding:4px;font-size:10px;border:0;color:#67513a}
+.mission #chapter-intro,.mission #progress {display:none}.mission.expanded #chapter-intro,.mission.expanded #progress {display:block;grid-column:1/-1;font-size:12px;margin:4px 0}
+.mission #edit-button {grid-column:1/-1;min-height:36px;padding:6px;font-size:11px;font-weight:400;margin-top:5px}
+.navigation {left:50%;right:auto;bottom:14px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);padding:5px;gap:5px;border:1px solid #b8ae9855;background:#201e19e8;box-shadow:0 3px 16px #0004}
+.navigation nav {gap:4px}.navigation nav button,.navigation>.light-button {background:transparent;box-shadow:none;border:0;color:#e4dcc9;min-height:44px;font-size:11px;padding:8px 12px}
+.navigation nav button[aria-pressed=true] {background:#e8e0ce;color:#4b3026;border:0;box-shadow:none}.controls-note {display:none}
+.thought {bottom:88px;width:min(510px,calc(100% - 28px));padding:8px 14px;background:#171713c9;border:0;box-shadow:none;color:#f0e6d2}
+.thought::before {display:none}.thought p {font-size:13px;color:#f0e6d2;border:0;padding:0;text-align:center}
+.type-case .small {color:#4e402e!important}
+@media(max-width:700px){.masthead{padding:12px 14px}.masthead h1{font-size:18px}.mission{top:76px;left:12px;right:auto;width:min(235px,calc(100% - 24px))}.mission h2{font-size:16px}.mission #edit-button{grid-column:1/-1;grid-row:auto;min-height:44px}.navigation{bottom:max(8px,env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:center;width:calc(100% - 24px);padding:4px}.navigation nav{display:flex;justify-content:center;width:auto;gap:2px}.navigation nav button{font-size:10px;padding:8px}.navigation>.light-button{width:auto;font-size:10px;padding:8px}.thought{bottom:116px;left:14px;right:14px;width:auto;transform:none}.thought p{font-size:12px}}
+
+/* Preserve the paper grain quietly behind small print. */
+.newspaper,.document,.note {background-image:linear-gradient(#eee9dfb8,#eee9dfb8),var(--newsprint)}
+.mission {background-image:linear-gradient(#eee9dfcc,#eee9dfcc),var(--newsprint)}
+dialog,.editor-panel,.type-case {background-image:linear-gradient(#d9c7a58c,#d9c7a58c),var(--folder)}
+.word-piece,.evidence-card {background-image:linear-gradient(#eee9dfcc,#eee9dfcc),var(--newsprint)}
+#mission-toggle {white-space:nowrap;width:52px}
+
+/* Keep dialog chrome and editor actions inside the viewport; only content scrolls. */
+#panel[open] {display:flex;flex-direction:column;overflow:hidden;max-height:calc(100dvh - 24px);box-sizing:border-box;margin:auto}
+#panel>.dialog-head,#panel>#panel-title,#panel>.panel-actions {flex-shrink:0}
+#panel>.dialog-head {position:static}
+#panel>#panel-body {min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 5px 16px;scrollbar-gutter:stable}
+#panel>.panel-actions {display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid #8b7651;padding-top:12px;background:transparent;margin-top:8px}
+.panel-actions button {min-height:44px;flex:1;padding:10px 12px;font-size:12px}
+#panel .editor-switch {top:0}
+#panel #panel-body .page-controls {flex-wrap:wrap}
+#panel #collect-button {margin-top:12px;min-height:44px}
+@media(max-width:550px){#panel[open]{max-height:calc(100dvh - 16px);padding:14px;width:calc(100% - 16px)}#panel>#panel-title{font-size:21px;margin-bottom:12px}.panel-actions button{font-size:11px;padding:8px;min-width:80px}}
+
+/* Readers take the material and construction of the picked prop. */
+#panel[data-kind=notebook] {background:#571f24 url('/assets/textures/notebook-cloth.png') center/600px;border:1px solid #361216;box-shadow:5px 8px 0 #351b17;padding-left:28px;color:#eadfc5}
+#panel[data-kind=notebook]::before {content:'';position:absolute;left:10px;top:15px;bottom:15px;width:2px;background:#291313;box-shadow:3px 0 #8b55553d}
+#panel[data-kind=notebook]>.dialog-head,#panel[data-kind=notebook]>h2 {color:#eee2c6}
+#panel[data-kind=notebook] .dialog-head .eyebrow,#panel[data-kind=notebook] .dialog-head button {color:#eee2c6}
+#panel[data-kind=notebook] .document {background:#eee8d6 url('/assets/textures/notebook-page.png') center/100% auto;padding:25px 30px 25px 45px;border:0;min-height:230px;box-shadow:2px 4px 6px #180b09a6}
+#panel[data-kind=notebook] .document p {line-height:1.9}
+#panel[data-kind=notebook] .page-controls button {color:#eadfc5;border-color:#b89975}
+#panel[data-kind=paper] {background:#eee8d8 var(--newsprint) center/900px;border:0;box-shadow:5px 7px 0 #93836a4a}
+#panel[data-kind=paper] .document {background:transparent;border:0;box-shadow:none;padding:8px 10px}
+#panel[data-kind=folder] {border-top:12px solid #816341;background:#c8ad7e var(--folder) center/900px}
+#panel[data-kind=folder] .document {background:#eee7d6 var(--newsprint) center/900px;transform:rotate(-.25deg)}
+#panel[data-kind=photo] {background:#35312a;border:12px solid #5f4b34;color:#e5decf}
+#panel[data-kind=photo] h2,#panel[data-kind=photo] .dialog-head .eyebrow {color:#e5decf}
+.masthead {gap:8px}.masthead>div {margin-right:auto}#sound-button{font-size:11px;padding:8px;min-height:44px}
+@media(max-width:550px){#panel[data-kind=notebook]{padding-left:24px}#panel[data-kind=notebook] .document{padding:18px 18px 18px 30px}.masthead h1{font-size:16px}.masthead .light-button{padding:6px;font-size:10px}}
+#panel[data-kind=notebook] .document,#panel[data-kind=notebook] .document p {color:#2d271e}
+
+/* Compact physical reader controls; body retains ownership of vertical scrolling. */
+#close-panel{min-width:48px;min-height:48px;padding:8px;border:0;background:transparent;color:#5b201b}
+#close-panel svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter}
+.reader-stage{perspective:1200px;touch-action:pan-y;outline-offset:4px}
+.reader-stage .document{backface-visibility:hidden;min-height:190px}
+.reader-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 10px}
+.reader-nav[hidden]{display:none}
+.reader-nav button{font-family:Georgia,serif;font-size:36px;line-height:1;min-width:48px;min-height:48px;padding:0;border:0;background:transparent;color:#6b2623}
+.reader-nav button:disabled{opacity:.2}
+.reader-count{font-size:12px;color:#5a4c38;text-align:center}
+.reader-record button{min-height:44px;padding:10px 18px;width:auto}
+@media(max-width:550px){.reader-stage .document{padding:18px 16px}.reader-record button{width:100%}}
+
+.reference-photo{display:block;max-width:100%;width:240px;max-height:240px;object-fit:contain;margin:0 auto 16px;filter:sepia(.25)}
+
+#panel .reader-stage .document, #panel .reader-stage .document p{color:#2d271e}#panel .reader-count{color:#cfc0a4}#panel .reader-nav button,#panel #close-panel{color:#c29156}
+
+/* Readers follow a B5 portrait silhouette, with the page separate from its cover. */
+#panel[data-item]{width:min(460px,calc(100vw - 24px));padding:18px 22px;border-width:1px}
+#panel[data-item] #panel-title{font-size:19px;line-height:1.4;margin:4px 0 14px}
+#panel[data-item] .reader-stage{position:relative;isolation:isolate;perspective:1500px;overflow:visible;margin:0 4px;transform-style:preserve-3d}
+#panel[data-item] .reader-stage .document{position:relative;width:100%;min-height:400px;aspect-ratio:176 / 250;box-sizing:border-box;padding:30px 24px;box-shadow:2px 2px 0 #bcae91,4px 4px 0 #d8c9ac,7px 8px 15px #0004;background-color:#e7dec8}
+#panel[data-item] .document h3{font-size:23px;line-height:1.4;margin-top:0}
+#panel[data-item] .document p{font-family:'Noto Serif',serif;font-size:16px;line-height:1.9}
+#panel[data-item] .document .source{font-size:10px;margin-top:22px;padding-top:10px}
+#panel[data-kind=notebook] .reader-stage .document{padding-left:38px;background-size:auto 100%;border-left:8px solid #b4a487;background-image:linear-gradient(90deg,#0002,transparent 8%),url('/assets/textures/notebook-page.png')}
+#panel[data-item] .page-bed{position:absolute;inset:0;background:#d9ccb0 url('/assets/textures/notebook-page.png') center/auto 100%;box-shadow:5px 5px #b5a789}
+.turning-leaf{position:absolute;top:0;left:0;width:100%;transform-style:preserve-3d;pointer-events:none;z-index:5}
+#panel[data-item] .turning-leaf .document{margin:0;height:100%;box-shadow:none}
+.leaf-front,.leaf-back{position:absolute!important;inset:0;backface-visibility:hidden}
+.leaf-back{transform:rotateY(180deg);background:#dfd4ba url('/assets/textures/notebook-page.png') center/auto 100%;box-shadow:inset -18px 0 20px #49351840}
+.page-turn-shadow{position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(90deg,#25190bd9,transparent);opacity:0;transform-origin:left}
+#panel[data-item] .reader-count{color:#634d32;font-size:11px}
+#panel[data-kind=notebook] .reader-count,#panel[data-kind=photo] .reader-count{color:#e3cfaa}
+.masthead button svg,#chapter-number svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+#notebook-button{display:flex;align-items:center;gap:5px}#notebook-button #clue-count{font-size:11px;min-width:17px}
+#sound-button{width:44px;padding:8px}#chapter-number{display:flex;align-items:center;gap:9px}#chapter-number svg{width:22px;height:22px}
+.thought[hidden]{display:none!important}
+@media(max-width:550px){#panel[data-item]{width:calc(100vw - 16px);padding:12px 15px}#panel[data-item] .reader-stage .document{min-height:350px;padding:23px 18px}#panel[data-item] .document p{font-size:15px}#panel[data-item] .document h3{font-size:20px}#panel[data-item] #panel-title{font-size:16px}#panel[data-kind=notebook] .reader-stage .document{padding-left:29px}}
+
+#panel[data-item] .document details.source{font-size:11px;padding-top:12px;margin-top:20px;border-top:1px solid #8c765c66;line-height:1.6}
+.document .source summary{cursor:pointer;color:#694e2f}.document .source a{display:block;margin-top:8px}
+#panel[data-item] .ink-word{display:inline;padding:0;min-height:0;font:inherit;color:inherit;border:0;border-bottom:1px dotted #74231f;background:none;box-shadow:none;border-radius:0}
+#panel[data-item] .ink-word[aria-pressed=true]{box-shadow:inset 0 -5px #c2a15970;border-bottom:2px solid #782720;color:#782720}
+.reader-record{font-family:'Noto Serif',serif;font-size:12px;line-height:1.6;padding-top:5px}
+
+/* Page transforms cannot create native horizontal/vertical scrollbar flashes. */
+#panel[data-item] #panel-body{overflow-x:hidden;scrollbar-width:none;scrollbar-gutter:auto}
+#panel[data-item] #panel-body::-webkit-scrollbar{display:none}
+#panel[data-item].turning-page #panel-body{overflow:hidden}
+#intro.entering{position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:transparent;box-shadow:none;overflow:hidden}
+#intro.entering::backdrop{background:transparent;backdrop-filter:none}
+#intro.entering>:not(.entry-doors):not(.entry-caption){visibility:hidden;pointer-events:none}
+.entry-doors{position:absolute;inset:0;pointer-events:none}
+.entry-left,.entry-right{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(#1e130f99,#1e130f99),url('/assets/textures/pbr/wood_table_001_diff_1k.jpg') center/auto 100%;box-shadow:inset 0 0 0 18px #24150e,inset 0 0 0 24px #58402a}
+.entry-left{left:0;border-right:4px solid #080605}.entry-right{right:0;border-left:4px solid #080605}
+.entry-left::after{content:'';position:absolute;right:22px;top:49%;width:10px;height:60px;background:#a0854e;border-radius:4px;box-shadow:0 2px 3px #000}
+#intro .entry-caption{position:absolute;bottom:12%;left:0;right:0;margin:0;text-align:center;color:#eee2c8;text-shadow:0 2px 5px #000;font-family:'Noto Serif',serif;pointer-events:none}
+.entry-caption small{display:block;margin-top:10px;font-size:11px;color:#c7baa2}
+.thought[aria-busy=true] #thought-text::after{content:'▏';color:#c3a56a}

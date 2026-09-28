@@ -1,0 +1,724 @@
+{
+  "schema": 1,
+  "assets": [
+    {
+      "path": "/assets/textures/archival-paper.png",
+      "type": "illustrative-texture",
+      "historicalEvidence": false,
+      "note": "Inspected visually; seamless edge behavior is not independently certified. Used as base-color only, not a PBR material set."
+    },
+    {
+      "path": "/assets/references/dan-chung.jpg",
+      "type": "user-supplied-reference",
+      "origin": "User-supplied newspaper collage, copied without alteration",
+      "historicalEvidence": false,
+      "rights": "Original photographer/source not supplied; verify before public distribution",
+      "note": "Visual reference only. Not attributed as a specific issue or event."
+    },
+    {
+      "path": "build:fontsource-fonts",
+      "type": "self-hosted-fonts",
+      "origin": "@fontsource/noto-serif@5.3.0 and @fontsource/be-vietnam-pro@5.3.0",
+      "license": "SIL Open Font License 1.1",
+      "licenseFiles": [
+        "/assets/fonts/noto-serif-LICENSE.txt",
+        "/assets/fonts/be-vietnam-pro-LICENSE.txt"
+      ],
+      "note": "Vietnamese/Latin/Latin-ext 400 and 700; unicode ranges preserved; WOFF2 only."
+    },
+    {
+      "path": "/assets/textures/pbr/plastered_wall_02_diff_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/plastered_wall_02",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "0a316ffd3f953a902325c06afb5a5863bbf71d13a353f9d85378562adca79603",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/plastered_wall_02_nor_gl_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/plastered_wall_02",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "0f1b4ea0c4707ea133f133c020923bddd8610a43a153281dad15d49f39ad9624",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/plastered_wall_02_rough_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/plastered_wall_02",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "6c317c0e647b02259601690bd33501bbc825858c6d1715cd0f8f46a5b51f6db4",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/rusty_painted_metal_diff_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/rusty_painted_metal",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "b086937b45c3628116a838363364a29bd3c5d2542cff906ec1d92d681ee80e15",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/rusty_painted_metal_nor_gl_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/rusty_painted_metal",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "f3372e2f60517df2d0e02c1472eb24071d95182d771c30b7ecd8e1b5142768bb",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/rusty_painted_metal_rough_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/rusty_painted_metal",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "2d1c355c793c5886ef9dcecfc06da354e30218a84a9fe28de37741d2f2ed5aaa",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/wood_table_001_diff_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/wood_table_001",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "460dd08d240f4a1f02982415048c3c5c200f385db212da18dc7e2df68bf4d0be",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/wood_table_001_nor_gl_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/wood_table_001",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "9bf7ddf5721e225c20290f1772ae37f9bdfd49658f6d458259eb794e2149d3cf",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/pbr/wood_table_001_rough_1k.jpg",
+      "type": "pbr-texture",
+      "origin": "https://polyhaven.com/a/wood_table_001",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sha256": "a2ca9ae89dfe7b8e2e5e92f0aa43467845417de8a50205b5852ef0d57c7624f9",
+      "historicalEvidence": false,
+      "note": "Original 1K JPG downloaded unchanged; self-hosted."
+    },
+    {
+      "path": "/assets/textures/saigon-cement-tile.png",
+      "type": "illustrative-texture",
+      "historicalEvidence": false,
+      "sha256": "ee99841384c704f77492560e0bd4da2a0c32f3292be3ee53a61dfcd10b1bcc7d",
+      "note": "New matte cement tile design inspired by early twentieth-century Saigon encaustic floors; not an exact archival pattern. Rendered at an illustrative 50 cm tile size."
+    },
+    {
+      "path": "/assets/models/drawer_cabinet/drawer_cabinet.bin",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/drawer_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "3460b9fe00ffbe779b7f7f2de3b159c214cfec275c06194add0eebd951ee14e9",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
+      "status": "rejected-modern-appearance-not-used"
+    },
+    {
+      "path": "/assets/models/drawer_cabinet/drawer_cabinet_1k.gltf",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/drawer_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "899581e6a041644139a138f909c6ba001684cc55b5d1702e08f01094e20d0617",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
+      "status": "rejected-modern-appearance-not-used"
+    },
+    {
+      "path": "/assets/models/drawer_cabinet/textures/drawer_cabinet_arm_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/drawer_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "8f8eefaaadcee247204c5658c2f4d9cac598222336918b01eb48e4190317788c",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
+      "status": "rejected-modern-appearance-not-used"
+    },
+    {
+      "path": "/assets/models/drawer_cabinet/textures/drawer_cabinet_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/drawer_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "0fe270409b54a5609662dda14afaa94af4bd3267dcd83dd824e05fa880d96efb",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
+      "status": "rejected-modern-appearance-not-used"
+    },
+    {
+      "path": "/assets/models/drawer_cabinet/textures/drawer_cabinet_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/drawer_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "26d0904ad341353e095ef619d157a5f416be014500475976f1144827cc849faa",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
+      "status": "rejected-modern-appearance-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/vintage_oil_lamp.bin",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "4064065c8e288beaa58639c139c801db337bfc6183e73378a9177157f0587167",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/vintage_oil_lamp_1k.gltf",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "ae570b98ea30b0337f62d8e7f551c03a05de00b238f3fac8f1ca5a1f1dbd1add",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_arm_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "004b7b6238632e4fc9e2ad7e76529caa292cfd96f5a42d6564531207f25c3e92",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "a96cc1383fb056618eca80a0cf4ae192286c8752f8e83cb52f9fec02ca94a471",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_flame_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "827c6a4fa9274141636cee9415f416a32937f2f257901bbe8488b22b862509f1",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_glass_arm_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "0ef2b0eb2087895851be979afc5ccb2c11076f71bc667f9e586b7f8038efc158",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_glass_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "dbe33017c012a00c74419bb8f05b16a2eeee5e06e2ceab49a80462d25c7a7c0a",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_glass_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "2752589c8f6c7724bf2aa5d097010bd9257fff8ca0f85add13ec2ac702909df0",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "54db7efff64c4117782e25851544a0eb4881e5e28a13a06917a16d15ce26b1db",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/wooden_bookshelf_worn.bin",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "170758113b50132380ab46943f6eab18f2714460dead065aae37241a94abf0f9",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/wooden_bookshelf_worn_1k.gltf",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "a1c5b3f1e71ae0b5eb73047e8097bceaa5f17e5d2d0d7ae1b8053d5ec0878fc6",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_arm_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "41b3aca38fb55cb300d971016a597c80425da3744a6d33d82fe78f9dbe609eaa",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "970f60178decadd0d8fb1e5872f718350a49b027fd69469210c41ead350cba56",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "90ffb1b3f7bb638d5a7e1a2b244a260d623e314a6010a6b8c23c57203e510ac9",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_table_02/wooden_table_02.bin",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_table_02",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "52ed7cc67b3aa403375cf9bd18050e8cc21bcced6532a0183c1a733f0965df6d",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_table_02/wooden_table_02_1k.gltf",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_table_02",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "bb38e301840cb629d72c43c83fdb7fb308518efe2d0bc01e1ed0e9a9e43ed9d3",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_table_02/textures/wooden_table_02_arm_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_table_02",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "b970a81e4b03f3b8a341c9eb639f112fff1782d681c846255ebc9073cd803ced",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_table_02/textures/wooden_table_02_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_table_02",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "2334ac3e23d69222322515d9bad066b4e90d7d81989fe231b8fb12f39179ad9e",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/models/wooden_table_02/textures/wooden_table_02_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_table_02",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "9470e08e5dab4ab6a7cafab2a488a50fb54fa8f38890e9032c39dcbf7f5846d2",
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+    },
+    {
+      "path": "/assets/textures/newsprint-stock.png",
+      "type": "illustrative-ui-texture",
+      "historicalEvidence": false,
+      "sha256": "f7fa47b04ccde07452fb9255a16e3767a011de101468e357b65472db92c02b0a"
+    },
+    {
+      "path": "/assets/textures/archive-folder.png",
+      "type": "illustrative-ui-texture",
+      "historicalEvidence": false,
+      "sha256": "f4e715b1e9f9b5e1c2a4a043a27ef63dc982d4041dd6c077537c9e59264db637"
+    },
+    {
+      "path": "/assets/models/painted_wooden_cabinet/painted_wooden_cabinet.bin",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/painted_wooden_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "1023d773d84c42f2709ec297247d90b0e2833e37241fbe852e2f33b41ae10cda",
+      "status": "used"
+    },
+    {
+      "path": "/assets/models/painted_wooden_cabinet/painted_wooden_cabinet_1k.gltf",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/painted_wooden_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "ce04543cdb10e05fe9c2cc08e9c118b16c1c717a07bcbfac9b99859465c8d1ed",
+      "status": "used"
+    },
+    {
+      "path": "/assets/models/painted_wooden_cabinet/textures/painted_wooden_cabinet_arm_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/painted_wooden_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "34e0bcb00a62704d85161d41e844e798d4f894e416e7769079d50a21d561d171",
+      "status": "used"
+    },
+    {
+      "path": "/assets/models/painted_wooden_cabinet/textures/painted_wooden_cabinet_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/painted_wooden_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "2dbed9f9ec8e49fc2e87de8cd86e2029a80e9001b5102b4e47c7dfa913f34d89",
+      "status": "used"
+    },
+    {
+      "path": "/assets/models/painted_wooden_cabinet/textures/painted_wooden_cabinet_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/painted_wooden_cabinet",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "e94edf68faeaf68016c28da9b9f299bb38c57463acd94130ecf98dcaef790016",
+      "status": "used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/vintage_cabinet_01.bin",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "407c58be2c5efb1d41d549fcff6a57d18d025033803dcb241e57349dd65bcf60",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/vintage_cabinet_01_1k.gltf",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "ce66c642cb13ba11bf7cde72bb58ad465dce1909dbef8a22dd55b28d857c1848",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_arm_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "0f5970977780b6dbb202f1371777b7b616dee9da7e01760eee306c2202ffeb17",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "06453bb3e2811147a7558914437c20042f3f5c21b9c4f1d3488bdfe94f25f03f",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "08d64582202f32c8f2250ee2061dc870678ac694206f9b4edf2acd11e33323a4",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_rough_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "a641d1ac6b43ca25eb1b26e631057b79c3f2ab1b39a3460a5894b5c3dd22b420",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_diff_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "81967dbb387b205b2aa6f253165c8c44f60cdf5e57d9ceebf230fef21569b33a",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_nor_gl_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "c9580fbf1f69d7bc23817216e2954c713c87aceb5c4f04b9b1a5233c2cf2ce7b",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_rough_1k.jpg",
+      "type": "downloaded-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "1f11ec7fdea1b6a9ce7ea8a3d2110f944860aeb72dce4d017b8d2880582dfb20",
+      "status": "candidate-not-used"
+    },
+    {
+      "path": "/assets/textures/limewash-wall.png",
+      "type": "illustrative-texture",
+      "historicalEvidence": false,
+      "sha256": "b2b9781df241af40f98471582f2671dec0294db337249de53b90e418275e6ade",
+      "note": "Flat matte limewash-inspired wall material; not evidence of a documented newspaper office."
+    },
+    {
+      "path": "/assets/audio/click_001.ogg",
+      "origin": "https://kenney.nl/assets/interface-sounds",
+      "type": "sfx",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9"
+    },
+    {
+      "path": "/assets/audio/close_001.ogg",
+      "origin": "https://kenney.nl/assets/interface-sounds",
+      "type": "sfx",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "44af8249b933e0fd35ec957a638bb1a0b01f85b53fbe9674bf77bd3ca3168ef4"
+    },
+    {
+      "path": "/assets/audio/confirmation_001.ogg",
+      "origin": "https://kenney.nl/assets/interface-sounds",
+      "type": "sfx",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a"
+    },
+    {
+      "path": "/assets/audio/drop_001.ogg",
+      "origin": "https://kenney.nl/assets/interface-sounds",
+      "type": "sfx",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af"
+    },
+    {
+      "path": "/assets/audio/error_001.ogg",
+      "origin": "https://kenney.nl/assets/interface-sounds",
+      "type": "sfx",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "46e67425d16339772e8d328fb36a49426c9467418686e11beeb71ff84b0f6433"
+    },
+    {
+      "path": "/assets/audio/Kenney-LICENSE.txt",
+      "origin": "https://kenney.nl/assets/interface-sounds",
+      "type": "sfx",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9"
+    },
+    {
+      "path": "/assets/audio/open_001.ogg",
+      "origin": "https://kenney.nl/assets/interface-sounds",
+      "type": "sfx",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "a27c6bb0df7da1e6af5dd5937593c98bc58b6e513f42fe6a3254cd6a6949c648"
+    },
+    {
+      "path": "/assets/textures/notebook-cloth.png",
+      "type": "illustrative-texture",
+      "historicalEvidence": false,
+      "sha256": "3e68cd01b68d7d242765ee98344d280b12da01cbaaf40f521d93429b73a9525e"
+    },
+    {
+      "path": "/assets/textures/notebook-page.png",
+      "type": "illustrative-texture",
+      "historicalEvidence": false,
+      "sha256": "fdf3b0a1c2c3df524791ac957d058ee1f1d56194d4f1cab0bf034166f0201037"
+    },
+    {
+      "path": "/assets/textures/ceiling-lime.png",
+      "type": "illustrative-texture",
+      "historicalEvidence": false,
+      "sha256": "280d1db7ea644836c0ac7fe217b53bb8adf12630845171290b5e0ffe99aece97"
+    },
+    {
+      "path": "/assets/models/painted_wooden_chair_01/painted_wooden_chair_01.bin",
+      "origin": "https://polyhaven.com/a/painted_wooden_chair_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "eaf952048db1e770c45898049b8abe28deb83d3dbbaad81d5e7e43e22a322295"
+    },
+    {
+      "path": "/assets/models/painted_wooden_chair_01/painted_wooden_chair_01_1k.gltf",
+      "origin": "https://polyhaven.com/a/painted_wooden_chair_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "34f55ebe1851b89c045dc62d4461c848de3b93c0668e752a2b5f6cbed2d91a5e"
+    },
+    {
+      "path": "/assets/models/painted_wooden_chair_01/textures/painted_wooden_chair_01_arm_1k.jpg",
+      "origin": "https://polyhaven.com/a/painted_wooden_chair_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "9d2de0ea0d630e8e5af05424b1f41b1ae4a80465d27a78eb471cd7f8556db84e"
+    },
+    {
+      "path": "/assets/models/painted_wooden_chair_01/textures/painted_wooden_chair_01_diff_1k.jpg",
+      "origin": "https://polyhaven.com/a/painted_wooden_chair_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "de67d1f8a0318616a7ee769cbe5c513301c2b25056542d011bb4359498f9e25d"
+    },
+    {
+      "path": "/assets/models/painted_wooden_chair_01/textures/painted_wooden_chair_01_nor_gl_1k.jpg",
+      "origin": "https://polyhaven.com/a/painted_wooden_chair_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "27301c3ac6a7daf9e0ba418ec85feaa44cc898e61d048211bca57133f22e1807"
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/mantel_clock_01.bin",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "95e2b4820daaea592aa3e354bb06aa78c2e747fb89939b54eaf51140294d40c7"
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/mantel_clock_01_1k.gltf",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "e4c4f264175626fa14f12409ee5d687cf7f0d68fd1881cb7eb927c5f112de6ab"
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/textures/mantel_clock_01_arm_1k.jpg",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "08dea26547315f6a081bfe0763da8eb987430833cd82f65bd472de165aaa6ba7"
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/textures/mantel_clock_01_diff_1k.jpg",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "278062fa68c0f763ecd55d59ed31873bfb7fb004a83ec7a3e5e26b31d3d1e23f"
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/textures/mantel_clock_01_nor_gl_1k.jpg",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "type": "downloaded-model-asset",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "faa4e33a64fee23010abc03fff82f277ed1b1f115ab0651259e9c7df0aca6d5f"
+    },
+    {
+      "path": "/assets/references/saigon-1930.jpg",
+      "origin": "https://commons.wikimedia.org/wiki/File:Saigon_--_Quartier_chinois.jpg",
+      "license": "Public domain",
+      "note": "Indochine française. Aéronautique militaire, 1930; backdrop only, not documented office viewpoint.",
+      "sha256": "2f68723c00b10b14d3616c8c2ada07bc9abd83700b291f1c45e45cb0a499dfc8",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/models/proofing-press/proofing-press.glb",
+      "origin": "https://3dassets.dev/assets/printing-press-and-newspaper-office-proofing-press-a9b284de",
+      "license": "CC0",
+      "note": "Downloaded illustrative proofing press; not authenticated Dân Chúng equipment.",
+      "sha256": "79b4c47fc4ca6c3b02e22d3ad32e0e407d35b70173573dbff22c45e03f714f00",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/door-open.mp3",
+      "origin": "https://opengameart.org/content/opening-lock-and-door",
+      "license": "CC0",
+      "note": "RPG",
+      "sha256": "f67b69fc1b2d340b01fb80a20dd6cd1e4009f48754e96f1fc7a382358c1ad98e",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/drawer.wav",
+      "origin": "https://opengameart.org/node/143670",
+      "license": "CC0",
+      "note": "laleksic, drawer_open.wav",
+      "sha256": "0f1a31835c07e0722e9b506f1f38b726d4ed9579a947721b8e633125c46f3586",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/drawer-close.wav",
+      "origin": "https://opengameart.org/node/143670",
+      "license": "CC0",
+      "note": "laleksic, drawer_close.wav",
+      "sha256": "a97d950015ea8300d41ea1002de0eecb17bbabdb455d454a6cc786f095b3da22",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/press.mp3",
+      "origin": "https://bigsoundbank.com/heidelberg-printing-press-6-s3409.html",
+      "license": "CC0",
+      "note": "Mireille B.; contemporary recording, gameplay excerpt, not archival sound",
+      "sha256": "691e90c6c591ddbbf402e2c511f638f558791a0f9674ec8c8abfafac9797adb3",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/paper-turn-0.ogg",
+      "origin": "https://opengameart.org/content/10-book-page-flips",
+      "license": "CC0",
+      "note": "StarNinjas",
+      "sha256": "ba66b947b6f53f557fa8db37413e66a2168c79ced10ca55a8abdfea134550817",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/paper-turn-1.ogg",
+      "origin": "https://opengameart.org/content/10-book-page-flips",
+      "license": "CC0",
+      "note": "StarNinjas",
+      "sha256": "4b66e2f2222ad5365f417cdb66a14c81254f4ccac59598e2b9cf334cbca136c4",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/paper-turn-2.ogg",
+      "origin": "https://opengameart.org/content/10-book-page-flips",
+      "license": "CC0",
+      "note": "StarNinjas",
+      "sha256": "3fd510b29e52ea6f47a87472707d1e159b09dfeada5ae9e25a3525071ecc2a6a",
+      "historicalEvidence": false
+    }
+  ],
+  "pending": [
+    "three local story videos",
+    "verified archival posters/photos",
+    "sound and narration"
+  ]
+}
