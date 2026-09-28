@@ -1,44 +1,40 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
-import { useEffect, Suspense } from 'react';
 import * as THREE from 'three';
-import { buildRoom, stations } from './room.js';
+import { Room, stations } from './room.jsx';
 
 function FrameDriver({ tick }) {
   useFrame((state, delta) => tick(state, delta));
   return null;
 }
-function LoadedModel({ request }) {
-  const { scene }=useGLTF(request.url);
-  useEffect(()=>request.attach(scene),[request,scene]);
-  return null;
-}
-
-// R3F owns the scene, WebGL renderer, camera, resize, and frame scheduler.
-// Room geometry and camera inspection retain their current gameplay contract.
+// R3F owns the scene hierarchy, renderer, camera, resize, and frame scheduler.
+// The controller keeps the existing game-facing camera inspection contract.
 export function createEngine(container, onPick, onHover) {
   return new Promise((resolve, reject) => {
     let settled=false;
     const reactRoot=createRoot(container,{onUncaughtError(error){fail(error);}});
     const readyTimeout=setTimeout(()=>fail(new Error('Cảnh 3D không khởi tạo kịp.')),15000);
     function fail(error){if(settled)return;settled=true;clearTimeout(readyTimeout);reactRoot.unmount();reject(error);}
-    let scene,camera,renderer,canvas,room,outline,invalidateFrame;
+    let scene,camera,renderer,canvas,room,invalidateFrame;
+    const outline=new THREE.BoxHelper(undefined,'#e8c569');
+    outline.visible=false;outline.material.depthTest=false;outline.renderOrder=10;outline.raycast=()=>{};
     const canvasProps={
       frameloop:'demand',shadows:'percentage',dpr:[1,1.5],
       camera:{fov:53,near:.1,far:40,position:stations.desk.position},
       gl:{antialias:true,powerPreference:'high-performance'},
-      onCreated:ready,style:{width:'100%',height:'100%'}
+      onCreated:ready,onPointerMissed:()=>setHover(null,null),style:{width:'100%',height:'100%'}
     };
-    function renderCanvas(requests=[]){
+    function renderCanvas(){
       reactRoot.render(React.createElement(Canvas,canvasProps,
+        React.createElement('color',{attach:'background',args:['#3e3028']}),
+        React.createElement('fog',{attach:'fog',args:['#3e3028',8,18]}),
         React.createElement(FrameDriver,{tick}),
-        ...requests.map((request,index)=>React.createElement(Suspense,{key:index,fallback:null},React.createElement(LoadedModel,{request})))
+        React.createElement(Room,{onReady:roomReady,onObjectPick,onObjectHover}),
+        React.createElement('primitive',{object:outline,dispose:null})
       ));
     }
     const position=new THREE.Vector3(),target=new THREE.Vector3(),look=new THREE.Vector3();
-    const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
     const reduce=matchMedia('(prefers-reduced-motion: reduce)');
     let yaw=0,pitch=0,dragging=false,moved=false,down=null,last=performance.now();
     let paused=false,disposed=false,hover=null,animation=null,inspection=null,frames=0;
@@ -58,14 +54,8 @@ export function createEngine(container, onPick, onHover) {
       if(immediate||reduce.matches){camera.position.copy(position);look.copy(target);camera.lookAt(look);}
       setHover(null,null);invalidate();
     }
-    function pick(event) {
-      const rect=canvas.getBoundingClientRect();
-      pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);
-      ray.setFromCamera(pointer,camera);
-      const hit=ray.intersectObjects(scene.children,true).find(h=>{for(let o=h.object;o;o=o.parent)if(!o.visible)return false;return true;});
-      for(let o=hit?.object;o;o=o.parent)if(o.userData.interaction)return {id:o.userData.interaction,mesh:o};
-      return null;
-    }
+    function onObjectPick(id,mesh){if(!moved)activate({id,mesh});}
+    function onObjectHover(id,mesh){if(!dragging)setHover(id,mesh);}
     function activate(found) {
       if(room.interactions.has(found.id)){setHover(null,null);onPick(found.id);return;}
       if(animation||inspection)return;
@@ -90,9 +80,9 @@ export function createEngine(container, onPick, onHover) {
     const handleMove=e=>{
       if(dragging&&down){const dx=e.clientX-down[0],dy=e.clientY-down[1];if(Math.abs(dx)+Math.abs(dy)>4)moved=true;
         if(moved){yaw=THREE.MathUtils.clamp(yaw+dx*.003,-.5,.5);pitch=THREE.MathUtils.clamp(pitch+dy*.003,-.3,.3);down=[e.clientX,e.clientY];setHover(null,null);invalidate();}
-      }else{const hit=pick(e);setHover(hit?.id||null,hit?.mesh||null);}
+      }
     };
-    const handleUp=e=>{if(!moved){const found=pick(e);if(found)activate(found);}dragging=false;down=null;};
+    const handleUp=()=>{dragging=false;down=null;};
     const handleCancel=()=>{dragging=false;down=null;};
     const handleLeave=()=>{if(!dragging)setHover(null,null);};
     const handlers=[['pointerdown',handleDown],['pointermove',handleMove],['pointerup',handleUp],['pointercancel',handleCancel],['pointerleave',handleLeave]];
@@ -121,22 +111,27 @@ export function createEngine(container, onPick, onHover) {
       if(completed)onPick(completed);
     }
     const visibility=()=>invalidate();
-    function ready(state) {
-      try {
-        scene=state.scene;camera=state.camera;renderer=state.gl;canvas=renderer.domElement;invalidateFrame=state.invalidate;
-        scene.background=new THREE.Color('#3e3028');scene.fog=new THREE.Fog('#3e3028',8,18);
-        renderer.toneMappingExposure=.85;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;
-        room=buildRoom(scene,invalidate);
-        outline=new THREE.BoxHelper(undefined,'#e8c569');outline.visible=false;outline.material.depthTest=false;outline.renderOrder=10;outline.raycast=()=>{};scene.add(outline);
+    function roomReady(api){room=api;finishSetup();}
+    function finishSetup(){
+      if(settled||!scene||!room)return;
+      try{
         handlers.forEach(([name,handler])=>canvas.addEventListener(name,handler));
         document.addEventListener('visibilitychange',visibility);
         goTo('desk',true);
-        queueMicrotask(()=>{if(!disposed)renderCanvas(room.modelRequests);});
         settled=true;clearTimeout(readyTimeout);
         resolve({goTo,focusObject,returnFromInspection,interact:id=>room.interact(id),canvas,
-          setPaused(value){paused=value;container.dataset.renderMode=value?'paused':'idle';state.setFrameloop(value?'never':'demand');if(!value)invalidate();},
-          dispose(){disposed=true;document.removeEventListener('visibilitychange',visibility);handlers.forEach(([name,handler])=>canvas.removeEventListener(name,handler));room.dispose();outline.geometry.dispose();outline.material.dispose();reactRoot.unmount();}
+          setPaused(value){paused=value;container.dataset.renderMode=value?'paused':'idle';stateRef.setFrameloop(value?'never':'demand');if(!value)invalidate();},
+          dispose(){disposed=true;document.removeEventListener('visibilitychange',visibility);handlers.forEach(([name,handler])=>canvas.removeEventListener(name,handler));outline.geometry.dispose();outline.material.dispose();reactRoot.unmount();}
         });
+      }catch(error){fail(error);}
+    }
+    let stateRef;
+    function ready(state) {
+      try {
+        stateRef=state;
+        scene=state.scene;camera=state.camera;renderer=state.gl;canvas=renderer.domElement;invalidateFrame=state.invalidate;
+        renderer.toneMappingExposure=.85;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;
+        finishSetup();
       }catch(error){fail(error);}
     }
     try{

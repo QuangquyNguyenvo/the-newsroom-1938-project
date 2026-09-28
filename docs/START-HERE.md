@@ -9,7 +9,7 @@ Keep first release small enough for one week. Three.js authorized; user selected
 |---|---|
 | Add/edit history, puzzle, video | src/content/chapters.js; docs/CONTENT-CONTRACT.md |
 | Fix evidence, unlock, save | src/game/state.js; tests/state.test.js |
-| Art/layout of 3D room | src/scene/room.js; src/scene/materials.js |
+| Art/layout of 3D room | src/scene/room.jsx; src/scene/materials.js |
 | Camera, picking, input | src/scene/engine.js |
 | Reader, notebook, answer UI | src/main.js; src/styles.css; src/game/newspaper.js; src/editor.css |
 | Vietnamese font faces | src/fonts.css; package.json |
@@ -23,7 +23,7 @@ Use the installed dependencies. Do not run npm install again unless package file
 No backend, account, remote assets at runtime or external font requests. Avoid framework migrations.
 
 ## Module contracts
-room.js exposes stations and buildRoom(scene). Meshes use userData.interaction; ancestor lookup supports child meshes.
+room.jsx exports stations and a declarative Room component. R3F Target groups register camera focus objects and handle pointer events; Drei loads models/images and supplies notebook LOD.
 engine.js exposes goTo(id), canvas, setPaused(bool), dispose(); onPick(id) opens UI after prop animation. Rendering owns no puzzle state. It renders on demand, caches shadows and filters invisible LOD levels while picking. #viewport data attributes expose render mode/frame count/calls/triangles/LOD levels for browser inspection.
 state.js owns pure verification and versioned local saves; chapter IDs are stable.
 content/chapters.js owns source entries, evidence IDs, objects/pages, three slot puzzles and optional media.
@@ -43,10 +43,10 @@ The six objects are mostly conspicuous; harder hidden-item staging is pending. N
 See CHECKLIST for measured status and gates. Do not claim a phase complete merely because it builds.
 
 ## Scene scale
-World units are metres. room.js constructs legacy coordinates inside roomRoot at scale 0.75: room width 6 m, desk top 0.81 m, shelf height 1.77 m. Station cameras use world coordinates with 1.65 m eye height. Tile UVs use 2/3 construction units, giving 0.5 m per tile in world space (visual design choice, not verified historical size). Document footprints and notebook were reduced individually. LOD distances are world distances; do not multiply camera positions by roomRoot again.
+World units are metres. room.jsx places construction coordinates inside a JSX group at scale 0.75: room width 6 m, desk top 0.81 m, shelf height 1.77 m. Station cameras use world coordinates with 1.65 m eye height. Tile UVs use 2/3 construction units, giving 0.5 m per tile in world space (visual design choice, not verified historical size). Document footprints and notebook were reduced individually. LOD distances are world distances; do not multiply camera positions by roomRoot again.
 
 ## Downloaded props and inspection
-room.js uses GLTFLoader for local Poly Haven CC0 models: wooden_table_02 (both tables), wooden_bookshelf_worn, painted_wooden_cabinet and vintage_oil_lamp. Models are normalized by bounds, placed in roomRoot, cast shadows and invalidate cached shadows on arrival. Late loads are disposed. drawer_cabinet and vintage_cabinet_01 were researched/downloaded candidates, not used. Generic vintage models are not documented original equipment. Shelf items match measured mesh shelf heights.
+room.jsx uses Drei useGLTF for local Poly Haven CC0 models: wooden_table_02 (both tables), wooden_bookshelf_worn, painted_wooden_cabinet and vintage_oil_lamp. Models are normalized by bounds, placed in the JSX room group and cast shadows. Suspense loads them through Drei; cloned instance resources are released on unmount. drawer_cabinet and vintage_cabinet_01 were researched/downloaded candidates, not used. Generic vintage models are not documented original equipment. Shelf items match measured mesh shelf heights.
 engine.activate focuses the camera over 850 ms, leaves props still, then opens the reader; closing returns the saved station view. Reduced motion skips travel. focusObject(id) supports object-list selection. Inspection is separate from puzzle state.
 period-redesign.css is the final styling layer after responsive.css: material-specific generated newsprint/folder backgrounds, asymmetric newspaper columns and compact expandable HUD. Room lighting uses exposure .85, hemisphere .9, daylight 1.45; generated limewash texture is matte illustration. Preview for this session runs at http://127.0.0.1:5174/ because 5173 belongs to another app; saves are origin-specific.
 
@@ -61,14 +61,16 @@ Object readers use a portrait B5 aspect (176:250); motion.turnPage overlays a tw
 Clock uses uniform scale; wall labels retain source-canvas aspect. Loose papers are B5 world dimensions. Original supplied collage remains unchanged; scene shader keys white surround. Downloaded public-domain Saigon 1930 street is window backdrop. proofing-press local CC0 GLB replaces procedural machine, placed separately beside desk. Audio maps door/paper/book/drawer/print to downloaded recordings; icon mute remains persisted. Brave private check tab avoids IAB user interaction during testing.
 
 ## Ambient interactions and entrance
-content/room-props.js owns six non-evidence props (window, lamp, chair, ink, clock, calendar). room.interact owns visual mutations; engine routes ambient picks immediately without inspection lock. GSAP object tweens invalidate on demand and are disposed; reduced motion sets final transforms. Drawer cabinet moved to construction [-2.1,0,-.8] beside left of desk. Added calendar, ink bottle and pencils.
+content/room-props.js owns six non-evidence props (window, lamp, chair, ink, clock, calendar). Room.interact owns visual mutations; R3F pointer events route ambient picks immediately without inspection lock. GSAP object tweens invalidate on demand and are disposed; reduced motion sets final transforms. Drawer cabinet moved to construction [-2.1,0,-.8] beside left of desk. Added calendar, ink bottle and pencils.
 main.enterRoom waits for actual door recording ended; motion.enterDoor runs panels for loaded audio duration (5.57 s), Escape skips. Muted/failed playback uses 2.4 s visual fallback. ui/sound.js returns completion promises, owns WebAudio type/clock ticks and audio cleanup. Thoughts type at 28 ms per glyph with throttled ticks, aria-busy during writing; reduced motion shows full text. Panel reader hides native scrollbar visuals and locks body overflow during page turns.
 
 ## React Three Fiber availability
-User authorized R3F installation on 2026-09-28. React 19, React DOM 19 and Fiber 9 are pinned in package.json. Current scene still uses engine.js/room.js; no React root or Fiber Canvas is mounted. For future migration preserve on-demand rendering, picking, camera inspection/return, asset disposal and stable puzzle saves. Installation is not migration. This explicit authorization supersedes the earlier generic instruction to avoid framework migrations for this toolkit.
+User authorized R3F and Drei. React 19, React DOM 19, Fiber 9 and Drei 10 are pinned in package.json. The Canvas, room hierarchy, pointer events and model loading now use R3F/Drei. Puzzle UI and camera inspection remain game-specific.
 
 
 ## R3F renderer migration
-2026-09-28: Drei installed and React Three Fiber Canvas now owns WebGL context, scene, camera, resize and demand-mode frame loop in src/scene/engine.js. The existing room builder in room.js, manual raycast/controller and HTML puzzle UI remain imperative to preserve interactions and saves. This is a staged migration; Drei useGLTF now loads the local furniture/press models into R3F Suspense boundaries; room.js still owns placement and material styling. Browser confirmed desk rendering, object-list drawer camera/reader, return and press-station move. Production JS rose from about 742 kB to 1300 kB minified; optimization and measured FPS are not claimed. Final gates pass. This newer state supersedes the earlier note that no R3F Canvas is mounted.
+2026-09-28: Drei installed and React Three Fiber Canvas now owns WebGL context, scene, camera, resize and demand-mode frame loop in src/scene/engine.js. The room hierarchy and pointer events are declarative in room.jsx. Drei useGLTF/useTexture/Detailed handle models, photos and notebook LOD. The HTML puzzle UI and camera inspection controller remain intentionally separate. Browser confirmed desk rendering, object-list drawer camera/reader, return and press-station move. Production JS rose from about 742 kB to 1300 kB minified; optimization and measured FPS are not claimed. Final gates pass. The old imperative room.js was removed after visual and interaction checks.
+
+
 
 

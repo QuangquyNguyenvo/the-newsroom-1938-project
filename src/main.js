@@ -10,7 +10,7 @@ import { createMotion } from './ui/motion.js';
 import { chapters, objects, evidenceLabels, sources } from './content/chapters.js';
 import { loadState, saveState, collectEvidence, checkAnswer, finishChapter, advanceChapter, freshState } from './game/state.js';
 import { createEngine } from './scene/engine.js';
-import { stations } from './scene/room.js';
+import { stations } from './scene/room.jsx';
 import { roomProps } from './content/room-props.js';
 
 await Promise.all([document.fonts.load('700 32px "Noto Serif"', 'Những tiếng nói đời thường'), document.fonts.load('400 16px "Be Vietnam Pro"', 'Đối chiếu sổ tay')]);
