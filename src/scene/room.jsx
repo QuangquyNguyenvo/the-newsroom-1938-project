@@ -151,11 +151,11 @@ function Outside() {
 
 function Shutter({ side, material, register, hingeRef }) {
   return <Target id="window" register={register} position={[side * .84, 2.6, -2.88]}>
-    <group ref={hingeRef} rotation={[0, side * 1.42, 0]}>
-      <group position={[-side * .36, 0, 0]}>
-        {[-.36, .36].map(edge => <Box key={edge} size={[.065, 2.08, .075]} position={[edge, 0, 0]} material={material} tiles="wood" />)}
-        {[-1.005, 0, 1.005].map(edge => <Box key={edge} size={[.73, .065, .075]} position={[0, edge, 0]} material={material} tiles="wood" />)}
-        {Array.from({ length: 15 }, (_, index) => <Box key={index} size={[.64, .092, .04]} position={[0, -.91 + index * .13, 0]} rotation={[-.45, 0, 0]} material={material} tiles="wood" />)}
+    <group ref={hingeRef} rotation={[0, -side * 1.42, 0]}>
+      <group position={[-side * .425, 0, 0]}>
+        {[-.39, .39].map(edge => <Box key={edge} size={[.065, 2.08, .075]} position={[edge, 0, 0]} material={material} tiles="wood" />)}
+        {[-1.005, 0, 1.005].map(edge => <Box key={edge} size={[.85, .065, .075]} position={[0, edge, 0]} material={material} tiles="wood" />)}
+        {Array.from({ length: 15 }, (_, index) => <Box key={index} size={[.76, .092, .04]} position={[0, -.91 + index * .13, 0]} rotation={[-.45, 0, 0]} material={material} tiles="wood" />)}
         <mesh position={[side * .24, -.03, .058]} material={material} castShadow>
           <sphereGeometry args={[.022, 8, 6]} />
         </mesh>
@@ -356,7 +356,7 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
     interact(id) {
       propState.current[id] = !propState.current[id];
       const active = propState.current[id];
-      if (id === 'window') shutterRefs.current.forEach((hinge, index) => animate(hinge?.rotation, { y: active ? 0 : index === 0 ? -1.42 : 1.42 }));
+      if (id === 'window') shutterRefs.current.forEach((hinge, index) => animate(hinge?.rotation, { y: active ? 0 : index === 0 ? 1.42 : -1.42 }));
       if (id === 'lamp') animate(lampLightRef.current, { intensity: active ? 0 : .7 });
       if (id === 'chair') animate(chairRef.current?.position, { z: active ? -.55 : -.85 });
       if (id === 'ink') animate(capRef.current?.position, { x: active ? .12 : 0, y: active ? .011 : .12 });
