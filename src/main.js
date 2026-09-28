@@ -201,11 +201,11 @@ let entering=false,entryDisposed=false;
 refreshHUD();think('');el('intro').showModal();engine?.setPaused(true);motion.revealDialog(el('intro'));
 async function enterRoom(){
   if(entering)return;entering=true;el('start-button').disabled=true;el('intro').classList.add('entering');
-  el('intro').insertAdjacentHTML('beforeend','<div class="entry-doors" aria-hidden="true"><div class="entry-left"></div><div class="entry-right"></div></div><p class="entry-caption" role="status">Cánh cửa đang mở…<small>Esc để bỏ qua</small></p>');
-  await sound.play('door',{wait:true,onDuration:duration=>motion.enterDoor(el('intro'),duration)});
-  if(!entryDisposed)motion.closeDialog(el('intro'));
+  el('intro').insertAdjacentHTML('beforeend','<p class="entry-caption" role="status">Bước vào phòng biên tập…<small>Esc để bỏ qua</small></p>');
+  await sound.play('door',{wait:true,onDuration:duration=>engine?.beginEntrance(duration)});
+  if(!entryDisposed){engine?.finishEntrance();motion.closeDialog(el('intro'));}
 }
 el('start-button').addEventListener('click',enterRoom);
-el('intro').addEventListener('cancel',event=>{event.preventDefault();if(entering){sound.stop('door');motion.closeDialog(el('intro'));}else enterRoom();});
+el('intro').addEventListener('cancel',event=>{event.preventDefault();if(entering){sound.stop('door');engine?.finishEntrance();motion.closeDialog(el('intro'));}else enterRoom();});
 el('intro').addEventListener('close',()=>{engine?.setPaused(false);motion.start();think(state.completed.length===chapters.length?'Trang báo đã hoàn thành. Mình có thể đọc lại từng bản tin.':chapters[state.chapter].intro);});
 if(import.meta.hot)import.meta.hot.dispose(()=>{entryDisposed=true;cancelAnimationFrame(popupFrame);clearTimeout(thoughtTimer);clearTimeout(thoughtTypeTimer);sound.dispose();motion.dispose();engine?.dispose();document.removeEventListener('keydown',handleKey);});

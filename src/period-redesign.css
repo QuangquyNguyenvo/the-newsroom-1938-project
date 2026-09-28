@@ -137,11 +137,8 @@ dialog,.editor-panel,.type-case {background-image:linear-gradient(#d9c7a58c,#d9c
 #panel[data-item].turning-page #panel-body{overflow:hidden}
 #intro.entering{position:fixed;inset:0;width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:transparent;box-shadow:none;overflow:hidden}
 #intro.entering::backdrop{background:transparent;backdrop-filter:none}
-#intro.entering>:not(.entry-doors):not(.entry-caption){visibility:hidden;pointer-events:none}
-.entry-doors{position:absolute;inset:0;pointer-events:none}
-.entry-left,.entry-right{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(#1e130f99,#1e130f99),url('/assets/textures/pbr/wood_table_001_diff_1k.jpg') center/auto 100%;box-shadow:inset 0 0 0 18px #24150e,inset 0 0 0 24px #58402a}
-.entry-left{left:0;border-right:4px solid #080605}.entry-right{right:0;border-left:4px solid #080605}
-.entry-left::after{content:'';position:absolute;right:22px;top:49%;width:10px;height:60px;background:#a0854e;border-radius:4px;box-shadow:0 2px 3px #000}
-#intro .entry-caption{position:absolute;bottom:12%;left:0;right:0;margin:0;text-align:center;color:#eee2c8;text-shadow:0 2px 5px #000;font-family:'Noto Serif',serif;pointer-events:none}
+#intro.entering>:not(.entry-caption){visibility:hidden;pointer-events:none}
+body:has(#intro.entering[open]) .masthead,body:has(#intro.entering[open]) .mission,body:has(#intro.entering[open]) .navigation,body:has(#intro.entering[open]) .thought,body:has(#intro.entering[open]) #hover-label{visibility:hidden}
+#intro .entry-caption{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 32px);margin:0;padding:10px 20px;text-align:center;color:#eee2c8;background:#241b17ad;border:1px solid #bda77d66;text-shadow:0 2px 5px #000;font-family:'Noto Serif',serif;pointer-events:none}
 .entry-caption small{display:block;margin-top:10px;font-size:11px;color:#c7baa2}
 .thought[aria-busy=true] #thought-text::after{content:'▏';color:#c3a56a}

@@ -29,7 +29,7 @@ export function makeMaterials(invalidate = () => {}) {
   }
   const materials = {
     wood: pbr('wood_table_001', {roughness: .85, normalScale: new THREE.Vector2(.3,.3)}),
-    wall: new THREE.MeshStandardMaterial({color:'#d4c6a8',roughness:1}),
+    wall: new THREE.MeshStandardMaterial({color:'#f0e5ce',roughness:1}),
     ceiling: new THREE.MeshStandardMaterial({roughness:1,color:'#e2ddcc'}),
     tile: new THREE.MeshStandardMaterial({roughness:1,metalness:0}),
     glass: new THREE.MeshStandardMaterial({color:'#d7d6bd',transparent:true,opacity:.28,roughness:.25,side:THREE.DoubleSide,depthWrite:false}),

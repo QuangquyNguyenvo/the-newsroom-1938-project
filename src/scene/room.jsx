@@ -6,9 +6,9 @@ import * as THREE from 'three';
 import { makeMaterials, labelTexture, pageTexture } from './materials.js';
 
 export const stations = {
-  desk: { label: 'Bàn biên tập', position: [.65, 1.65, 1.55], target: [0, .8, -1.55] },
-  shelf: { label: 'Kệ tư liệu', position: [-.9, 1.65, .85], target: [-1.91, 1.05, -1.6] },
-  press: { label: 'Bàn in', position: [.7, 1.6, .85], target: [1.7, .65, -.65] },
+  desk: { label: 'Bàn biên tập', position: [.25, 1.65, 1.92], target: [0, 1.35, -1.55] },
+  shelf: { label: 'Kệ tư liệu', position: [-.8, 1.65, 1.25], target: [-1.91, 1.25, -1.55] },
+  press: { label: 'Bàn in', position: [1.05, 1.65, 1.38], target: [1.85, 1.15, -1] },
 };
 
 const ambientIds = new Set(['window', 'lamp', 'chair', 'ink', 'clock', 'calendar']);
@@ -179,6 +179,34 @@ function Window({ m, register, shutterRefs }) {
   </>;
 }
 
+function EntryDoor({ m, doorRefs }) {
+  return <>
+    <Box size={[.13, 3.2, .2]} position={[-1.14, 1.6, 3.27]} material={m.wood} tiles="wood" />
+    <Box size={[.13, 3.2, .2]} position={[1.14, 1.6, 3.27]} material={m.wood} tiles="wood" />
+    <Box size={[2.4, .15, .2]} position={[0, 3.25, 3.27]} material={m.wood} tiles="wood" />
+    {[-1, 1].map((side, index) => <group key={side} ref={node => { doorRefs.current[index] = node; }} position={[side * 1.08, 1.59, 3.19]} rotation={[0, -side * 1.42, 0]}>
+      <group position={[-side * .53, 0, 0]}>
+        <Box size={[1.06, 3.1, .085]} material={m.wood} tiles="wood" />
+        {[-.46, .46].map(x => <Box key={x} size={[.09, 2.96, .12]} position={[x, 0, -.035]} material={m.wood} tiles="wood" />)}
+        {[-1.38, -.1, 1.38].map(y => <Box key={y} size={[.98, .09, .12]} position={[0, y, -.035]} material={m.wood} tiles="wood" />)}
+        <Box size={[.19, .31, .04]} position={[side * .36, -.08, -.085]} material={m.gold} />
+      </group>
+    </group>)}
+  </>;
+}
+
+function SideVent({ m }) {
+  return <>
+    <mesh position={[-4.34, 3.3, -1.9]} rotation={[0, Math.PI / 2, 0]}>
+      <planeGeometry args={[1.52, .7]} />
+      <meshBasicMaterial color="#d9ddca" side={THREE.DoubleSide} toneMapped={false} />
+    </mesh>
+    {[2.91, 3.69].map(y => <Box key={y} size={[.21, .075, 1.72]} position={[-3.98, y, -1.9]} material={m.wood} tiles="wood" />)}
+    {[-2.75, -1.05].map(z => <Box key={z} size={[.21, .78, .075]} position={[-3.98, 3.3, z]} material={m.wood} tiles="wood" />)}
+    {Array.from({ length: 6 }, (_, index) => <Box key={index} size={[.16, .055, 1.6]} position={[-3.9, 2.97 + index * .13, -1.9]} rotation={[0, 0, -.22]} material={m.wood} tiles="wood" />)}
+  </>;
+}
+
 function PhotoFace({ size }) {
   const texture = useTexture(`${base}assets/references/dan-chung.jpg`);
   const material = useMemo(() => {
@@ -293,6 +321,7 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
   const targets = useRef(new Map());
   const lods = useRef([]);
   const shutterRefs = useRef([]);
+  const doorRefs = useRef([]);
   const chairRef = useRef(), capRef = useRef();
   const lampLightRef = useRef(), calendarMaterialRef = useRef(), calendarMaps = useRef();
   const propState = useRef({});
@@ -319,6 +348,11 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
   }, [gl, invalidate, reduced]);
   const api = useMemo(() => ({
     targets: targets.current, lods: lods.current, interactions: ambientIds,
+    setEntryDoor(open) {
+      doorRefs.current.forEach((leaf, index) => { if (leaf) leaf.rotation.y = (index === 0 ? 1 : -1) * 1.42 * open; });
+      gl.shadowMap.needsUpdate = true;
+      invalidate();
+    },
     interact(id) {
       propState.current[id] = !propState.current[id];
       const active = propState.current[id];
@@ -347,8 +381,16 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
     <Box size={[3.09, 4.5, .15]} position={[2.455, 2.2, -3.2]} material={m.wall} tiles="wall" />
     <Box size={[1.82, 1.45, .15]} position={[0, .725, -3.2]} material={m.wall} tiles="wall" />
     <Box size={[1.82, .76, .15]} position={[0, 4.12, -3.2]} material={m.wall} tiles="wall" />
-    <Box size={[.15, 4.5, 7]} position={[-4, 2.2, -.2]} material={m.wall} tiles="wall" />
+    <Box size={[.15, 4.5, 1]} position={[-4, 2.2, -3.2]} material={m.wall} tiles="wall" />
+    <Box size={[.15, 4.5, 4.4]} position={[-4, 2.2, 1.1]} material={m.wall} tiles="wall" />
+    <Box size={[.15, 2.97, 1.6]} position={[-4, 1.435, -1.9]} material={m.wall} tiles="wall" />
+    <Box size={[.15, .77, 1.6]} position={[-4, 4.065, -1.9]} material={m.wall} tiles="wall" />
+    <SideVent m={m} />
     <Box size={[.15, 4.5, 7]} position={[4, 2.2, -.2]} material={m.wall} tiles="wall" />
+    <Box size={[2.86, 4.5, .15]} position={[-2.57, 2.2, 3.35]} material={m.wall} tiles="wall" />
+    <Box size={[2.86, 4.5, .15]} position={[2.57, 2.2, 3.35]} material={m.wall} tiles="wall" />
+    <Box size={[2.28, 1.15, .15]} position={[0, 3.925, 3.35]} material={m.wall} tiles="wall" />
+    <EntryDoor m={m} doorRefs={doorRefs} />
     <Box size={[8, .12, 7]} position={[0, 4.48, -.2]} material={m.ceiling} />
     {[-2.7, 0, 2.7].map(x => <Box key={x} size={[.12, .15, 7]} position={[x, 4.34, -.2]} material={m.wood} tiles="wood" />)}
     <Box size={[8, .2, .08]} position={[0, .1, -3.1]} material={m.wood} tiles="wood" />
@@ -372,16 +414,17 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
     <Notebook m={m} register={register} addLod={addLod} />
     <Archive m={m} register={register} />
     {Array.from({ length: 5 }, (_, index) => <Box key={index} size={[.08, .25 + index * .02, .26]} position={[-3.15 + index * .17, 1.89 + (.25 + index * .02) / 2, -2.18]} material={index % 2 ? m.dark : m.red} tiles={index % 2 ? 'dark' : undefined} />)}
-    <ModelAt id="proof" register={register} asset="proofing-press" size={[1.45, 1, 1]} position={[2.75, 0, -.6]} preserve />
+    <ModelAt id="proof" register={register} asset="proofing-press" size={[1.3, .9, .9]} position={[2.75, 0, -1.28]} preserve />
     <Document id="proof" size={[.235, .333]} position={[1.08, 1.085, -1.58]} title="BẢN IN THỬ" subtitle="ĐỐI CHIẾU TRƯỚC KHI IN" angle={-.08} m={m} register={register} />
     <Ink m={m} register={register} capRef={capRef} />
     {Array.from({ length: 3 }, (_, index) => <mesh key={index} position={[.38, 1.091, -2.5 + index * .025]} rotation={[0, .1 * index, Math.PI / 2]} material={m.wood}>
       <cylinderGeometry args={[.004, .004, .25, 6]} />
     </mesh>)}
     <Calendar m={m} register={register} materialRef={calendarMaterialRef} mapRef={calendarMaps} />
-    <hemisphereLight args={['#e7e5df', '#322b24', .9]} />
+    <hemisphereLight args={['#f4eee0', '#51463b', 1.12]} />
     <primitive object={sunTarget} />
     <directionalLight color="#ffe4b1" intensity={2.1} position={[-1.8, 4.6, -5.1]} target={sunTarget} castShadow shadow-mapSize={[1024, 1024]} shadow-camera-left={-5} shadow-camera-right={5} shadow-camera-top={5} shadow-camera-bottom={-5} shadow-bias={-.001} />
     <pointLight color="#ffe5bd" intensity={.65} distance={3.2} position={[0, 2.8, -2.8]} />
+    <pointLight color="#e5e8ce" intensity={.34} distance={3} position={[-3.7, 3.3, -1.9]} />
   </group></InteractionContext.Provider>;
 }
