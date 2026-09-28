@@ -19,12 +19,12 @@ root.innerHTML = `
   <main class="game-shell">
     <div id="viewport" aria-label="Phòng biên tập 3D"></div>
     <header class="masthead"><div><span class="eyebrow">MỘT TRÒ CHƠI LỊCH SỬ ĐẢNG</span><h1>GIỮ TIẾNG NÓI<span class="edition">1938 / 1939</span></h1></div><button id="sound-button" class="light-button" aria-label="Bật tắt âm thanh" aria-pressed="true">Âm thanh</button><button id="notebook-button" class="light-button" aria-label="Sổ tay đối chiếu"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 6h10v21H5zM15 6h12v21H15M9 11h3M9 16h3M19 11h4M19 16h4"/></svg><span id="clue-count">0</span></button></header>
-    <aside class="mission"><span id="chapter-number" class="eyebrow"></span><h2 id="chapter-title"></h2><button id="mission-toggle" aria-expanded="false" aria-controls="chapter-intro">Chi tiết</button><p id="chapter-intro"></p><button id="edit-button">Biên tập bản tin</button><p id="progress" class="small"></p></aside>
+    <aside class="mission"><span id="chapter-number" class="eyebrow"></span><h2 id="chapter-title"></h2><button id="mission-toggle" aria-expanded="false" aria-controls="chapter-hint">Gợi ý</button><p id="chapter-intro"></p><p id="chapter-hint" class="mission-hint" hidden></p><button id="edit-button">Biên tập bản tin</button><p id="progress" class="small"></p></aside>
     <div id="hover-label" class="hover-label" aria-hidden="true"></div>
     <div class="thought" role="status" aria-live="polite"><span class="eyebrow">SUY NGHĨ</span><p id="thought-text">Có một bản tin còn thiếu. Mình sẽ tìm tư liệu trước khi đưa nó lên trang báo.</p></div>
-    <footer class="navigation"><nav id="station-buttons" aria-label="Vị trí trong phòng"></nav><button id="objects-button" class="light-button">Khám phá đồ vật</button><span class="controls-note">Kéo để nhìn quanh · Bấm đồ vật để xem · Esc để đóng</span></footer>
+    <footer class="navigation"><nav id="station-buttons" aria-label="Vị trí trong phòng"></nav><button id="objects-button" class="light-button">Khám phá đồ vật</button><span class="controls-note">Rê chuột để nhìn quanh · Bấm đồ vật để xem · Esc để đóng</span></footer>
     <dialog id="panel" aria-labelledby="panel-title"><div class="dialog-head"><span class="eyebrow" id="panel-kicker"></span><button id="close-panel" aria-label="Quay lại phòng"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 7 8 16l10 9M9 16h17"/></svg></button></div><h2 id="panel-title"></h2><div id="panel-body"></div></dialog>
-    <dialog id="intro" aria-labelledby="intro-title"><span class="eyebrow">MÔ PHỎNG LỊCH SỬ</span><h2 id="intro-title">Một trang báo.<br>Nhiều tiếng nói.</h2><p>Khám phá phòng biên tập, xem cả hai mặt tài liệu và đối chiếu manh mối để hoàn thành ba bản tin.</p><p class="small">Đây là trò chơi mô phỏng phục vụ học tập. Căn phòng, đồ vật, lời dẫn và câu đố được thiết kế lại; không phải bản phục dựng nguyên trạng tòa soạn năm 1938. Tiêu đề trong game không phải tiêu đề báo gốc. Ảnh ngoài cửa sổ là Sài Gòn năm 1930, dùng gợi bối cảnh. Các sự kiện lịch sử có liên kết nguồn để đối chiếu.</p><button id="start-button">Bước vào phòng</button></dialog>
+    <dialog id="intro" aria-labelledby="intro-title"><span class="eyebrow">MÔ PHỎNG LỊCH SỬ</span><h2 id="intro-title">Một trang báo.<br>Nhiều tiếng nói.</h2><p>Bạn đang ở phòng biên tập mô phỏng của báo Dân Chúng, cơ quan ngôn luận của Đảng Cộng sản Đông Dương. Qua ba bản tin, hãy khám phá cách tờ báo công khai truyền bá chủ trương của Đảng và vận động dân sinh, dân chủ trong giai đoạn 1936–1939.</p><p>Chọn vị trí ở thanh dưới, bấm vật thể để đọc tài liệu, ghi manh mối vào sổ tay rồi biên tập bản tin. Nút “Gợi ý” trên phiếu sẽ chỉ bước tiếp theo.</p><p class="small">Đây là trò chơi mô phỏng phục vụ học tập. Căn phòng, đồ vật, lời dẫn và câu đố được thiết kế lại; không phải bản phục dựng nguyên trạng tòa soạn năm 1938. Tiêu đề trong game không phải tiêu đề báo gốc. Ảnh ngoài cửa sổ là Sài Gòn năm 1930, dùng gợi bối cảnh. Các sự kiện lịch sử có liên kết nguồn để đối chiếu.</p><button id="start-button">Bước vào phòng</button></dialog>
   </main>`;
 
 let state;
@@ -37,8 +37,7 @@ const sound=createSound(root);
 const syncSound=()=>{el('sound-button').setAttribute('aria-pressed',String(!sound.muted));el('sound-button').innerHTML=`<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12h5l7-6v20l-7-6H5z"/>${sound.muted?'<path d="m22 12 7 8m0-8-7 8"/>':'<path d="M22 11q7 5 0 10M25 6q13 10 0 20"/>'}</svg>`;};syncSound();
 el('sound-button').addEventListener('click',()=>{sound.toggle();syncSound();});
 root.addEventListener('click',event=>{const button=event.target.closest('button');if(!button||['sound-button','close-panel','print-button','start-button'].includes(button.id)||button.hasAttribute('data-page'))return;sound.play(button.dataset.page?'page':button.dataset.word||button.dataset.slot?'place':'click');});
-el('mission-toggle').addEventListener('click',()=>{const expanded=el('mission-toggle').getAttribute('aria-expanded')!=='true';el('mission-toggle').setAttribute('aria-expanded',String(expanded));root.querySelector('.mission').classList.toggle('expanded',expanded);});
-let popupFrame=0, lastChapter;
+let popupFrame=0, lastChapter, missionHintIndex=0;
 const escape = text => String(text).replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
 function remember() {
   try { if (!saveState(localStorage, state)) think('Tiến độ được giữ trong phiên này. Trình duyệt hiện không cho lưu lâu dài.'); }
@@ -86,8 +85,15 @@ function refreshHUD() {
   el('progress').textContent=`${state.completed.length}/3 bản tin đã hoàn thành`;
   el('clue-count').textContent=state.evidence.length;
   el('edit-button').textContent=state.completed.length===chapters.length ? 'Xem trang báo' : 'Biên tập bản tin';
-  if(lastChapter!==chapter.id){motion.ink(el('chapter-title'));lastChapter=chapter.id;}
+  if(lastChapter!==chapter.id){missionHintIndex=0;el('chapter-hint').hidden=true;el('mission-toggle').setAttribute('aria-expanded','false');el('chapter-hint').textContent='';motion.ink(el('chapter-title'));lastChapter=chapter.id;}
 }
+el('mission-toggle').addEventListener('click',()=>{
+  const guides=chapters[state.chapter].guide;
+  el('chapter-hint').textContent=guides[missionHintIndex%guides.length];
+  el('chapter-hint').hidden=false;
+  el('mission-toggle').setAttribute('aria-expanded','true');
+  missionHintIndex++;
+});
 function inspect(id, pageIndex=0) {
   const object=objects.find(item=>item.id===id); if(!object)return;
   think('');
@@ -172,7 +178,7 @@ function showCompletion() {
   el('watch-button').addEventListener('click',()=>{
     openPanel(chapter.title,'CÂU CHUYỆN PHÍA SAU BẢN TIN',`${chapter.video ? `<video controls playsinline preload="metadata" ${chapter.poster?`poster="${escape(chapter.poster)}"`:''}><source src="${escape(chapter.video)}" type="video/mp4"></video><p id="video-status" role="status"></p>` : '<div class="video-placeholder"><span class="eyebrow">CHỜ VIDEO TƯ LIỆU</span><p>Màn mẫu đang dùng phần tổng kết. Video thật sẽ được thêm vào bản tin này.</p></div>'}<p>${escape(chapter.summary)}</p>${sourceLink(chapter.source)}<button id="next-button">${state.chapter===chapters.length-1?'Xuất bản trang báo':'Trở về phòng, mở bản tin tiếp theo'}</button>`);
     panel.querySelector('video')?.addEventListener('error',()=>{el('video-status').textContent='Video chưa tải được. Bạn vẫn có thể đọc phần tổng kết và tiếp tục.';});
-    el('next-button').addEventListener('click',()=>{if(advanceChapter(state)){remember();closePanel();think(chapters[state.chapter].intro);}else showFinal();});
+    el('next-button').addEventListener('click',()=>{if(advanceChapter(state)){remember();closePanel();think(chapters[state.chapter].narration);}else showFinal();});
   });
 }
 function showFinal() {
@@ -207,5 +213,5 @@ async function enterRoom(){
 }
 el('start-button').addEventListener('click',enterRoom);
 el('intro').addEventListener('cancel',event=>{event.preventDefault();if(entering){sound.stop('door');engine?.finishEntrance();motion.closeDialog(el('intro'));}else enterRoom();});
-el('intro').addEventListener('close',()=>{engine?.setPaused(false);motion.start();think(state.completed.length===chapters.length?'Trang báo đã hoàn thành. Mình có thể đọc lại từng bản tin.':chapters[state.chapter].intro);});
+el('intro').addEventListener('close',()=>{engine?.setPaused(false);motion.start();think(state.completed.length===chapters.length?'Trang báo đã hoàn thành. Mình có thể đọc lại từng bản tin.':chapters[state.chapter].narration);});
 if(import.meta.hot)import.meta.hot.dispose(()=>{entryDisposed=true;cancelAnimationFrame(popupFrame);clearTimeout(thoughtTimer);clearTimeout(thoughtTypeTimer);sound.dispose();motion.dispose();engine?.dispose();document.removeEventListener('keydown',handleKey);});

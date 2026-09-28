@@ -22,7 +22,7 @@ export function newspaperMarkup(chapter) {
     <div class="paper-issue"><span>BẢN TIN HỌC TẬP ${chapter.number}</span><span>SÀI GÒN</span></div>
     <h3 class="paper-headline">${layout[0]}</h3>
     <div class="paper-columns">
-      ${chapter.slots.map((slot,i)=>`<article class="paper-column"><h4>${layout[i+1]}</h4><button type="button" class="word-slot" id="slot-${i}" data-slot="${i}" aria-label="Đặt chữ: ${html(slot.label)}"><span class="slot-number">GHÉP CHỮ VÀO DÒNG NÀY</span><span class="slot-text">··················</span></button><p>${html(i===0?chapter.intro:i===1?chapter.summary:'Đối chiếu ngày ra số đầu, tổ chức đứng sau và ngày ra số cuối. Một mốc đúng cần có bằng chứng hỗ trợ.')}</p><p>${html(columnCopy[Number(chapter.number)-1][i])}</p>${i===1?'<figure class="archive-figure"><img src="/assets/references/dan-chung.jpg" alt="Các số báo Dân Chúng"><figcaption>Các số báo Dân Chúng</figcaption></figure>':''}</article>`).join('')}
+      ${chapter.slots.map((slot,i)=>`<article class="paper-column"><h4>${layout[i+1]}</h4><button type="button" class="word-slot" id="slot-${i}" data-slot="${i}" aria-label="Đặt chữ: ${html(slot.label)}"><span class="slot-number">GHÉP CHỮ VÀO DÒNG NÀY</span><span class="slot-text">··················</span><span class="slot-result" aria-live="polite"></span></button><p>${html(i===0?chapter.intro:i===1?chapter.summary:'Đối chiếu ngày ra số đầu, tổ chức đứng sau và ngày ra số cuối. Một mốc đúng cần có bằng chứng hỗ trợ.')}</p><p>${html(columnCopy[Number(chapter.number)-1][i])}</p>${i===1?'<figure class="archive-figure"><img src="/assets/references/dan-chung.jpg" alt="Các số báo Dân Chúng"><figcaption>Các số báo Dân Chúng</figcaption></figure>':''}</article>`).join('')}
     </div><div class="paper-bottom">SÀI GÒN · DÂN SINH · DÂN CHỦ</div>
   </section>`;
 }
@@ -32,8 +32,8 @@ export function mountNewspaper(container, chapter, state, { submit, hint, compar
   // Fixed interleaving prevents each answer appearing beside its matching slot.
   const shuffled = choices.filter((_,i)=>i%2).reverse().concat(choices.filter((_,i)=>!(i%2)));
   let selected = '', proof = '';
-  container.innerHTML = `<div class="editor-switch"><div class="editor-tabs" role="group" aria-label="Chế độ biên tập"><button type="button" data-view="paper" aria-pressed="true">Trang báo</button><button type="button" data-view="tray" aria-pressed="false">Khay chữ & tư liệu</button></div><p id="held-word" role="status">Chọn chữ trong khay rồi đặt lên báo.</p></div><div class="editor-workspace" data-view="paper">${newspaperMarkup(chapter)}
-    <aside class="type-case"><span class="eyebrow">KHAY CHỮ RỜI</span><p class="small">Chọn một mảnh chữ rồi bấm vào chỗ trống trên báo. Có thể kéo thả. Bấm chữ đã đặt để lấy lại.</p>
+  container.innerHTML = `<div class="editor-switch"><div class="editor-tabs" role="group" aria-label="Chế độ biên tập"><button type="button" data-view="paper" aria-pressed="true">Trang báo</button><button type="button" data-view="tray" aria-pressed="false">Khay chữ & tư liệu</button></div><p id="held-word" role="status">Đọc đề mục từng cột, chọn mảnh chữ phù hợp rồi đặt vào ô. Ô sẽ báo đúng hoặc cần thử lại.</p></div><div class="editor-workspace" data-view="paper">${newspaperMarkup(chapter)}
+    <aside class="type-case"><span class="eyebrow">KHAY CHỮ RỜI</span><p class="small">Đọc đề mục từng cột rồi chọn mảnh chữ phù hợp. Ô báo đúng/sai ngay khi đặt; bấm chữ đã đặt để sửa. Có mảnh gây nhiễu.</p>
     <div class="word-tray">${shuffled.map((word,i)=>`<button type="button" draggable="true" class="word-piece" data-word="${i}" aria-pressed="false">${html(word)}</button>`).join('')}</div>
     <span class="eyebrow proof-heading">GHIM TƯ LIỆU CHỨNG MINH</span><div class="evidence-tray">${state.evidence.length?state.evidence.map(id=>`<button type="button" class="evidence-card" data-proof="${id}" aria-pressed="false">${html(evidenceLabels[id])}</button>`).join(''):'<p class="small">Chưa có tư liệu. Tìm ghi chú trong phòng rồi ghi vào sổ tay.</p>'}</div>
     <p id="assembly-count" class="small">0/3 vị trí đã ghép</p></aside></div>
@@ -51,23 +51,30 @@ export function mountNewspaper(container, chapter, state, { submit, hint, compar
   const sync = () => {
     pieces.forEach(b=>{const word=shuffled[Number(b.dataset.word)]; b.setAttribute('aria-pressed',String(word===selected)); b.disabled=selections.includes(word);});
     container.querySelector('#assembly-count').textContent=`${selections.filter(Boolean).length}/3 vị trí đã ghép`;
-    container.querySelector('#held-word').textContent=selected?`Đang cầm: ${selected}`:selections.every(Boolean)?'Chữ đã đủ. Mở khay để ghim tư liệu.':`${selections.filter(Boolean).length}/3 vị trí đã ghép. Chọn chữ trong khay để tiếp tục.`;
+    const correctCount=selections.reduce((count,word,index)=>count+(word===chapter.slots[index].answer?1:0),0);
+    container.querySelector('#held-word').textContent=selected?`Đang cầm: ${selected}. Chọn cột mà mảnh chữ này trả lời.`:selections.every(Boolean)&&correctCount===slots.length?'Cả 3 mảnh chữ đã đúng chỗ. Tiếp tục ghim bằng chứng.':`${correctCount}/3 mảnh đúng chỗ. Đọc đề mục từng cột để ghép tiếp.`;
   };
   const place = (i, word) => {
     if (!word || selections.includes(word)) return;
     selections[i]=word; selected='';
     slots[i].querySelector('.slot-text').textContent=word;
-    slots[i].classList.add('filled'); slots[i].removeAttribute('aria-invalid');
+    const correct=word===chapter.slots[i].answer;
+    slots[i].classList.add('filled');slots[i].classList.toggle('correct',correct);slots[i].classList.toggle('incorrect',!correct);
+    slots[i].removeAttribute('aria-invalid');
+    slots[i].querySelector('.slot-result').textContent=correct?'✓ ĐÚNG CỘT':'↺ THỬ CỘT KHÁC';
     slots[i].animate([{transform:'translateY(-8px)',opacity:.4},{transform:'translateY(0)',opacity:1}], {duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:260});
     sync();
-    container.querySelector('#feedback').textContent=selections.every(Boolean)?'Chữ đã đủ. Ghim bằng chứng rồi đối chiếu bản in.':`Đã đặt “${word}”. Tiếp tục ghép những vị trí còn thiếu.`;
+    const feedback=container.querySelector('#feedback');
+    if(!correct)feedback.textContent=`“${word}” chưa trả lời mục “${chapter.slots[i].label}”. Bấm ô này để lấy chữ về rồi thử cột khác.`;
+    else if(selections.every(Boolean)&&selections.every((value,index)=>value===chapter.slots[index].answer))feedback.textContent='Cả ba mảnh đã khớp với đề mục. Giờ ghim bằng chứng rồi đối chiếu bản in.';
+    else feedback.textContent=`Đúng rồi, “${word}” trả lời mục “${chapter.slots[i].label}”. Ghép tiếp các cột còn lại.`;
   };
   pieces.forEach(b=>{
     b.addEventListener('click',()=>{selected=shuffled[Number(b.dataset.word)]; sync(); container.querySelector('#feedback').textContent=`Đã chọn “${selected}”. Đặt vào vị trí phù hợp trên báo.`;if(compact.matches){switchView('paper');const destination=slots.find((_,i)=>!selections[i])||slots[0];destination.scrollIntoView({block:'center'});destination.focus({preventScroll:true});}});
     b.addEventListener('dragstart',event=>{event.dataTransfer.setData('text/plain',shuffled[Number(b.dataset.word)]); event.dataTransfer.effectAllowed='move';});
   });
   slots.forEach((b,i)=>{
-    b.addEventListener('click',()=>{if(selected)place(i,selected);else if(selections[i]){selections[i]='';b.classList.remove('filled');b.querySelector('.slot-text').textContent='Chỗ chữ còn thiếu';sync();}});
+    b.addEventListener('click',()=>{if(selected)place(i,selected);else if(selections[i]){selections[i]='';b.classList.remove('filled','correct','incorrect');b.removeAttribute('aria-invalid');b.querySelector('.slot-text').textContent='··················';b.querySelector('.slot-result').textContent='';sync();container.querySelector('#feedback').textContent='Đã lấy mảnh chữ về khay. Chọn cột khác để thử lại.';}});
     b.addEventListener('dragover',e=>{e.preventDefault();b.classList.add('drop-target');});
     b.addEventListener('dragleave',()=>b.classList.remove('drop-target'));
     b.addEventListener('drop',e=>{e.preventDefault();b.classList.remove('drop-target');const word=e.dataTransfer.getData('text/plain');if(choices.includes(word))place(i,word);});

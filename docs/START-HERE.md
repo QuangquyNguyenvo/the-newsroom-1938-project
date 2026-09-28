@@ -33,7 +33,7 @@ responsive.css is the final layout layer. Below 700px the mission uses a compact
 
 ## Known limitations
 Room uses local Poly Haven CC0 1K PBR wood/plaster/metal maps; provenance and hashes are in the asset manifest. Box UVs use physical dimensions. Paper props are thin grouped sheets with canvas labels; books have exposed page edges. Notebook retains a far LOD; lamp and printing press now use downloaded models. Props stay still while camera focuses. Texture disposal includes data maps and late loads. Reader uses GSAP page turns, swipe and keyboard arrows; no hinged 3D cover. Photo uses supplied newspaper collage as visual reference, not evidence of the arrest.
-Movement is between preset first-person stations with limited drag look, not WASD free roaming.
+Movement is between preset first-person stations with mouse-position camera parallax, not WASD free roaming.
 Video integration uses authored local file paths and controls; actual clips are not supplied. The current completion effect is a CSS expansion, not a camera zoom from an archival photo.
 Answer UI is a three-column newspaper reconstruction with a loose-word tray, click/place or drag/drop and evidence cards. src/game/newspaper.js owns placement UI; state.js remains authoritative for validation. Reduced motion disables placement/reveal effects. Fontsource fonts are self-hosted with Vietnamese/Latin unicode ranges and shipped OFL licenses.
 The supplied newspaper collage is visual reference only, not evidence of a specific event; provenance is recorded in the asset manifest.
