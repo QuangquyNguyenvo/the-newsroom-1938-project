@@ -1,76 +1,41 @@
-# Start here (small context)
+# Kiến trúc và phát triển
 
-## Accepted direction
-One-room first-person 3D point-and-click puzzle. Player searches notebooks/documents, compares clues and builds three educational news stories. Each success opens a story/video; final reward is a completed newspaper. Theme must center the Party. Visuals: aged paper, deep red, restrained yellow, contrast, short engaging Vietnamese thoughts without em dashes.
-Keep first release small enough for one week. Three.js authorized; user selected GSAP for UI animation on 2026-09-27. No other animation toolkit selected.
+Giữ tiếng nói là trò chơi giải đố trong một phòng biên tập, với ba vị trí, ba bản tin chính, sáu chuyện nhân vật và tám hồ sơ lịch sử tự chọn. Nội dung tập trung vào báo chí cách mạng của Đảng và phong trào dân chủ 1936–1939.
 
-## Read only what you need
-| Task | Files |
-|---|---|
-| Add/edit history, puzzle, video | src/content/chapters.js; docs/CONTENT-CONTRACT.md |
-| Fix evidence, unlock, save | src/game/state.js; tests/state.test.js |
-| Art/layout of 3D room | src/scene/room.jsx; src/scene/materials.js |
-| Camera, picking, input | src/scene/engine.js |
-| Reader, notebook, answer UI | src/main.js; src/styles.css; src/game/newspaper.js; src/editor.css |
-| Vietnamese font faces | src/fonts.css; package.json |
-| Shared archival UI / GSAP transitions | src/archival-ui.css; src/ui/motion.js; src/main.js |
-| Responsive layout / mobile editing | src/responsive.css; src/game/newspaper.js; src/main.js |
-| Continue schedule | plans/mvp/CHECKLIST.md; selected phase only |
+## Các mô-đun
 
-## Commands
-`npm run dev` · `npm test` · `npm run check:content` · `npm run build`.
-Use the installed dependencies. Do not run npm install again unless package files changed.
-No backend, account, remote assets at runtime or external font requests. Avoid framework migrations.
+| Công việc | Nơi sửa |
+| --- | --- |
+| Khởi động, điều phối giao diện, hội thoại | `src/main.js`, `src/ui/` |
+| Tư liệu, nguồn lịch sử, câu đố | `src/content/`, `docs/CONTENT-CONTRACT.md` |
+| Quy tắc, lưu tiến độ | `src/game/state.js` |
+| Ghép chữ và đối chiếu bản tin | `src/game/newspaper.js`, `src/content/editorial*.js` |
+| Chuyện nhân vật và hồ sơ tự chọn | `src/game/story-state.js`, `src/game/knowledge-state.js` |
+| Camera, chọn đồ vật, lịch dựng hình | `src/scene/engine.js` |
+| Góc nhìn và tên ba vị trí | `src/scene/stations.js` |
+| Căn phòng và đồ vật | `src/scene/room.jsx`, `src/scene/*props.jsx`, `src/scene/shelf-dressing.jsx` |
+| Vật liệu và chữ trên đồ vật | `src/scene/materials.js` |
+| Cài đặt, ánh sáng và hậu kỳ | `src/scene/graphics.js`, `src/scene/cinematic.js` |
+| Tiến độ tải tài nguyên | `src/scene/loading.js`, `src/ui/boot.js` |
+| Kiểu dáng, cửa sổ đọc và font | `src/styles/` |
+| Xuất xứ, giấy phép tài nguyên | `public/assets/manifest.json` |
 
-## Module contracts
-room.jsx exports stations and a declarative Room component. R3F Target groups register camera focus objects and handle pointer events; Drei loads models/images and supplies notebook LOD.
-engine.js exposes goTo(id), canvas, setPaused(bool), dispose(); onPick(id) opens UI after prop animation. Rendering owns no puzzle state. It renders on demand, caches shadows and filters invisible LOD levels while picking. #viewport data attributes expose render mode/frame count/calls/triangles/LOD levels for browser inspection.
-state.js owns pure verification and versioned local saves; chapter IDs are stable.
-content/chapters.js owns source entries, evidence IDs, objects/pages, three slot puzzles and optional media.
-main.js translates those records to HTML. No historical content should be duplicated in scene files.
-motion.js owns short GSAP dialog/HUD/text transitions, interruption and cleanup. main.js owns native dialog focus/cancel flow. Entrance uses opacity to retain keyboard focus; close uses autoAlpha then native close. MatchMedia handles reduced motion. archival-ui.css loads after the baseline and newspaper CSS and owns the shared print style.
-responsive.css is the final layout layer. Below 700px the mission uses a compact grid with a details toggle. Below 900px newspaper and tray are switchable views; choosing a word returns to paper and focuses the next empty slot. Desktop displays both panels. Native-dialog headers/tabs remain reachable when scrolled on compact layouts. Keep selections during breakpoint changes; do not remount the puzzle on resize.
+## Hợp đồng chính
 
-## Known limitations
-Room uses local Poly Haven CC0 1K PBR wood/plaster/metal maps; provenance and hashes are in the asset manifest. Box UVs use physical dimensions. Paper props are thin grouped sheets with canvas labels; books have exposed page edges. Notebook retains a far LOD; lamp and printing press now use downloaded models. Props stay still while camera focuses. Texture disposal includes data maps and late loads. Reader uses GSAP page turns, swipe and keyboard arrows; no hinged 3D cover. Photo uses supplied newspaper collage as visual reference, not evidence of the arrest.
-Movement is between preset first-person stations with mouse-position camera parallax, not WASD free roaming.
-Video integration uses authored local file paths and controls; actual clips are not supplied. The current completion effect is a CSS expansion, not a camera zoom from an archival photo.
-Answer UI is a three-column newspaper reconstruction with a loose-word tray, click/place or drag/drop and evidence cards. src/game/newspaper.js owns placement UI; state.js remains authoritative for validation. Reduced motion disables placement/reveal effects. Fontsource fonts are self-hosted with Vietnamese/Latin unicode ranges and shipped OFL licenses.
-The supplied newspaper collage is visual reference only, not evidence of a specific event; provenance is recorded in the asset manifest.
-The six objects are mostly conspicuous; harder hidden-item staging is pending. No mystery plot is falsely attributed to actual editors.
+React Three Fiber sở hữu Canvas, camera, cây cảnh, đổi kích thước, lịch dựng hình và sự kiện đồ vật. Drei tải mô hình/ảnh và quản lý LOD sổ tay. Giao diện câu đố dùng HTML. GSAP quản lý chuyển động ngắn và dọn chuyển động khi đóng giao diện.
 
-## Next work
-See CHECKLIST for measured status and gates. Do not claim a phase complete merely because it builds.
+`createEngine` trả về điều khiển chuyển vị trí, xem gần, tương tác, cài đặt, tạm dừng và hủy cảnh. Phần 3D tải qua import động. Cảnh dựng theo nhu cầu, lưu bóng đổ khi hình học không đổi, dừng khi mở hộp thoại hoặc ẩn tab. Hiệu ứng không khí cập nhật khoảng 25 lần/giây khi bật. Thuộc tính `data-*` của `#viewport` cho phép kiểm tra chế độ dựng, số khung hình, lượt vẽ và độ phân giải.
 
-## Scene scale
-World units are metres. room.jsx places construction coordinates inside a JSX group at scale 0.75: room width 6 m, desk top 0.81 m, shelf height 1.77 m. Station cameras use world coordinates with 1.65 m eye height. Tile UVs use 2/3 construction units, giving 0.5 m per tile in world space (visual design choice, not verified historical size). Document footprints and notebook were reduced individually. LOD distances are world distances; do not multiply camera positions by roomRoot again.
+Tọa độ cảnh tính bằng mét; hình học căn phòng nằm trong nhóm có tỷ lệ 0,75. Camera dùng tọa độ thế giới. Mô hình tải qua bộ nhớ đệm của Drei; hình học gốc dùng chung, vật liệu và texture tùy chỉnh được giải phóng theo từng đối tượng.
 
-## Downloaded props and inspection
-room.jsx uses Drei useGLTF for local Poly Haven CC0 models: wooden_table_02 (both tables), wooden_bookshelf_worn, painted_wooden_cabinet and vintage_oil_lamp. Models are normalized by bounds, placed in the JSX room group and cast shadows. Suspense loads them through Drei; cloned instance resources are released on unmount. drawer_cabinet and vintage_cabinet_01 were researched/downloaded candidates, not used. Generic vintage models are not documented original equipment. Shelf items match measured mesh shelf heights.
-engine.activate focuses the camera over 850 ms, leaves props still, then opens the reader; closing returns the saved station view. Reduced motion skips travel. focusObject(id) supports object-list selection. Inspection is separate from puzzle state.
-period-redesign.css is the final styling layer after responsive.css: material-specific generated newsprint/folder backgrounds, asymmetric newspaper columns and compact expandable HUD. Room lighting uses exposure .85, hemisphere .9, daylight 1.45; generated limewash texture is matte illustration. Preview for this session runs at http://127.0.0.1:5174/ because 5173 belongs to another app; saves are origin-specific.
+ID chương, tư liệu và khóa lưu là dữ liệu bền vững. Đổi ID cần xử lý dữ liệu đã lưu. Hồ sơ tự chọn và chuyện nhân vật có dữ liệu lưu riêng, không khóa ba bản tin chính.
 
-## Room layout and audio update
-Desk and all desk props now sit near centered window; chair faces working edge, proof press on shared desk (not a typewriter). Ceiling owns generated ceiling-lime.png and beams; wall shelf carries mantel_clock_01. Station IDs preserved. Object reader data-kind chooses notebook cloth/ruled page, paper or folder skins in period-redesign.css; openPanel resets kind. ui/sound.js owns local Kenney CC0 OGG one-shots and persisted mute, playing events appear on #app dataset for inspection. No loops/autoplay. Camera focus and return remain engine-owned; GSAP reader entrance is fade, no paper jump.
+## Kiểu dáng
 
-## Reader and clearance update
-Compact previous/next arrows plus horizontal swipe and keyboard turn pages in place via motion.turnPage. Back arrow replaces modal X. reader-stage allows vertical scrolling. Cabinet now stands beside desk at x2.55 rather than under it; wall sign and clock have separate vertical bounds. Red cloth is not multiplied by a dark red tint.
+Nạp CSS theo thứ tự: `fonts.css`, `game.css`, `panels.css`, `interface.css`. Thứ tự này giữ các quy tắc responsive và giao diện hiện tại. Font và tài nguyên được phục vụ cục bộ. Chữ cần đọc dùng HTML hoặc canvas. Texture WebP được nén lossless từ bản PNG gốc.
 
-## Physical reader and downloaded context
-Object readers use a portrait B5 aspect (176:250); motion.turnPage overlays a two-sided leaf rotating 180 degrees above the next page with shadow, no fade swap. Manuscript clue requires highlighting three inline demands; proof opens editor, other clues have distinct record actions. Sources collapse under a disclosure. Intro owns reconstruction notice; transient thoughts hide after 5.5 seconds and do not reveal object answers. Obsolete optional draft evidence is filtered on load.
-Clock uses uniform scale; wall labels retain source-canvas aspect. Loose papers are B5 world dimensions. Original supplied collage remains unchanged; scene shader keys white surround. Downloaded public-domain Saigon 1930 street is window backdrop. proofing-press local CC0 GLB replaces procedural machine, placed separately beside desk. Audio maps door/paper/book/drawer/print to downloaded recordings; icon mute remains persisted. Brave private check tab avoids IAB user interaction during testing.
+## Kiểm tra
 
-## Ambient interactions and entrance
-content/room-props.js owns six non-evidence props (window, lamp, chair, ink, clock, calendar). Room.interact owns visual mutations; R3F pointer events route ambient picks immediately without inspection lock. GSAP object tweens invalidate on demand and are disposed; reduced motion sets final transforms. Drawer cabinet moved to construction [-2.1,0,-.8] beside left of desk. Added calendar, ink bottle and pencils.
-main.enterRoom waits for actual door recording ended; motion.enterDoor runs panels for loaded audio duration (5.57 s), Escape skips. Muted/failed playback uses 2.4 s visual fallback. ui/sound.js returns completion promises, owns WebAudio type/clock ticks and audio cleanup. Thoughts type at 28 ms per glyph with throttled ticks, aria-busy during writing; reduced motion shows full text. Panel reader hides native scrollbar visuals and locks body overflow during page turns.
+`npm run check` chạy định dạng mã, kiểm thử quy tắc/lưu dữ liệu, kiểm tra nội dung, xuất xứ tài nguyên và build. Thay đổi giao diện hoặc cảnh còn cần mở trình duyệt để kiểm tra. Build thành công chưa chứng minh tốc độ GPU hay khả năng chơi trên thiết bị cảm ứng.
 
-## React Three Fiber availability
-User authorized R3F and Drei. React 19, React DOM 19, Fiber 9 and Drei 10 are pinned in package.json. The Canvas, room hierarchy, pointer events and model loading now use R3F/Drei. Puzzle UI and camera inspection remain game-specific.
-
-
-## R3F renderer migration
-2026-09-28: Drei installed and React Three Fiber Canvas now owns WebGL context, scene, camera, resize and demand-mode frame loop in src/scene/engine.js. The room hierarchy and pointer events are declarative in room.jsx. Drei useGLTF/useTexture/Detailed handle models, photos and notebook LOD. The HTML puzzle UI and camera inspection controller remain intentionally separate. Browser confirmed desk rendering, object-list drawer camera/reader, return and press-station move. Production JS rose from about 742 kB to 1300 kB minified; optimization and measured FPS are not claimed. Final gates pass. The old imperative room.js was removed after visual and interaction checks.
-
-
-
-
+Tiến độ và việc còn lại: [CHECKLIST](../plans/mvp/CHECKLIST.md). Video thật chưa được cung cấp. Phòng, lời thoại và vật thể là mô phỏng học tập; các nguồn lịch sử và quyền tài nguyên được giữ trong dữ liệu nội dung và manifest.

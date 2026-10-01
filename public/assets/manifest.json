@@ -2,10 +2,71 @@
   "schema": 1,
   "assets": [
     {
-      "path": "/assets/textures/archival-paper.png",
+      "path": "runtime:press-knowledge-props",
+      "type": "procedural-illustration",
+      "origin": "Locally authored geometry and educational reading interface, 2026-10-01",
+      "historicalEvidence": false,
+      "note": "Eight optional dossier targets: index cards, bound folders, rolled-paper bundles, editorial notes and a small type tray. Reuses credited paper, cloth and wood materials. Interpretive objects link to sourced historical knowledge pages, but are not original equipment, authentic newspaper covers or reconstructed archival documents."
+    },
+    {
+      "path": "runtime:shelf-dressing",
+      "type": "procedural-illustration",
+      "origin": "Locally authored geometry, 2026-10-01",
+      "historicalEvidence": false,
+      "note": "Fifteen decorative books, horizontal ledger stacks, plain wooden bookends, folded paper bundle, twine spool and hinged supply box with thread/paperclips. Generic illustrative shelf contents, no original newspaper headlines or historical equipment claims. Reuses credited local wood, cloth and paper materials; no external assets or packages added."
+    },
+    {
+      "path": "runtime:fictional-reader-story-props",
+      "type": "procedural-illustration",
+      "origin": "Locally authored geometry and fictional narrative, 2026-10-01",
+      "historicalEvidence": false,
+      "note": "Patched fabric, a copied writing exercise book, copied rental accounts, an old sandal strap/thread, a wooden coin box and a question notebook. Eighteen fictional scenes, dialogue and small contributions are authored for this game, not archival objects, testimony or documented fundraising totals. Existing credited wood/cloth textures reused."
+    },
+    {
+      "path": "runtime:cinematic-surface-relief",
+      "type": "procedural-illustration",
+      "origin": "Locally authored deterministic canvas height maps, 2026-10-01",
+      "historicalEvidence": false,
+      "note": "Smooth low-contrast limewash colour and continuous shallow plaster relief replace the noisy generated wall map. Matte cement grout, paper fibres and book page edges in materials.js. Educational surface treatment, not scans of the original office."
+    },
+    {
+      "path": "runtime:detailed-editorial-props",
+      "type": "procedural-illustration",
+      "origin": "Locally authored geometry, 2026-10-01",
+      "historicalEvidence": false,
+      "note": "Bevelled cloth books with separate covers/spines/pages, manila folders and tabs, curled paper, wire paperclip, lathed ink bottle with neck and ridged cap, sharpened pencils, bevelled wooden louvres and simple hinge hardware. Generic illustrative room props in props.jsx and room.jsxx, not verified original Dân Chúng equipment. No external models or packages added."
+    },
+    {
+      "path": "runtime:intro-score",
+      "type": "procedural-audio",
+      "origin": "Locally authored Web Audio composition, 2026-09-30",
+      "historicalEvidence": false,
+      "note": "Original restrained sine/triangle drone with slow gain modulation for cinematic intro. Starts after player click, respects mute/visibility and fades when entering the room. Paper/typewriter/press accents reuse the credited local recordings below. Not period music, archival sound or historical narration."
+    },
+    {
+      "path": "build:patrick-hand-font",
+      "type": "self-hosted-font",
+      "origin": "@fontsource/patrick-hand@5.3.0; Patrick Wagesreiter, Google Fonts",
+      "source": "https://github.com/google/fonts/tree/main/ofl/patrickhand",
+      "license": "SIL Open Font License 1.1; public/assets/fonts/patrick-hand-LICENSE.txt",
+      "historicalEvidence": false,
+      "note": "Vietnamese/Latin WOFF2 subsets for fictional reader letters. Handwriting is an interface treatment, not a reproduction of any historical person's writing. No external font requests at runtime."
+    },
+    {
+      "path": "runtime:scene-atmosphere-and-composing-tray",
+      "type": "procedural-illustration",
+      "origin": "Locally authored geometry, canvas glow and shaders, 2026-09-30",
+      "historicalEvidence": false,
+      "note": "Dust in sunlight, oil-lamp flame/glow, contact shades, blank paper tied with twine and a generic composing tray. Educational room dressing, not verified equipment from the Dân Chúng office. Implemented in src/scene/atmosphere.jsx and src/scene/room.jsxx; no remote assets."
+    },
+    {
+      "path": "/assets/textures/archival-paper.webp",
       "type": "illustrative-texture",
       "historicalEvidence": false,
-      "note": "Inspected visually; seamless edge behavior is not independently certified. Used as base-color only, not a PBR material set."
+      "note": "Inspected visually; seamless edge behavior is not independently certified. Used as base-color only, not a PBR material set.",
+      "originalSha256": "c436a56ddea11e43a079867e3704f6da925f63d532ce3739ad825c6894bb3cae",
+      "sha256": "f81de02f955916efbe1c500325231180f54f4eff7a3314cc50febfbed453fb82",
+      "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
     },
     {
       "path": "/assets/references/dan-chung.jpg",
@@ -25,36 +86,6 @@
         "/assets/fonts/be-vietnam-pro-LICENSE.txt"
       ],
       "note": "Vietnamese/Latin/Latin-ext 400 and 700; unicode ranges preserved; WOFF2 only."
-    },
-    {
-      "path": "/assets/textures/pbr/plastered_wall_02_diff_1k.jpg",
-      "type": "pbr-texture",
-      "origin": "https://polyhaven.com/a/plastered_wall_02",
-      "license": "CC0-1.0",
-      "licenseSource": "https://polyhaven.com/license",
-      "sha256": "0a316ffd3f953a902325c06afb5a5863bbf71d13a353f9d85378562adca79603",
-      "historicalEvidence": false,
-      "note": "Original 1K JPG downloaded unchanged; self-hosted."
-    },
-    {
-      "path": "/assets/textures/pbr/plastered_wall_02_nor_gl_1k.jpg",
-      "type": "pbr-texture",
-      "origin": "https://polyhaven.com/a/plastered_wall_02",
-      "license": "CC0-1.0",
-      "licenseSource": "https://polyhaven.com/license",
-      "sha256": "0f1b4ea0c4707ea133f133c020923bddd8610a43a153281dad15d49f39ad9624",
-      "historicalEvidence": false,
-      "note": "Original 1K JPG downloaded unchanged; self-hosted."
-    },
-    {
-      "path": "/assets/textures/pbr/plastered_wall_02_rough_1k.jpg",
-      "type": "pbr-texture",
-      "origin": "https://polyhaven.com/a/plastered_wall_02",
-      "license": "CC0-1.0",
-      "licenseSource": "https://polyhaven.com/license",
-      "sha256": "6c317c0e647b02259601690bd33501bbc825858c6d1715cd0f8f46a5b51f6db4",
-      "historicalEvidence": false,
-      "note": "Original 1K JPG downloaded unchanged; self-hosted."
     },
     {
       "path": "/assets/textures/pbr/rusty_painted_metal_diff_1k.jpg",
@@ -117,61 +148,13 @@
       "note": "Original 1K JPG downloaded unchanged; self-hosted."
     },
     {
-      "path": "/assets/textures/saigon-cement-tile.png",
+      "path": "/assets/textures/saigon-cement-tile.webp",
       "type": "illustrative-texture",
       "historicalEvidence": false,
-      "sha256": "ee99841384c704f77492560e0bd4da2a0c32f3292be3ee53a61dfcd10b1bcc7d",
-      "note": "New matte cement tile design inspired by early twentieth-century Saigon encaustic floors; not an exact archival pattern. Rendered at an illustrative 50 cm tile size."
-    },
-    {
-      "path": "/assets/models/drawer_cabinet/drawer_cabinet.bin",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/drawer_cabinet",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "3460b9fe00ffbe779b7f7f2de3b159c214cfec275c06194add0eebd951ee14e9",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
-      "status": "rejected-modern-appearance-not-used"
-    },
-    {
-      "path": "/assets/models/drawer_cabinet/drawer_cabinet_1k.gltf",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/drawer_cabinet",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "899581e6a041644139a138f909c6ba001684cc55b5d1702e08f01094e20d0617",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
-      "status": "rejected-modern-appearance-not-used"
-    },
-    {
-      "path": "/assets/models/drawer_cabinet/textures/drawer_cabinet_arm_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/drawer_cabinet",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "8f8eefaaadcee247204c5658c2f4d9cac598222336918b01eb48e4190317788c",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
-      "status": "rejected-modern-appearance-not-used"
-    },
-    {
-      "path": "/assets/models/drawer_cabinet/textures/drawer_cabinet_diff_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/drawer_cabinet",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "0fe270409b54a5609662dda14afaa94af4bd3267dcd83dd824e05fa880d96efb",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
-      "status": "rejected-modern-appearance-not-used"
-    },
-    {
-      "path": "/assets/models/drawer_cabinet/textures/drawer_cabinet_nor_gl_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/drawer_cabinet",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "26d0904ad341353e095ef619d157a5f416be014500475976f1144827cc849faa",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment.",
-      "status": "rejected-modern-appearance-not-used"
+      "sha256": "8d1e439b5960980a090cff6a92d93bca63540e7b66af8e273f952a7485b0f5ef",
+      "note": "New matte cement tile design inspired by early twentieth-century Saigon encaustic floors; not an exact archival pattern. Rendered at an illustrative 50 cm tile size.",
+      "originalSha256": "ee99841384c704f77492560e0bd4da2a0c32f3292be3ee53a61dfcd10b1bcc7d",
+      "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/vintage_oil_lamp.bin",
@@ -180,7 +163,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "4064065c8e288beaa58639c139c801db337bfc6183e73378a9177157f0587167",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/vintage_oil_lamp_1k.gltf",
@@ -189,7 +172,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "ae570b98ea30b0337f62d8e7f551c03a05de00b238f3fac8f1ca5a1f1dbd1add",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_arm_1k.jpg",
@@ -198,7 +181,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "004b7b6238632e4fc9e2ad7e76529caa292cfd96f5a42d6564531207f25c3e92",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_diff_1k.jpg",
@@ -207,7 +190,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "a96cc1383fb056618eca80a0cf4ae192286c8752f8e83cb52f9fec02ca94a471",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_flame_diff_1k.jpg",
@@ -216,7 +199,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "827c6a4fa9274141636cee9415f416a32937f2f257901bbe8488b22b862509f1",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_glass_arm_1k.jpg",
@@ -225,7 +208,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "0ef2b0eb2087895851be979afc5ccb2c11076f71bc667f9e586b7f8038efc158",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_glass_diff_1k.jpg",
@@ -234,7 +217,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "dbe33017c012a00c74419bb8f05b16a2eeee5e06e2ceab49a80462d25c7a7c0a",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_glass_nor_gl_1k.jpg",
@@ -243,7 +226,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "2752589c8f6c7724bf2aa5d097010bd9257fff8ca0f85add13ec2ac702909df0",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_nor_gl_1k.jpg",
@@ -252,7 +235,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "54db7efff64c4117782e25851544a0eb4881e5e28a13a06917a16d15ce26b1db",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_bookshelf_worn/wooden_bookshelf_worn.bin",
@@ -261,7 +244,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "170758113b50132380ab46943f6eab18f2714460dead065aae37241a94abf0f9",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_bookshelf_worn/wooden_bookshelf_worn_1k.gltf",
@@ -270,7 +253,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "a1c5b3f1e71ae0b5eb73047e8097bceaa5f17e5d2d0d7ae1b8053d5ec0878fc6",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_arm_1k.jpg",
@@ -279,7 +262,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "41b3aca38fb55cb300d971016a597c80425da3744a6d33d82fe78f9dbe609eaa",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_diff_1k.jpg",
@@ -288,7 +271,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "970f60178decadd0d8fb1e5872f718350a49b027fd69469210c41ead350cba56",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_nor_gl_1k.jpg",
@@ -297,7 +280,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "90ffb1b3f7bb638d5a7e1a2b244a260d623e314a6010a6b8c23c57203e510ac9",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_table_02/wooden_table_02.bin",
@@ -306,7 +289,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "52ed7cc67b3aa403375cf9bd18050e8cc21bcced6532a0183c1a733f0965df6d",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_table_02/wooden_table_02_1k.gltf",
@@ -315,7 +298,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "bb38e301840cb629d72c43c83fdb7fb308518efe2d0bc01e1ed0e9a9e43ed9d3",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_table_02/textures/wooden_table_02_arm_1k.jpg",
@@ -324,7 +307,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "b970a81e4b03f3b8a341c9eb639f112fff1782d681c846255ebc9073cd803ced",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_table_02/textures/wooden_table_02_diff_1k.jpg",
@@ -333,7 +316,7 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "2334ac3e23d69222322515d9bad066b4e90d7d81989fe231b8fb12f39179ad9e",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
       "path": "/assets/models/wooden_table_02/textures/wooden_table_02_nor_gl_1k.jpg",
@@ -342,19 +325,23 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "9470e08e5dab4ab6a7cafab2a488a50fb54fa8f38890e9032c39dcbf7f5846d2",
-      "note": "Original local glTF/buffer/maps; normalized dimensions in room.js. Generic vintage prop, not documented Dân Chúng equipment."
+      "note": "Original local glTF/buffer/maps; normalized dimensions in room.jsx. Generic vintage prop, not documented Dân Chúng equipment."
     },
     {
-      "path": "/assets/textures/newsprint-stock.png",
+      "path": "/assets/textures/newsprint-stock.webp",
       "type": "illustrative-ui-texture",
       "historicalEvidence": false,
-      "sha256": "f7fa47b04ccde07452fb9255a16e3767a011de101468e357b65472db92c02b0a"
+      "sha256": "0c1f2c45ac1087fe01db9cee20aac22941d5aa521f97b647d5c4de24fd15aa5c",
+      "originalSha256": "f7fa47b04ccde07452fb9255a16e3767a011de101468e357b65472db92c02b0a",
+      "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
     },
     {
-      "path": "/assets/textures/archive-folder.png",
+      "path": "/assets/textures/archive-folder.webp",
       "type": "illustrative-ui-texture",
       "historicalEvidence": false,
-      "sha256": "f4e715b1e9f9b5e1c2a4a043a27ef63dc982d4041dd6c077537c9e59264db637"
+      "sha256": "9694acfd1498a84c070bcf01351df2c204f5d1481a93de8fa9f3d526fed75b39",
+      "originalSha256": "f4e715b1e9f9b5e1c2a4a043a27ef63dc982d4041dd6c077537c9e59264db637",
+      "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
     },
     {
       "path": "/assets/models/painted_wooden_cabinet/painted_wooden_cabinet.bin",
@@ -402,166 +389,20 @@
       "status": "used"
     },
     {
-      "path": "/assets/models/vintage_cabinet_01/vintage_cabinet_01.bin",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "407c58be2c5efb1d41d549fcff6a57d18d025033803dcb241e57349dd65bcf60",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/vintage_cabinet_01_1k.gltf",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "ce66c642cb13ba11bf7cde72bb58ad465dce1909dbef8a22dd55b28d857c1848",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_arm_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "0f5970977780b6dbb202f1371777b7b616dee9da7e01760eee306c2202ffeb17",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_diff_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "06453bb3e2811147a7558914437c20042f3f5c21b9c4f1d3488bdfe94f25f03f",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_nor_gl_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "08d64582202f32c8f2250ee2061dc870678ac694206f9b4edf2acd11e33323a4",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_a_rough_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "a641d1ac6b43ca25eb1b26e631057b79c3f2ab1b39a3460a5894b5c3dd22b420",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_diff_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "81967dbb387b205b2aa6f253165c8c44f60cdf5e57d9ceebf230fef21569b33a",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_nor_gl_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "c9580fbf1f69d7bc23817216e2954c713c87aceb5c4f04b9b1a5233c2cf2ce7b",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/models/vintage_cabinet_01/textures/vintage_cabinet_01_b_rough_1k.jpg",
-      "type": "downloaded-model-asset",
-      "origin": "https://polyhaven.com/a/vintage_cabinet_01",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "1f11ec7fdea1b6a9ce7ea8a3d2110f944860aeb72dce4d017b8d2880582dfb20",
-      "status": "candidate-not-used"
-    },
-    {
-      "path": "/assets/textures/limewash-wall.png",
+      "path": "/assets/textures/notebook-cloth.webp",
       "type": "illustrative-texture",
       "historicalEvidence": false,
-      "sha256": "b2b9781df241af40f98471582f2671dec0294db337249de53b90e418275e6ade",
-      "note": "Flat matte limewash-inspired wall material; not evidence of a documented newspaper office."
+      "sha256": "1b676fda18a28a1145f853dee7a159ceba3c9570d72d3d7bb602462681291e42",
+      "originalSha256": "3e68cd01b68d7d242765ee98344d280b12da01cbaaf40f521d93429b73a9525e",
+      "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
     },
     {
-      "path": "/assets/audio/click_001.ogg",
-      "origin": "https://kenney.nl/assets/interface-sounds",
-      "type": "sfx",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "ccfb7fa0cccdd9faec0eb16033c732b1e308d139d80f799161495d58f7adcdb9"
-    },
-    {
-      "path": "/assets/audio/close_001.ogg",
-      "origin": "https://kenney.nl/assets/interface-sounds",
-      "type": "sfx",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "44af8249b933e0fd35ec957a638bb1a0b01f85b53fbe9674bf77bd3ca3168ef4"
-    },
-    {
-      "path": "/assets/audio/confirmation_001.ogg",
-      "origin": "https://kenney.nl/assets/interface-sounds",
-      "type": "sfx",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "063564703b6094d70718a3e787a55cc9141611e4ecd6b6637f8828f79b4a8c3a"
-    },
-    {
-      "path": "/assets/audio/drop_001.ogg",
-      "origin": "https://kenney.nl/assets/interface-sounds",
-      "type": "sfx",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "692ee3a6f1821402ca649ff735bee9591dc4846c8098fc7d6a90fd15fa57c1af"
-    },
-    {
-      "path": "/assets/audio/error_001.ogg",
-      "origin": "https://kenney.nl/assets/interface-sounds",
-      "type": "sfx",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "46e67425d16339772e8d328fb36a49426c9467418686e11beeb71ff84b0f6433"
-    },
-    {
-      "path": "/assets/audio/Kenney-LICENSE.txt",
-      "origin": "https://kenney.nl/assets/interface-sounds",
-      "type": "sfx",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "f7966c773bbed0eca6a9c75081c44a178b38eae112724dbb5fdfbd4192d118a9"
-    },
-    {
-      "path": "/assets/audio/open_001.ogg",
-      "origin": "https://kenney.nl/assets/interface-sounds",
-      "type": "sfx",
-      "license": "CC0-1.0",
-      "historicalEvidence": false,
-      "sha256": "a27c6bb0df7da1e6af5dd5937593c98bc58b6e513f42fe6a3254cd6a6949c648"
-    },
-    {
-      "path": "/assets/textures/notebook-cloth.png",
+      "path": "/assets/textures/notebook-page.webp",
       "type": "illustrative-texture",
       "historicalEvidence": false,
-      "sha256": "3e68cd01b68d7d242765ee98344d280b12da01cbaaf40f521d93429b73a9525e"
-    },
-    {
-      "path": "/assets/textures/notebook-page.png",
-      "type": "illustrative-texture",
-      "historicalEvidence": false,
-      "sha256": "fdf3b0a1c2c3df524791ac957d058ee1f1d56194d4f1cab0bf034166f0201037"
-    },
-    {
-      "path": "/assets/textures/ceiling-lime.png",
-      "type": "illustrative-texture",
-      "historicalEvidence": false,
-      "sha256": "280d1db7ea644836c0ac7fe217b53bb8adf12630845171290b5e0ffe99aece97"
+      "sha256": "e4d96519d8f00adf8f25529478e1f85344f562b4e431ee413654c2c8c9392298",
+      "originalSha256": "fdf3b0a1c2c3df524791ac957d058ee1f1d56194d4f1cab0bf034166f0201037",
+      "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
     },
     {
       "path": "/assets/models/painted_wooden_chair_01/painted_wooden_chair_01.bin",
@@ -642,14 +483,6 @@
       "license": "CC0-1.0",
       "historicalEvidence": false,
       "sha256": "faa4e33a64fee23010abc03fff82f277ed1b1f115ab0651259e9c7df0aca6d5f"
-    },
-    {
-      "path": "/assets/references/saigon-1930.jpg",
-      "origin": "https://commons.wikimedia.org/wiki/File:Saigon_--_Quartier_chinois.jpg",
-      "license": "Public domain",
-      "note": "Indochine française. Aéronautique militaire, 1930; backdrop only, not documented office viewpoint.",
-      "sha256": "2f68723c00b10b14d3616c8c2ada07bc9abd83700b291f1c45e45cb0a499dfc8",
-      "historicalEvidence": false
     },
     {
       "path": "/assets/models/proofing-press/proofing-press.glb",
@@ -834,6 +667,94 @@
       "sha256": "f06aef6c2cbb434beee5323ce28b30c9f03bbc72bc1bfe291f6a2db926e027d7",
       "historicalEvidence": false,
       "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
+    },
+    {
+      "path": "/assets/audio/ambient-heat.ogg",
+      "origin": "https://bigsoundbank.com/sun-and-heat-1-s1779.html",
+      "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
+      "note": "Tropical heat and cicada ambience loop; contemporary recording, not archival",
+      "sha256": "af7e2f170532eb57bdd2a396e9665ac3b22dd7f19b3695c41a8f421840cb9f61",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/clock-tick.ogg",
+      "origin": "https://bigsoundbank.com/clock-s0007.html",
+      "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
+      "note": "Mechanical clock ticking",
+      "sha256": "2d7c17ad5530c023b15297adc37e063c439d73345607f3810332f1989d3239af",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/type-key.ogg",
+      "origin": "https://bigsoundbank.com/typewriter-key-s2842.html",
+      "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
+      "note": "Typewriter key for thought text",
+      "sha256": "3570880fd69524b74e0a47b4c2dead81c36fe5d65de077e3f170cdfb48fe9726",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/bike-bell.ogg",
+      "origin": "https://bigsoundbank.com/bell-bike-1-s0028.html",
+      "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
+      "note": "Occasional distant bicycle bell",
+      "sha256": "43df83dc7c266c66ffcce9d470a1411f8b8427d47c36de23b62c905790163575",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/type-bell.ogg",
+      "origin": "https://bigsoundbank.com/typewriter-bell-s2844.html",
+      "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
+      "note": "Bell when a clue is recorded",
+      "sha256": "c3aad8529a2a193b80f56790f053b5b88a1fe2768783e7ac2e2e359a802f3694",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/paper-open.ogg",
+      "origin": "https://bigsoundbank.com/news-paper-manipulations-s1251.html",
+      "license": "BigSoundBank free licence (commercial use allowed)",
+      "note": "Newspaper handling, short excerpt for opening documents",
+      "sha256": "bbadaedb595ed0490f36598dc3f04e90e10bd2d7b7770d68c82e94dc9aef722c",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/paper-close.ogg",
+      "origin": "https://bigsoundbank.com/news-paper-pages-s1250.html",
+      "license": "BigSoundBank free licence (commercial use allowed)",
+      "note": "Newspaper pages, short excerpt for closing",
+      "sha256": "207e39380dcf22f1b73b6055bbbd8690f4fc4b556d6332dc288f0f0371b7a2cb",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/type-space.ogg",
+      "origin": "https://bigsoundbank.com/typewriter-space-s2843.html",
+      "license": "BigSoundBank free licence (commercial use allowed)",
+      "note": "Typewriter space bar, UI click",
+      "sha256": "9c03d391b87d32f5e3a31e374f05c9a569972996a911bdf9db41dc8012a542ba",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/type-bell-2.ogg",
+      "origin": "https://bigsoundbank.com/typewriter-bell-s2845.html",
+      "license": "BigSoundBank free licence (commercial use allowed)",
+      "note": "Typewriter bell, success",
+      "sha256": "c8aa745a2c169c6051e75ba24f2317eaaffefba76c49bc6acb8e18b596b7eb5e",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/knock-error.ogg",
+      "origin": "https://bigsoundbank.com/knock-on-a-light-door-s0374.html",
+      "license": "BigSoundBank free licence (commercial use allowed)",
+      "note": "Dull knock, wrong answer",
+      "sha256": "bc1d6d51e943599a5fdcf7ffb430a729e1fb9907d934ad597fbabe948eadd938",
+      "historicalEvidence": false
+    },
+    {
+      "path": "/assets/audio/old-switch.ogg",
+      "origin": "https://bigsoundbank.com/old-switch-s0540.html",
+      "license": "BigSoundBank free licence (commercial use allowed)",
+      "note": "Old switch, lamp",
+      "sha256": "e76438aeea48126b6b3351e86af1988169868ddeeb78627bac7ce9514ab79c3b",
+      "historicalEvidence": false
     }
   ],
   "pending": [

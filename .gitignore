@@ -6,3 +6,9 @@ artifacts/
 .env*
 !.env.example
 tmp/
+
+# Local reports and operating-system metadata
+coverage/
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,20 @@
+* text=auto
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.prettierignore text eol=lf
+.rgignore text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+public/assets/** -text
+public/assets/manifest.json text eol=lf
+*.webp binary
+*.jpg binary
+*.ogg binary
+*.mp3 binary
+*.wav binary
+*.glb binary
+*.bin binary
