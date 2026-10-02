@@ -1,7 +1,11 @@
 import { icons } from './icons.js';
 import {
+  graphicsManualKey,
   graphicsPresets,
+  presetForTier,
   presetGraphics,
+  presetOrder,
+  tierForRenderer,
   normalizeGraphics,
   loadGraphics,
   saveGraphics,
@@ -12,7 +16,27 @@ export function createGraphicsSettings(root, getEngine, onAtmosphere) {
   try {
     storage = localStorage;
   } catch {}
-  let settings = loadGraphics(storage, matchMedia('(max-width:700px)').matches),
+  // Ask the browser which GPU draws WebGL before choosing how heavy the room starts.
+  let renderer = '';
+  try {
+    const gl = document.createElement('canvas').getContext('webgl');
+    const info = gl?.getExtension('WEBGL_debug_renderer_info');
+    renderer = String(gl?.getParameter(info ? info.UNMASKED_RENDERER_WEBGL : gl.RENDERER) || '');
+    gl?.getExtension('WEBGL_lose_context')?.loseContext();
+  } catch {}
+  const tier = tierForRenderer(renderer),
+    compact = matchMedia('(max-width:700px)').matches;
+  let manual = false;
+  try {
+    manual = storage?.getItem(graphicsManualKey) === '1';
+  } catch {}
+  const chosen = () => {
+    manual = true;
+    try {
+      storage?.setItem(graphicsManualKey, '1');
+    } catch {}
+  };
+  let settings = loadGraphics(storage, compact, tier),
     returnFocus,
     announcement;
   const icon =
@@ -37,6 +61,15 @@ export function createGraphicsSettings(root, getEngine, onAtmosphere) {
       )
       .join('')}</div>
     <p id="graphics-summary"></p>
+    <details class="graphics-help"><summary>Game bị giật, lag?</summary><div>
+      <p class="graphics-gpu"></p>
+      <ol>
+        <li><b>Hạ mức đồ họa</b> xuống “Cân bằng” hoặc “Nhẹ” ở trên. Game cũng tự hạ khi thấy máy dựng hình chậm.</li>
+        <li><b>Bật tăng tốc phần cứng của trình duyệt.</b> Chrome, Edge, Cốc Cốc: Cài đặt → Hệ thống → bật “Sử dụng chế độ tăng tốc đồ họa khi có thể” → Khởi chạy lại. Firefox: Cài đặt → Chung → Hiệu suất → bật “Dùng tăng tốc phần cứng khi có thể”.</li>
+        <li><b>Laptop có hai card đồ họa:</b> Windows → Cài đặt → Hệ thống → Màn hình → Đồ họa → chọn trình duyệt → “Hiệu suất cao”, rồi mở lại trình duyệt.</li>
+        <li>Cắm sạc, tắt chế độ tiết kiệm pin và đóng bớt các thẻ khác.</li>
+      </ol>
+    </div></details>
     <details class="graphics-advanced"><summary>Tuỳ chỉnh từng hiệu ứng</summary><div>
       <label class="graphics-select"><span>Độ nét khung hình<small>Tăng độ nét sẽ dựng nhiều điểm ảnh hơn.</small></span><select data-graphics="resolution"><option value="0.75">75%</option><option value="1">100%</option><option value="1.25">125%</option></select></label>
       <label class="graphics-select"><span>Bóng đổ<small>Bóng của cửa chớp, bàn và đồ vật.</small></span><select data-graphics="shadows"><option value="0">Tắt</option><option value="1024">Vừa</option><option value="2048">Cao</option><option value="4096">Rất cao</option></select></label>
@@ -84,9 +117,28 @@ export function createGraphicsSettings(root, getEngine, onAtmosphere) {
         : 'Đã áp dụng cho lần chơi này.';
     }, 250);
   }
-  dialog
-    .querySelectorAll('[data-preset]')
-    .forEach((el) => el.addEventListener('click', () => apply(presetGraphics(el.dataset.preset))));
+  dialog.querySelectorAll('[data-preset]').forEach((el) =>
+    el.addEventListener('click', () => {
+      chosen();
+      apply(presetGraphics(el.dataset.preset));
+    }),
+  );
+  dialog.querySelector('.graphics-gpu').textContent =
+    tier === 'software'
+      ? `Trình duyệt đang dựng hình bằng CPU (${renderer}). Đây là nguyên nhân chính gây giật: hãy làm bước 2.`
+      : `Card đồ họa trình duyệt đang dùng: ${renderer || 'không đọc được'}.`;
+  // A struggling GPU steps the preset down by itself, unless the player chose a level.
+  const slowFrames = () => {
+    const index = presetOrder.indexOf(settings.preset);
+    if (manual || index < 1) return;
+    apply(presetGraphics(presetOrder[index - 1]));
+    root.dispatchEvent(
+      new CustomEvent('graphicsnotice', {
+        detail: `Máy đang dựng hình chậm nên đồ họa đã hạ xuống mức “${graphicsPresets[settings.preset].label}”. Muốn đổi lại, mở cài đặt đồ họa.`,
+      }),
+    );
+  };
+  root.querySelector('#viewport')?.addEventListener('slowframes', slowFrames);
   dialog.querySelectorAll('[data-graphics]').forEach((el) =>
     el.addEventListener(el.type === 'range' ? 'input' : 'change', () => {
       const key = el.dataset.graphics,
@@ -98,31 +150,35 @@ export function createGraphicsSettings(root, getEngine, onAtmosphere) {
               : key === 'ao'
                 ? el.value
                 : Number(el.value);
+      chosen();
       apply({ ...settings, preset: 'custom', [key]: value });
     }),
   );
   const close = () => dialog.close();
-  const open = () => {
+  const open = (help = false) => {
     returnFocus = document.activeElement;
     sync();
+    if (help === true) dialog.querySelector('.graphics-help').open = true;
     dialog.showModal();
     dialog.querySelector('#graphics-close').focus();
   };
-  button.addEventListener('click', open);
-  root.querySelectorAll('[data-open-graphics]').forEach((el) => el.addEventListener('click', open));
+  button.addEventListener('click', () => open());
+  root
+    .querySelectorAll('[data-open-graphics]')
+    .forEach((el) => el.addEventListener('click', () => open()));
   dialog.querySelector('#graphics-close').addEventListener('click', close);
   dialog.querySelector('#graphics-return').addEventListener('click', close);
   dialog.addEventListener('close', () => returnFocus?.focus());
   dialog
     .querySelector('#graphics-reset')
-    .addEventListener('click', () =>
-      apply(presetGraphics(matchMedia('(max-width:700px)').matches ? 'balanced' : 'cinematic')),
-    );
+    .addEventListener('click', () => apply(presetGraphics(presetForTier(tier, compact))));
   sync();
   return {
     get settings() {
       return settings;
     },
+    tier,
+    open,
     setAtmosphere(value) {
       settings = { ...settings, preset: 'custom', atmosphere: value };
       saveGraphics(storage, settings);

@@ -1,5 +1,7 @@
 export const graphicsKey = 'game-lsd:graphics-v1';
-const graphicsRevision = 2;
+const graphicsRevision = 3;
+export const graphicsManualKey = 'game-lsd:graphics-manual';
+export const presetOrder = ['low', 'balanced', 'high', 'cinematic'];
 export const graphicsPresets = {
   low: {
     label: 'Nhẹ',
@@ -54,13 +56,29 @@ export const graphicsPresets = {
     dpr: 2,
   },
 };
+// The WebGL renderer name tells a CPU fallback and an integrated chip from a real GPU.
+// The result is only the starting preset; players can still pick any level.
+export function tierForRenderer(name) {
+  const renderer = String(name || '').toLowerCase();
+  if (!renderer) return 'unknown';
+  if (/swiftshader|llvmpipe|softpipe|software|basic render/.test(renderer)) return 'software';
+  if (
+    /nvidia|geforce|rtx|gtx|quadro|radeon (rx|pro)|radeon\(tm\) rx|\barc\b|apple m\d/.test(renderer)
+  )
+    return 'discrete';
+  return 'integrated';
+}
+export function presetForTier(tier, compact = false) {
+  const preset = { software: 'low', integrated: 'balanced', discrete: 'high' }[tier] || 'balanced';
+  return compact && preset === 'high' ? 'balanced' : preset;
+}
 export function presetGraphics(id) {
   const valid = Object.hasOwn(graphicsPresets, id);
   const { label, note, ...values } = valid ? graphicsPresets[id] : graphicsPresets.high;
   return { preset: valid ? id : 'high', revision: graphicsRevision, ...values };
 }
 // Settings are independent of puzzle progress. Corrupt or obsolete values are bounded.
-export function normalizeGraphics(input, fallback = 'cinematic') {
+export function normalizeGraphics(input, fallback = 'balanced') {
   const source = input && typeof input === 'object' ? input : {};
   const preset = Object.hasOwn(graphicsPresets, source.preset)
     ? source.preset
@@ -86,13 +104,19 @@ export function normalizeGraphics(input, fallback = 'cinematic') {
       values[key] = Math.min(max, Math.max(min, source[key]));
   return values;
 }
-export function loadGraphics(storage, compact = false) {
-  const fallback = compact ? 'balanced' : 'cinematic';
+export function loadGraphics(storage, compact = false, tier = 'unknown') {
+  const fallback = presetForTier(tier, compact);
   try {
     const saved = JSON.parse(storage.getItem(graphicsKey));
-    // Upgrade the old named preset that blurred the room. Explicit custom choices survive.
-    if (saved?.preset === 'cinematic' && saved.revision !== graphicsRevision)
-      return presetGraphics('cinematic');
+    // Presets saved before the GPU-based default were the heaviest one for everybody.
+    // They restart from the detected level unless the player picked a level on purpose.
+    if (
+      saved &&
+      saved.preset !== 'custom' &&
+      saved.revision !== graphicsRevision &&
+      storage.getItem(graphicsManualKey) !== '1'
+    )
+      return presetGraphics(fallback);
     return normalizeGraphics(saved, fallback);
   } catch {
     return presetGraphics(fallback);

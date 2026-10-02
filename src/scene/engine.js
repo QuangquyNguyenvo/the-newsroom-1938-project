@@ -88,7 +88,12 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       animation = null,
       inspection = null,
       entry = null,
-      frames = 0;
+      frames = 0,
+      frameAt = 0,
+      due = 0,
+      samples = 0,
+      slow = 0,
+      elapsed = 0;
     let effects = true,
       ambientTimer = 0;
     function invalidate(shadows = false) {
@@ -331,6 +336,22 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
         look.distanceToSquared(target) > 0.000001 ||
         Math.abs(parallaxYaw - cursorYaw) > 0.0001 ||
         Math.abs(parallaxPitch - cursorPitch) > 0.0001;
+      // A next frame is due at once while the view moves and every 40 ms while the air
+      // drifts. Frames that keep arriving far later than that mean the GPU cannot keep
+      // up, and the interface is asked to lower the preset.
+      const ambient = effects && graphics.atmosphere && !reduce.matches;
+      const gap = now - frameAt;
+      frameAt = now;
+      if (due && gap < 5000 && !profiling) {
+        samples++;
+        elapsed += gap;
+        if (gap > due) slow++;
+        if (samples >= 50 || (samples >= 4 && elapsed > 2500)) {
+          if (slow > samples * 0.6) container.dispatchEvent(new CustomEvent('slowframes'));
+          samples = slow = elapsed = 0;
+        }
+      }
+      due = moving ? 45 : ambient ? 95 : 0;
       container.dataset.renderMode = moving
         ? 'animating'
         : effects && graphics.atmosphere && !reduce.matches
@@ -345,6 +366,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
     const visibility = () => {
       clearTimeout(ambientTimer);
       last = performance.now();
+      due = 0;
       invalidate();
     };
     const motionChange = () => {
@@ -386,6 +408,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
           },
           setPaused(value) {
             benchmark?.reset();
+            due = 0;
             paused = value;
             clearTimeout(ambientTimer);
             setHover(null, null);

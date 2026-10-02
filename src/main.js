@@ -113,6 +113,17 @@ try {
     graphicsUI.setAtmosphere(false);
 } catch {}
 effectsEnabled = graphicsUI.settings.atmosphere;
+root.addEventListener('graphicsnotice', (event) => think(event.detail));
+// Without GPU acceleration every preset stutters, so say so before the player starts.
+if (graphicsUI.tier === 'software' && el('boot')) {
+  el('boot')
+    .querySelector('.boot-progress')
+    .insertAdjacentHTML(
+      'afterend',
+      '<p class="boot-warning">Trình duyệt chưa bật tăng tốc đồ họa nên game sẽ giật. <button type="button" id="boot-gpu-help">Xem cách bật</button></p>',
+    );
+  el('boot-gpu-help').addEventListener('click', () => graphicsUI.open(true));
+}
 el('effects-button').setAttribute('aria-pressed', String(effectsEnabled));
 el('effects-button').addEventListener('click', () => {
   effectsEnabled = !effectsEnabled;

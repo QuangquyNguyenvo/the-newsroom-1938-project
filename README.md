@@ -46,6 +46,17 @@ npm run check     # định dạng mã, kiểm thử, kiểm tra nội dung và 
 npm run preview   # xem bản build trong dist/
 ```
 
+## Nếu game bị giật
+
+Game tự chọn mức đồ họa theo card đồ họa của máy và tự hạ mức khi dựng hình chậm. Nếu vẫn giật:
+
+1. Mở **Đồ họa** (nút ở màn hình mở đầu hoặc góc trên bên phải) và chọn mức “Cân bằng” hoặc “Nhẹ”.
+2. Bật tăng tốc phần cứng của trình duyệt. Chrome, Edge, Cốc Cốc: Cài đặt → Hệ thống → “Sử dụng chế độ tăng tốc đồ họa khi có thể” → Khởi chạy lại.
+3. Laptop có hai card đồ họa: Windows → Cài đặt → Hệ thống → Màn hình → Đồ họa → chọn trình duyệt → “Hiệu suất cao”.
+4. Cắm sạc và tắt chế độ tiết kiệm pin.
+
+Mục “Game bị giật, lag?” trong bảng Đồ họa cho biết trình duyệt đang dùng card nào.
+
 ## Công nghệ
 
 - **Cảnh 3D:** Three.js, React Three Fiber, Drei.

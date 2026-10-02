@@ -754,3 +754,52 @@
   width: 18px;
   height: 18px;
 }
+
+/* ---------- Performance help ---------- */
+.graphics-help {
+  margin-top: 14px;
+  font:
+    400 13px/1.6 'Be Vietnam Pro',
+    sans-serif;
+}
+.graphics-help summary {
+  width: fit-content;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.graphics-help ol {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding-left: 20px;
+}
+.graphics-help .graphics-gpu {
+  margin: 10px 0 0;
+  overflow-wrap: anywhere;
+  opacity: 0.85;
+}
+.boot-warning {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid var(--press-red);
+  background: #8c1f1c14;
+  color: var(--ink);
+  font:
+    400 13px/1.5 'Be Vietnam Pro',
+    sans-serif;
+}
+.boot-warning button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--press-red);
+  font:
+    700 13px/1.5 'Be Vietnam Pro',
+    sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
