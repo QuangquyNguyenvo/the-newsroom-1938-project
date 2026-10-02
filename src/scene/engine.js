@@ -102,6 +102,9 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
     const shading = createSimpleShading();
     let shaded = false;
     const simple = () => graphics.lighting === 'simple';
+    // Reduced lighting shares the cheap materials and the direct render, but keeps the
+    // sun shadow and a moving camera: it is meant for integrated GPUs, not for a CPU.
+    const lite = () => graphics.lighting !== 'full';
     function invalidate(shadows = false) {
       if (shadows && renderer) renderer.shadowMap.needsUpdate = true;
       if (!disposed && !paused && !document.hidden) invalidateFrame?.();
@@ -134,11 +137,11 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       if (disposed || paused || document.hidden) return;
       const stable = container.dataset.renderMode !== 'animating';
       benchmark?.begin(stable);
-      if (simple() || shaded) {
-        shaded = simple();
-        shading.apply(state.scene, shaded);
+      if (lite() || shaded) {
+        shaded = lite();
+        shading.apply(state.scene, shaded, simple());
         // AgX is a film curve evaluated per pixel; the simple path uses the plain one.
-        state.gl.toneMapping = shaded ? THREE.LinearToneMapping : THREE.AgXToneMapping;
+        state.gl.toneMapping = simple() ? THREE.LinearToneMapping : THREE.AgXToneMapping;
       }
       if (cinematic && !shaded) cinematic.render(state, delta, look);
       else {

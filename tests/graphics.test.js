@@ -22,11 +22,11 @@ test('corrupt settings cannot enable invalid sizes or non-finite exposure', () =
     dpr: 100,
   });
   assert.equal(value.resolution, 1);
-  assert.equal(value.shadows, 2048);
+  assert.equal(value.shadows, 1024);
   assert.equal(value.ao, 'off');
   assert.equal(value.exposure, 1);
   assert.equal(value.film, 0);
-  assert.equal(value.bloom, true);
+  assert.equal(value.bloom, false);
   assert.equal(value.dpr, 1.25);
   assert.equal(normalizeGraphics({ preset: '__proto__' }).preset, 'balanced');
 });

@@ -45,14 +45,15 @@ export function createSimpleShading() {
     }
   }
   return {
-    apply(scene, simple) {
-      const swap = simple ? twin : full;
+    // `lite` swaps the materials; `plain` also drops anisotropic filtering.
+    apply(scene, lite, plain = lite) {
+      const swap = lite ? twin : full;
       scene.traverse((object) => {
         if (!object.isMesh) return;
         const material = object.material;
         object.material = Array.isArray(material) ? material.map(swap) : swap(material);
         for (const item of Array.isArray(object.material) ? object.material : [object.material])
-          filter(item?.map, simple);
+          filter(item?.map, plain);
       });
     },
     dispose() {

@@ -1087,11 +1087,15 @@ export function Room({ onReady, onObjectPick, onObjectHover, notebookDistance = 
         }
         // Simple lighting: sky fill and a soft sun stand in for the area light, the
         // fill lamps and the shadow-masked sun, which are what a CPU cannot afford.
-        const simple = settings.lighting === 'simple';
-        if (windowBounceRef.current) windowBounceRef.current.visible = !simple;
-        if (fillLightsRef.current) fillLightsRef.current.visible = !simple;
+        // Reduced lighting keeps the materials, the sun and its shadow and the lamp, and
+        // lets a brighter sky stand in for the area light and the four fill lamps.
+        const simple = settings.lighting === 'simple',
+          reduced = settings.lighting === 'reduced';
+        if (windowBounceRef.current) windowBounceRef.current.visible = !simple && !reduced;
+        if (fillLightsRef.current) fillLightsRef.current.visible = !simple && !reduced;
         if (lampLightRef.current) lampLightRef.current.visible = !simple;
-        if (skyLightRef.current) skyLightRef.current.intensity = simple ? 1.25 : 0.16;
+        if (skyLightRef.current)
+          skyLightRef.current.intensity = simple ? 1.25 : reduced ? 0.55 : 0.16;
         if (sunRef.current) sunRef.current.intensity = simple && !settings.shadows ? 1.1 : 6.5;
         gl.shadowMap.needsUpdate = true;
         invalidate();

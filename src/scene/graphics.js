@@ -1,5 +1,5 @@
 export const graphicsKey = 'game-lsd:graphics-v1';
-const graphicsRevision = 4;
+const graphicsRevision = 5;
 export const graphicsManualKey = 'game-lsd:graphics-manual';
 export const presetOrder = ['low', 'balanced', 'high', 'cinematic'];
 export const graphicsPresets = {
@@ -19,17 +19,17 @@ export const graphicsPresets = {
   },
   balanced: {
     label: 'Cân bằng',
-    note: 'Giữ ánh sáng và vật liệu, giảm chi phí dựng cảnh.',
-    lighting: 'full',
+    note: 'Cho máy không có card rời: giữ vật liệu và bóng nắng, bớt đèn phụ và hiệu ứng.',
+    lighting: 'reduced',
     resolution: 1,
-    shadows: 2048,
+    shadows: 1024,
     ao: 'off',
-    bloom: true,
+    bloom: false,
     dof: false,
     film: 0.55,
     exposure: 1,
-    atmosphere: true,
-    dpr: 1.25,
+    atmosphere: false,
+    dpr: 1,
   },
   high: {
     label: 'Cao',
@@ -95,7 +95,7 @@ export function normalizeGraphics(input, fallback = 'balanced') {
     resolution: [0.75, 1, 1.25],
     shadows: [0, 1024, 2048, 4096],
     ao: ['off', 'medium', 'high'],
-    lighting: ['full', 'simple'],
+    lighting: ['full', 'reduced', 'simple'],
     dpr: [1, 1.25, 1.65, 2],
   }))
     if (allowed.includes(source[key])) values[key] = source[key];
@@ -122,6 +122,8 @@ export function loadGraphics(storage, compact = false, tier = 'unknown') {
       storage.getItem(graphicsManualKey) !== '1'
     )
       return presetGraphics(fallback);
+    // A named preset always means its current definition; only custom values are kept.
+    if (saved && Object.hasOwn(graphicsPresets, saved.preset)) return presetGraphics(saved.preset);
     return normalizeGraphics(saved, fallback);
   } catch {
     return presetGraphics(fallback);
