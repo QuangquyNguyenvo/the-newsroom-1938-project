@@ -1,13 +1,14 @@
 export const graphicsKey = 'game-lsd:graphics-v1';
-const graphicsRevision = 3;
+const graphicsRevision = 4;
 export const graphicsManualKey = 'game-lsd:graphics-manual';
 export const presetOrder = ['low', 'balanced', 'high', 'cinematic'];
 export const graphicsPresets = {
   low: {
     label: 'Nhẹ',
-    note: 'Ưu tiên máy yếu, giảm độ nét và hiệu ứng.',
-    resolution: 0.75,
-    shadows: 1024,
+    note: 'Ánh sáng đơn giản, không bóng đổ, giữ nguyên độ nét. Dành cho máy yếu hoặc chạy bằng CPU.',
+    lighting: 'simple',
+    resolution: 1,
+    shadows: 0,
     ao: 'off',
     bloom: false,
     dof: false,
@@ -19,6 +20,7 @@ export const graphicsPresets = {
   balanced: {
     label: 'Cân bằng',
     note: 'Giữ ánh sáng và vật liệu, giảm chi phí dựng cảnh.',
+    lighting: 'full',
     resolution: 1,
     shadows: 2048,
     ao: 'off',
@@ -32,6 +34,7 @@ export const graphicsPresets = {
   high: {
     label: 'Cao',
     note: 'Bóng tiếp xúc, hình sắc nét và quầng sáng mềm.',
+    lighting: 'full',
     resolution: 1,
     shadows: 2048,
     ao: 'medium',
@@ -45,6 +48,7 @@ export const graphicsPresets = {
   cinematic: {
     label: 'Điện ảnh',
     note: 'Khung hình sắc nét, bóng chi tiết và vật thể đầy đủ. Tốn tài nguyên nhất.',
+    lighting: 'full',
     resolution: 1.25,
     shadows: 4096,
     ao: 'high',
@@ -91,6 +95,7 @@ export function normalizeGraphics(input, fallback = 'balanced') {
     resolution: [0.75, 1, 1.25],
     shadows: [0, 1024, 2048, 4096],
     ao: ['off', 'medium', 'high'],
+    lighting: ['full', 'simple'],
     dpr: [1, 1.25, 1.65, 2],
   }))
     if (allowed.includes(source[key])) values[key] = source[key];

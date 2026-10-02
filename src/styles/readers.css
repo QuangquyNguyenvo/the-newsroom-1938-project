@@ -803,3 +803,16 @@
   text-underline-offset: 3px;
   cursor: pointer;
 }
+
+/* Simple lighting is for CPU rendering, where page-wide filters, blends and blurs cost
+   as much as the scene itself. */
+[data-lighting='simple'] .game-shell::after {
+  display: none;
+}
+[data-lighting='simple'] #viewport canvas {
+  filter: none;
+}
+[data-lighting='simple'] dialog::backdrop,
+[data-lighting='simple'] #intro.intro-sheet::backdrop {
+  backdrop-filter: none;
+}

@@ -9,6 +9,7 @@ import { createCinematic } from './cinematic.js';
 import { normalizeGraphics } from './graphics.js';
 import { trackAssets } from './loading.js';
 import { createBenchmark } from './benchmark.js';
+import { createSimpleShading } from './simple-shading.js';
 
 function FrameDriver({ tick, render }) {
   useFrame((state, delta) => tick(state, delta));
@@ -96,6 +97,11 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       elapsed = 0;
     let effects = true,
       ambientTimer = 0;
+    // Simple lighting also holds the camera still: no cursor tilt and no travel between
+    // views, so a slow renderer draws one frame per view instead of an animation.
+    const shading = createSimpleShading();
+    let shaded = false;
+    const simple = () => graphics.lighting === 'simple';
     function invalidate(shadows = false) {
       if (shadows && renderer) renderer.shadowMap.needsUpdate = true;
       if (!disposed && !paused && !document.hidden) invalidateFrame?.();
@@ -118,6 +124,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
         cinematic?.configure(graphics);
       }
       room?.setGraphics(graphics);
+      if (simple()) cursorYaw = cursorPitch = 0;
       room?.setEffects(effects && graphics.atmosphere && !reduce.matches);
       clearTimeout(ambientTimer);
       container.dataset.graphicsPreset = graphics.preset;
@@ -127,8 +134,18 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       if (disposed || paused || document.hidden) return;
       const stable = container.dataset.renderMode !== 'animating';
       benchmark?.begin(stable);
-      if (cinematic) cinematic.render(state, delta, look);
-      else state.gl.render(state.scene, state.camera);
+      if (simple() || shaded) {
+        shaded = simple();
+        shading.apply(state.scene, shaded);
+        // AgX is a film curve evaluated per pixel; the simple path uses the plain one.
+        state.gl.toneMapping = shaded ? THREE.LinearToneMapping : THREE.AgXToneMapping;
+      }
+      if (cinematic && !shaded) cinematic.render(state, delta, look);
+      else {
+        state.gl.render(state.scene, state.camera);
+        container.dataset.postprocessing = 'none';
+        container.dataset.renderResolution = `${state.gl.domElement.width} × ${state.gl.domElement.height}`;
+      }
       if (benchmark?.end(stable) && benchmarkMode === '1') invalidate();
     }
     function setHover(id, mesh, event) {
@@ -146,7 +163,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       const view = stations[id];
       position.fromArray(view.position);
       target.fromArray(view.target);
-      if (immediate || reduce.matches) {
+      if (immediate || reduce.matches || simple()) {
         camera.position.copy(position);
         look.copy(target);
         camera.lookAt(look);
@@ -172,7 +189,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
     function beginEntrance(seconds) {
       if (!room || !camera) return;
       room.setEntryDoor(0);
-      if (reduce.matches) {
+      if (reduce.matches || simple()) {
         finishEntrance();
         return;
       }
@@ -215,7 +232,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       const destination = center.clone().addScaledVector(direction, distance);
       destination.y = Math.max(destination.y, center.y + 0.22);
       setHover(null, null);
-      if (reduce.matches) {
+      if (reduce.matches || simple()) {
         position.copy(destination);
         target.copy(center);
         camera.position.copy(position);
@@ -253,7 +270,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       if (mesh) activate({ id, mesh });
     }
     const handleMove = (e) => {
-      if (e.pointerType === 'mouse' && !reduce.matches) {
+      if (e.pointerType === 'mouse' && !reduce.matches && !simple()) {
         const rect = canvas.getBoundingClientRect();
         cursorYaw =
           -THREE.MathUtils.clamp(((e.clientX - rect.left) / rect.width) * 2 - 1, -1, 1) * 0.095;
@@ -424,6 +441,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
             handlers.forEach(([name, handler]) => canvas.removeEventListener(name, handler));
             cinematic?.dispose();
             benchmark?.dispose();
+            shading.dispose();
             environment?.dispose();
             reactRoot.unmount();
           },

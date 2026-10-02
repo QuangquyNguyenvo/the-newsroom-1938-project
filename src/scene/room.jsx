@@ -1004,7 +1004,9 @@ export function Room({ onReady, onObjectPick, onObjectHover, notebookDistance = 
     capRef = useRef();
   const storyLidRef = useRef();
   const shelfLidRef = useRef();
-  const lampLightRef = useRef(),
+  const skyLightRef = useRef(),
+    fillLightsRef = useRef(),
+    lampLightRef = useRef(),
     calendarMaterialRef = useRef(),
     calendarMaps = useRef();
   const sunRef = useRef(),
@@ -1083,8 +1085,14 @@ export function Room({ onReady, onObjectPick, onObjectHover, notebookDistance = 
             if (size) light.shadow.mapSize.set(size, size);
           }
         }
-        if (windowBounceRef.current)
-          windowBounceRef.current.intensity = settings.preset === 'low' ? 0 : 0.65;
+        // Simple lighting: sky fill and a soft sun stand in for the area light, the
+        // fill lamps and the shadow-masked sun, which are what a CPU cannot afford.
+        const simple = settings.lighting === 'simple';
+        if (windowBounceRef.current) windowBounceRef.current.visible = !simple;
+        if (fillLightsRef.current) fillLightsRef.current.visible = !simple;
+        if (lampLightRef.current) lampLightRef.current.visible = !simple;
+        if (skyLightRef.current) skyLightRef.current.intensity = simple ? 1.25 : 0.16;
+        if (sunRef.current) sunRef.current.intensity = simple && !settings.shadows ? 1.1 : 6.5;
         gl.shadowMap.needsUpdate = true;
         invalidate();
       },
@@ -1371,7 +1379,7 @@ export function Room({ onReady, onObjectPick, onObjectHover, notebookDistance = 
         <StoryProps m={m} register={register} Target={Target} lidRef={storyLidRef} />
         <KnowledgeProps m={m} register={register} Target={Target} />
         <Atmosphere enabled={effectsEnabled} shaftRef={shaftRef} lampLightRef={lampLightRef} />
-        <hemisphereLight args={['#c4d5e1', '#302015', 0.16]} />
+        <hemisphereLight ref={skyLightRef} args={['#c4d5e1', '#302015', 0.16]} />
         <rectAreaLight
           ref={windowBounceRef}
           color="#ffe3b7"
@@ -1401,28 +1409,30 @@ export function Room({ onReady, onObjectPick, onObjectHover, notebookDistance = 
           shadow-radius={3}
           shadow-blurSamples={16}
         />
-        <pointLight
-          color="#f3c98f"
-          intensity={0.3}
-          distance={3.6}
-          decay={1.6}
-          position={[0.3, 0.35, -1.2]}
-        />
-        <pointLight
-          color="#9fb2bf"
-          intensity={0.16}
-          distance={4.5}
-          decay={1.5}
-          position={[0, 2.8, 1.8]}
-        />
-        <pointLight
-          color="#ffe1b0"
-          intensity={0.32}
-          distance={3.4}
-          decay={1.4}
-          position={[0, 2.6, -2.7]}
-        />
-        <pointLight color="#e5e8ce" intensity={0.22} distance={3} position={[-3.7, 3.3, -1.9]} />
+        <group ref={fillLightsRef}>
+          <pointLight
+            color="#f3c98f"
+            intensity={0.3}
+            distance={3.6}
+            decay={1.6}
+            position={[0.3, 0.35, -1.2]}
+          />
+          <pointLight
+            color="#9fb2bf"
+            intensity={0.16}
+            distance={4.5}
+            decay={1.5}
+            position={[0, 2.8, 1.8]}
+          />
+          <pointLight
+            color="#ffe1b0"
+            intensity={0.32}
+            distance={3.4}
+            decay={1.4}
+            position={[0, 2.6, -2.7]}
+          />
+          <pointLight color="#e5e8ce" intensity={0.22} distance={3} position={[-3.7, 3.3, -1.9]} />
+        </group>
       </group>
     </InteractionContext.Provider>
   );
