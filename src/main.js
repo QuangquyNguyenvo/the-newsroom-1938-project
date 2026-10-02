@@ -2,8 +2,11 @@ import './styles/fonts.css';
 import './styles/game.css';
 import './styles/panels.css';
 import './styles/interface.css';
-import { bootMarkup, startBoot } from './ui/boot.js';
-import { introMarkup } from './ui/intro.js';
+import './styles/opening.css';
+import './styles/readers.css';
+import { icons } from './ui/icons.js';
+import { bootMarkup, setBootReader, startBoot } from './ui/boot.js';
+import { introMarkup, setIntroReader } from './ui/intro.js';
 import { editorial } from './content/editorial.js';
 import { createGraphicsSettings } from './ui/graphics-settings.js';
 import { graphicsKey } from './scene/graphics.js';
@@ -31,6 +34,7 @@ const fontsReady = Promise.all([
   document.fonts.load('700 32px "Noto Serif"', 'Những tiếng nói đời thường'),
   document.fonts.load('400 16px "Be Vietnam Pro"', 'Đối chiếu sổ tay'),
   document.fonts.load('400 24px "Patrick Hand"', 'Tôi nhờ Út ghi hộ lời của chị Tư'),
+  document.fonts.load('400 22px "Mali"', 'Lời là của tôi'),
 ]).catch(() => {});
 const root = document.querySelector('#app');
 root.innerHTML = `
@@ -60,10 +64,25 @@ let station = 'desk',
   returnFocus;
 const panel = document.querySelector('#panel');
 const el = (id) => document.getElementById(id);
+const readerOf = { voices: 'tu', publication: 'ba', pressure: 'nam' };
+// The opening quotes the reader whose letter is on the desk now, not always the first one.
+function applyOpening() {
+  const chapter = chapters[state.chapter];
+  setBootReader(el('boot'), readerOf[chapter.id], chapter.letter);
+  setIntroReader(
+    el('intro'),
+    readerOf[chapter.id],
+    chapter.letter,
+    state.completed.includes(chapter.id),
+  );
+}
+applyOpening();
 el('edit-button').insertAdjacentHTML(
   'beforebegin',
   '<div id="mission-trail" aria-label="Tiến độ công việc"></div><div id="mission-clues" aria-label="Tư liệu cần tìm"></div>',
 );
+el('chapter-intro').insertAdjacentHTML('beforebegin', '<p id="mission-goal"></p>');
+el('edit-button').insertAdjacentHTML('beforebegin', '<p id="mission-next" role="status"></p>');
 el('chapter-intro').insertAdjacentHTML(
   'afterend',
   '<button id="reader-button" class="reader-link" aria-haspopup="dialog">Chuyện người gửi thư</button>',
@@ -247,7 +266,9 @@ function openPanel(title, kicker, html) {
   delete panel.dataset.item;
   delete panel.dataset.kind;
   delete panel.dataset.story;
+  delete panel.dataset.reader;
   engine?.setPaused(true);
+  if (el('leave-closeup')) el('leave-closeup').hidden = true;
   if (!panel.open) returnFocus = document.activeElement;
   el('panel-title').textContent = title;
   el('panel-kicker').textContent = kicker;
@@ -276,6 +297,7 @@ const sideStoriesUI = createSideStories({
   sound,
   escape,
   travel: (story) => {
+    if (refuse(story.id)) return;
     const visit = () => {
       moveTo(story.station, true);
       if (engine) engine.focusObject(story.id);
@@ -296,6 +318,7 @@ const knowledgeUI = createPressKnowledge({
   sound,
   escape,
   travel: (item) => {
+    if (refuse(item.id)) return;
     const visit = () => {
       moveTo(item.station, true);
       if (engine) engine.focusObject(item.id);
@@ -308,6 +331,43 @@ const knowledgeUI = createPressKnowledge({
   },
 });
 let pendingDocumentThought;
+// The room opens in the order of the letters: evidence for the current news item only,
+// then a reader's keepsakes and the related dossiers once that item has been printed.
+function lockReason(id) {
+  if (state.completed.length === chapters.length) return '';
+  const numberOf = (chapterId) => chapters.find((chapter) => chapter.id === chapterId).number;
+  const story = sideStories.find((item) => item.id === id);
+  if (story) {
+    const chapterId = Object.keys(readerOf).find((key) => readerOf[key] === story.reader);
+    return state.completed.includes(chapterId)
+      ? ''
+      : `Chuyện này mở ra sau khi bản tin ${numberOf(chapterId)} được in.`;
+  }
+  const dossier = pressKnowledge.find((item) => item.id === id);
+  if (dossier)
+    return state.completed.includes(dossier.unlock)
+      ? ''
+      : `Hồ sơ này mở ra sau khi bản tin ${numberOf(dossier.unlock)} được in.`;
+  const evidence =
+    objects
+      .find((item) => item.id === id)
+      ?.pages.map((page) => page.evidence)
+      .filter(Boolean) || [];
+  const owner = chapters.findIndex((chapter) =>
+    chapter.requiredEvidence.some((item) => evidence.includes(item)),
+  );
+  if (owner < 0 || owner === state.chapter) return '';
+  return owner > state.chapter
+    ? `Chưa tới lúc. Tư liệu này dành cho bản tin ${chapters[owner].number}.`
+    : `Tư liệu này đã vào bản tin ${chapters[owner].number}. Muốn xem lại, hãy mở sổ tay.`;
+}
+function refuse(id) {
+  const reason = lockReason(id);
+  if (!reason) return false;
+  if (panel.open) closePanel();
+  think(reason);
+  return true;
+}
 el('close-panel').addEventListener('click', closePanel);
 panel.addEventListener('cancel', (event) => {
   event.preventDefault();
@@ -396,6 +456,22 @@ function refreshHUD() {
         );
       }),
     );
+  // Optional reading only joins the card once the first news item has opened some.
+  el('side-stories-button').hidden = el('press-knowledge-button').hidden =
+    state.completed.length === 0;
+  const missing = chapter.requiredEvidence.find((id) => !state.evidence.includes(id));
+  const target = objects.find((item) => item.pages.some((page) => page.evidence === missing));
+  el('mission-goal').innerHTML =
+    `<b>Mục tiêu</b>Viết bản tin trả lời thư ${escape(chapter.letter.address)}.`;
+  el('mission-next').innerHTML = `<b>Việc tiếp theo</b>${escape(
+    state.completed.length === chapters.length
+      ? 'Trang báo đã xong. Đọc các chuyện và hồ sơ còn lại trong phòng, hoặc xem lại trang báo.'
+      : done
+        ? 'Bản tin đã in. Bấm nút bên dưới để xem lại và đi tiếp.'
+        : target
+          ? `Đến ${stations[target.station].label}, mở “${target.label}” rồi ghi tư liệu vào sổ tay.`
+          : 'Tư liệu đã đủ. Bấm nút bên dưới để ghép bản tin.',
+  )}`;
   el('edit-button').textContent =
     state.completed.length === chapters.length
       ? 'Xem trang báo'
@@ -419,6 +495,14 @@ el('mission-toggle').addEventListener('click', () => {
   el('mission-toggle').setAttribute('aria-expanded', 'true');
   missionHintIndex++;
 });
+const documentLabels = {
+  letter: 'Bản thảo',
+  notebook: 'Sổ ghi chép',
+  archive: 'Hồ sơ lưu',
+  photo: 'Ảnh sưu tập',
+  drawer: 'Hồ sơ ngăn kéo',
+  proof: 'Bản kiểm tra',
+};
 function inspect(id, pageIndex = 0) {
   const object = objects.find((item) => item.id === id);
   if (!object) return;
@@ -426,7 +510,7 @@ function inspect(id, pageIndex = 0) {
   openPanel(
     object.label,
     'TƯ LIỆU',
-    `<div class="reader-stage" tabindex="0" aria-label="Tài liệu, dùng phím trái phải hoặc vuốt để lật"><div class="page-bed" aria-hidden="true"></div><article class="document"></article></div><div class="reader-nav"><button data-page="previous" aria-label="Lật về trước">‹</button><span class="reader-count" aria-live="polite"></span><button data-page="next" aria-label="Lật tiếp">›</button></div><div class="reader-record"></div>`,
+    `<div class="reader-stage" tabindex="0" aria-label="Tài liệu, dùng phím trái phải hoặc vuốt để lật"><div class="page-bed" aria-hidden="true"></div><article class="document"></article></div><div class="reader-nav"><button data-page="previous" aria-label="Lật về trước">${icons.chevronLeft}</button><span class="reader-count" aria-live="polite"></span><button data-page="next" aria-label="Lật tiếp">${icons.chevronRight}</button></div><div class="reader-record"></div>`,
   );
   panel.dataset.item = id;
   panel.dataset.kind = id === 'notebook' ? 'notebook' : object.kind;
@@ -441,9 +525,12 @@ function inspect(id, pageIndex = 0) {
     if (!annotations.has(index)) annotations.set(index, new Set());
     const selected = annotations.get(index);
     stage.scrollTop = 0;
-    article.innerHTML = `${id === 'photo' && index === 0 ? `<img class="reference-photo" src="${import.meta.env.BASE_URL}assets/references/dan-chung.jpg" alt="Ảnh sưu tập các tờ báo Dân Chúng">` : ''}<h3>${escape(page.title)}</h3><p>${escape(page.text)}</p>${sourceLink(page.source)}`;
+    const arrived =
+      page.reader && chapters.findIndex((item) => item.id === page.reader.chapter) <= state.chapter;
+    article.dataset.face = id === 'photo' && index > 0 ? 'back' : 'front';
+    article.innerHTML = `<span class="doc-label">${escape(id === 'photo' && index > 0 ? 'Mặt sau tấm ảnh' : documentLabels[id])}<i>${index + 1} / ${object.pages.length}</i></span>${id === 'photo' && index === 0 ? `<img class="reference-photo" src="${import.meta.env.BASE_URL}assets/references/dan-chung.jpg" alt="Ảnh sưu tập các tờ báo Dân Chúng">` : ''}<h3>${escape(page.title)}</h3><p class="doc-text">${escape(page.text)}</p>${sourceLink(page.source)}${page.note ? `<aside class="doc-note"><b>Mình ghi bên lề</b><p>${escape(page.note)}</p>${arrived ? `<p>${escape(page.reader.text)}</p>` : ''}</aside>` : ''}`;
     if (id === 'letter' && page.evidence) {
-      const paragraph = article.querySelector('p');
+      const paragraph = article.querySelector('.doc-text');
       paragraph.innerHTML = escape(page.text).replace(
         /cơm áo|hòa bình|dân chủ/gi,
         (word) =>
@@ -616,13 +703,15 @@ function readerAfterMarkup(chapter, ending = false) {
 }
 function letterMarkup(chapter) {
   const reader = chapter.letter;
-  return `<article class="reader-letter">
+  return `<article class="reader-letter" data-reader="${readerOf[chapter.id]}">
     <span class="eyebrow">CÂU CHUYỆN HƯ CẤU · BẠN ĐỌC GỬI TÒA SOẠN</span>
     <header class="reader-person"><span class="reader-initial" aria-hidden="true">${escape(reader.name.split(' ').at(-1))}</span><div><h3>${escape(reader.from)}</h3><p>${escape(reader.motif)}</p></div></header>
     <p class="reader-scene">${escape(reader.scene)}</p>
     <div class="letter-sheet"><p class="letter-delivery">${escape(reader.delivery)}</p>${reader.text
       .split('\n\n')
-      .map((text) => `<p class="letter-text">${escape(text)}</p>`)
+      .map(
+        (text) => `<p class="letter-text">${escape(text).replace(/~~(.+?)~~/g, '<s>$1</s>')}</p>`,
+      )
       .join('')}<p class="letter-from">${escape(reader.signature)}</p></div>
     <details class="reader-history"><summary>Chuyện đời ${escape(reader.address)}</summary><ol>${reader.history.map((scene) => `<li><h4>${escape(scene.title)}</h4><p>${escape(scene.text)}</p></li>`).join('')}</ol></details>
     ${sideStoriesUI.characterMarkup({ voices: 'tu', publication: 'ba', pressure: 'nam' }[chapter.id])}
@@ -649,12 +738,17 @@ el('reader-button').addEventListener('click', () => showLetter(chapters[state.ch
 function startChapter() {
   const chapter = chapters[state.chapter];
   if (state.completed.length === chapters.length) {
-    think('Trang báo đã hoàn thành. Mình có thể đọc lại từng bản tin.');
+    think(
+      'Trang báo đã hoàn thành. Mọi tư liệu, chuyện và hồ sơ trong phòng đều mở để mình đọc lại.',
+    );
     return;
   }
+  const previous = chapters[state.chapter - 1];
   const narration =
     chapter.narration +
-    (sideStoriesUI.hasUpdates() ? ' Những đồ vật mình đã xem có lời kể mới.' : '');
+    (previous && state.completed.includes(previous.id)
+      ? ` Chuyện của ${previous.letter.address} và hồ sơ đọc thêm vừa mở trong phòng.`
+      : '');
   if (!state.completed.includes(chapter.id) && !lettersRead().includes(chapter.id))
     showLetter(chapter, () => think(narration));
   else think(narration);
@@ -669,11 +763,11 @@ function showObjects() {
   openPanel(
     'Quan sát gần hơn',
     stations[station].label,
-    `<p>Bấm một đồ vật để xem gần. Hồ sơ mở rộng và chuyện người gửi thư là các nhánh tự chọn.</p>${groups
+    `<p>Bấm một đồ vật để xem gần. Chuyện của người gửi thư và hồ sơ đọc thêm mở ra sau khi bản tin của người ấy được in.</p>${groups
       .map(([title, items]) => {
         const visible = items.filter((object) => object.station === station);
         return visible.length
-          ? `<section class="object-group"><h3>${escape(title)}</h3><div class="object-list">${visible.map((object) => `<button data-object="${object.id}">${escape(object.label)}${sideStoriesUI.has(object.id) ? `<small>${sideStoriesUI.label(object.id)}</small>` : knowledgeUI.has(object.id) ? `<small>${escape(object.title)} · ${knowledgeUI.label(object.id)}</small>` : ''}</button>`).join('')}</div></section>`
+          ? `<section class="object-group"><h3>${escape(title)}</h3><div class="object-list">${visible.map((object) => `<button data-object="${object.id}"${lockReason(object.id) ? ' disabled' : ''}>${escape(object.label)}${lockReason(object.id) ? `<small>${escape(lockReason(object.id))}</small>` : sideStoriesUI.has(object.id) ? `<small>${sideStoriesUI.label(object.id)}</small>` : knowledgeUI.has(object.id) ? `<small>${escape(object.title)} · ${knowledgeUI.label(object.id)}</small>` : ''}</button>`).join('')}</div></section>`
           : '';
       })
       .join('')}`,
@@ -814,7 +908,7 @@ function showCompletion() {
   openPanel(
     'Bản tin đã hoàn thành',
     `BẢN TIN ${chapter.number}`,
-    `<div class="story-frame"><figure class="story-image"><img src="/assets/references/dan-chung.jpg" alt="Các số báo Dân Chúng"><figcaption>Hình tham khảo người dùng cung cấp</figcaption></figure><span class="stamp">ĐÃ ĐỐI CHIẾU</span><h3>${escape(chapter.title)}</h3><p>${escape(chapter.summary)}</p><button id="watch-button">Mở câu chuyện</button></div>`,
+    `<div class="story-frame"><span class="stamp">ĐÃ ĐỐI CHIẾU</span><h3>${escape(chapter.title)}</h3><p>${escape(chapter.summary)}</p><button id="watch-button">Mở câu chuyện</button></div>`,
   );
   el('watch-button').addEventListener('click', () => {
     openPanel(
@@ -847,15 +941,7 @@ function showFinal() {
   );
   el('explore-stories').addEventListener('click', closePanel);
   el('restart-button').addEventListener('click', () => {
-    state = freshState();
-    drafts = {};
-    sideStoriesUI.reset();
-    knowledgeUI.reset();
-    remember();
-    try {
-      localStorage.removeItem(lettersKey);
-      localStorage.removeItem(draftsKey);
-    } catch {}
+    resetProgress();
     closePanel();
     moveTo('desk');
     think('Mình bắt đầu một trang báo mới.');
@@ -867,9 +953,22 @@ function showFinal() {
       `<section class="reader-endings"><span class="eyebrow">NHỮNG NGƯỜI TỪNG CHỜ BÁO · HƯ CẤU</span>${chapters.map((chapter) => readerAfterMarkup(chapter, true)).join('')}</section>`,
     );
 }
+function resetProgress() {
+  state = freshState();
+  drafts = {};
+  applyOpening();
+  sideStoriesUI.reset();
+  knowledgeUI.reset();
+  remember();
+  try {
+    localStorage.removeItem(lettersKey);
+    localStorage.removeItem(draftsKey);
+  } catch {}
+}
 function moveTo(id, immediate = false) {
   station = id;
   engine?.goTo(id, immediate);
+  if (el('leave-closeup')) el('leave-closeup').hidden = true;
   el('station-buttons')
     .querySelectorAll('button')
     .forEach((button) =>
@@ -892,6 +991,15 @@ el('station-buttons')
   .forEach((button) => button.addEventListener('click', () => moveTo(button.dataset.station)));
 el('notebook-button').addEventListener('click', showNotebook);
 el('objects-button').addEventListener('click', showObjects);
+el('station-buttons').insertAdjacentHTML(
+  'beforebegin',
+  `<button id="leave-closeup" class="light-button" hidden>${icons.chevronLeft}Trở ra</button>`,
+);
+function leaveCloseUp() {
+  el('leave-closeup').hidden = true;
+  engine?.returnFromInspection();
+}
+el('leave-closeup').addEventListener('click', leaveCloseUp);
 el('edit-button').addEventListener('click', editChapter);
 let engineError = null;
 try {
@@ -901,6 +1009,12 @@ try {
     el('viewport'),
     (id) => {
       if (panel.open) return;
+      const reason = lockReason(id);
+      if (reason) {
+        think(reason);
+        el('leave-closeup').hidden = false;
+        return;
+      }
       if (knowledgeUI.has(id)) {
         knowledgeUI.open(id);
         return;
@@ -918,10 +1032,11 @@ try {
           (object) => object.id === id,
         );
       const text = id === 'board' ? 'Biên tập bản tin' : object?.label || '';
-      if (label.dataset.target !== String(id)) {
-        label.dataset.target = String(id);
+      const locked = id ? lockReason(id) : '';
+      if (label.dataset.target !== `${id}:${locked}`) {
+        label.dataset.target = `${id}:${locked}`;
         label.innerHTML = text
-          ? `<i aria-hidden="true"></i><div class="hover-tooltip"><span>${escape(text)}</span><small>${knowledgeUI.has(id) ? 'Bấm để khám phá hồ sơ' : sideStoriesUI.has(id) ? 'Bấm để mở chuyện phụ' : roomProps.some((prop) => prop.id === id) ? 'Bấm để tương tác' : 'Bấm để xem gần'}</small></div>`
+          ? `<i aria-hidden="true"></i><div class="hover-tooltip"><span>${escape(text)}</span><small>${locked ? escape(locked.split('.')[0]) : knowledgeUI.has(id) ? 'Bấm để khám phá hồ sơ' : sideStoriesUI.has(id) ? 'Bấm để mở chuyện phụ' : roomProps.some((prop) => prop.id === id) ? 'Bấm để tương tác' : 'Bấm để xem gần'}</small></div>`
           : '';
         const tooltip = label.querySelector('.hover-tooltip');
         hoverTooltipSize = { width: tooltip?.offsetWidth || 0, height: tooltip?.offsetHeight || 0 };
@@ -942,7 +1057,7 @@ try {
           `${Math.max(8, Math.min(innerHeight - height - 8, y)) - point.y}px`,
         );
       }
-      if (engine) engine.canvas.style.cursor = id ? 'pointer' : 'grab';
+      if (engine) engine.canvas.style.cursor = !id ? 'grab' : locked ? 'default' : 'pointer';
     },
     graphicsUI.settings,
   );
@@ -962,6 +1077,10 @@ const handleKey = (event) => {
     ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)
   )
     return;
+  if (event.key === 'Escape' && !el('leave-closeup').hidden) {
+    leaveCloseUp();
+    return;
+  }
   const id = Object.keys(stations)[Number(event.key) - 1];
   if (id) moveTo(id);
 };
@@ -972,7 +1091,14 @@ refreshHUD();
 think('');
 engine?.setPaused(true);
 // Credits and loading run together; a failed or slow load offers retry instead of a black room.
-await boot.ready(engine, engineError, sound);
+await boot.ready(engine, engineError, sound, {
+  hasProgress:
+    state.evidence.length > 0 ||
+    state.completed.length > 0 ||
+    lettersRead().length > 0 ||
+    Object.keys(drafts).length > 0,
+  onNewGame: resetProgress,
+});
 el('intro').showModal();
 motion.revealIntro(el('intro'));
 syncSound();

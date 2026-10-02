@@ -1,4 +1,5 @@
-// Entirely fictional people, dialogue and life events. None of these scenes or
+// Entirely fictional people, dialogue and life events. `~~…~~` in a letter marks words the
+// writer crossed out. None of these scenes or
 // contributions is an archival account or part of documented donation totals.
 export const readers = {
   tu: {
@@ -6,10 +7,12 @@ export const readers = {
     address: 'chị Tư',
     from: 'Chị Tư, thợ dệt ở Chợ Lớn',
     motif: 'Muốn con được đi học',
+    question: 'Báo các anh có nói chuyện của người như tôi không?',
+    excerpt: ['Các anh làm báo,', 'Lương không đủ đong gạo, con nhỏ đau mà chưa mua được thuốc.'],
     scene:
       'Tan việc, chị Tư đặt phần cơm để dành xuống cạnh chỗ con nằm. Út, em trai chị, mở tờ báo dưới ngọn đèn. Chị ngắt lời em ở một chữ chưa hiểu, rồi bảo: “Chuyện này, em viết giùm chị được không?”',
     delivery: 'Chị Tư kể, em trai tên Út ghi hộ rồi đọc lại cho chị nghe trước khi gửi.',
-    text: 'Các anh làm báo,\n\nTôi ít chữ. Hồi nhỏ, nhà thiếu người làm nên tôi nghỉ học sớm. Tối nào rảnh, thằng Út cũng đọc báo cho tôi nghe. Lá thư này tôi nhờ nó viết, nhưng lời là của tôi.\n\nLương không đủ đong gạo, con nhỏ đau mà chưa mua được thuốc. Có bữa tôi nhìn bàn tay mình, dệt vải suốt ngày mà vẫn phải vá áo cho con. Tôi muốn nó được đi học, đừng lớn lên rồi chỉ biết cúi đầu như mẹ.\n\nBáo các anh có nói chuyện của người như tôi không? Nếu có, xin dùng lời dễ hiểu. Tôi còn muốn nghe lại và kể cho mấy chị cùng làm.',
+    text: 'Các anh làm báo,\n\nTôi ít chữ. Hồi nhỏ, nhà thiếu người làm nên tôi nghỉ học sớm. Tối nào rảnh, thằng Út cũng đọc báo cho tôi nghe. Lá thư này tôi nhờ nó viết, nhưng lời là của tôi.\n\n~~Tiền công không đủ chi dùng~~ Lương không đủ đong gạo, con nhỏ đau mà chưa mua được thuốc. Có bữa tôi nhìn bàn tay mình, dệt vải suốt ngày mà vẫn phải vá áo cho con. Tôi muốn nó được đi học, đừng lớn lên rồi chỉ biết cúi đầu như mẹ.\n\nBáo các anh có nói chuyện của người như tôi không? Nếu có, xin dùng lời dễ hiểu. Tôi còn muốn nghe lại và kể cho mấy chị cùng làm.',
     signature: 'Út ghi hộ lời chị Tư',
     history: [
       {
@@ -37,10 +40,12 @@ export const readers = {
     address: 'anh Ba',
     from: 'Anh Ba, phu kéo xe ở Sài Gòn',
     motif: 'Muốn hiểu trước khi tin',
+    question: 'Ai đứng sau tờ báo này?',
+    excerpt: ['Các anh,', 'Ông chủ xe bảo đừng cầm nữa, nói báo này xúi người ta làm bậy.'],
     scene:
       'Anh Ba ngồi vá quai dép sau một ngày kéo xe. Tờ báo gấp tư nằm cạnh khoản tiền thuê xe phải trả. Anh đã nghe hai lời trái ngược về nó. Trước khi đưa báo cho người khác đọc, anh muốn hỏi cho rõ.',
     delivery: 'Anh Ba tự viết. Lá thư được gửi nhờ Út, người em của chị Tư.',
-    text: 'Các anh,\n\nTôi theo cha ra Sài Gòn từ hồi còn nhỏ, học được ít chữ ở người quen. Cha mất, tôi đi kéo xe. Ban đầu nghĩ dành được tiền thì kiếm việc khác; đến giờ vẫn thuê chiếc xe ấy mỗi ngày.\n\nCó hôm chờ khách lâu, tôi đọc báo. Tôi hay mang tờ đã đọc về cho người ở dãy trọ, trong đó có chị Tư. Nhưng ông chủ xe thấy được, bảo đừng cầm nữa, nói báo này xúi người ta làm bậy. Tôi sợ mất xe, mà cũng không muốn vì sợ rồi tin ngay lời ông ấy.\n\nAi đứng sau tờ báo này? Các anh nói giúp tôi cho rõ. Tôi muốn biết mình đang đọc lời của ai trước khi kể lại cho người khác.',
+    text: 'Các anh,\n\nTôi theo cha ra Sài Gòn từ hồi còn nhỏ, học được ít chữ ở người quen. Cha mất, tôi đi kéo xe. Ban đầu nghĩ dành được tiền thì kiếm việc khác; đến giờ vẫn thuê chiếc xe ấy mỗi ngày.\n\nCó hôm chờ khách lâu, tôi đọc báo. Tôi hay mang tờ đã đọc về cho người ở dãy trọ, trong đó có chị Tư. Nhưng ông chủ xe thấy được, bảo đừng cầm nữa, nói báo này xúi người ta làm bậy. Tôi ~~không sợ~~ sợ mất xe, mà cũng không muốn vì sợ rồi tin ngay lời ông ấy.\n\nAi đứng sau tờ báo này? Các anh nói giúp tôi cho rõ. Tôi muốn biết mình đang đọc lời của ai trước khi kể lại cho người khác.',
     signature: 'Ba, người kéo xe',
     history: [
       {
@@ -68,10 +73,15 @@ export const readers = {
     address: 'cậu Năm',
     from: 'Cậu Năm, học trò từ Gia Định đến Chợ Lớn',
     motif: 'Muốn giữ một nơi để học và đọc',
+    question: 'Các anh có còn ra báo không?',
+    excerpt: [
+      'Các anh ở tòa soạn,',
+      'Nghe nói người làm báo bị bắt, em lo tuần sau chẳng còn gì để đọc.',
+    ],
     scene:
       'Năm ngồi trước cuốn tập chỉ còn vài trang trắng. Năm xu dành dụm nằm trong lòng bàn tay. Ở dãy trọ, Út vừa kể tin tòa soạn bị khám xét. Cậu gấp một mảnh giấy, viết rồi xóa dòng đầu hai lần.',
     delivery: 'Năm tự viết trên giấy lấy từ cuốn tập của mình, gửi nhờ anh Ba mang đi.',
-    text: 'Các anh ở tòa soạn,\n\nEm theo mẹ từ Gia Định đến đây. Mẹ giặt thuê, em đi học và phụ mẹ khi về. Em muốn sau này dạy học, vì có người lớn như chị Tư làm giỏi bao nhiêu việc mà vẫn phải nhờ người khác đọc chữ. Khi anh Út bận, em đọc báo cho chị nghe. Có chỗ em cũng chưa hiểu, phải hỏi lại.\n\nNghe nói người làm báo bị bắt, em lo tuần sau chẳng còn gì để đọc. Em dành được năm xu để mua tập mới. Em giữ lại một ít, phần còn lại gửi cùng thư, chẳng được bao nhiêu.\n\nCác anh có còn ra báo không? Nếu có, xin cho em biết. Em còn nợ chị Tư một đoạn hôm trước chưa đọc hết.',
+    text: '~~Kính thưa quý báo,~~ ~~Thưa các ông,~~ Các anh ở tòa soạn,\n\nEm theo mẹ từ Gia Định đến đây. Mẹ giặt thuê, em đi học và phụ mẹ khi về. Em muốn sau này dạy học, vì có người lớn như chị Tư làm giỏi bao nhiêu việc mà vẫn phải nhờ người khác đọc chữ. Khi anh Út bận, em đọc báo cho chị nghe. Có chỗ em cũng chưa hiểu, phải hỏi lại.\n\nNghe nói người làm báo bị bắt, em lo tuần sau chẳng còn gì để đọc. Em dành được năm xu để mua tập mới. Em giữ lại một ít, phần còn lại gửi cùng thư, ~~mong các anh đừng chê~~ chẳng được bao nhiêu.\n\nCác anh có còn ra báo không? Nếu có, xin cho em biết. Em còn nợ chị Tư một đoạn hôm trước chưa đọc hết.',
     signature: 'Năm, học trò',
     history: [
       {

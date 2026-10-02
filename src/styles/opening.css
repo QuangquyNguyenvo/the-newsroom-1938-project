@@ -1,0 +1,654 @@
+/* Start screen and briefing. Both are printed matter lying on the editor's desk, built
+   from the same newsprint, ink and press red as the broadsheet and the paper panels. */
+svg.glyph {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.18em;
+}
+
+/* ---------- Start screen: a front page ---------- */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vh, 32px) clamp(12px, 3vw, 40px);
+  overflow: auto;
+  background: radial-gradient(120% 90% at 50% 40%, #33261b, #17100b 78%), #17100b;
+  color: var(--ink);
+}
+.boot-sheet {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: min(940px, 100%);
+  min-height: min(640px, 100%);
+  padding: clamp(18px, 3vw, 30px) clamp(18px, 4vw, 44px) clamp(16px, 2.4vw, 24px);
+  border: 1px solid #a1957c;
+  background-color: var(--newsprint-tone);
+  background-image: linear-gradient(#eee9dfb8, #eee9dfb8), var(--newsprint);
+  background-size: 100%, 1000px;
+  box-shadow:
+    0 1px 0 #fff8 inset,
+    6px 8px 0 #0000002e,
+    0 22px 60px #000a;
+}
+.boot-masthead {
+  text-align: center;
+}
+.boot-title {
+  margin: 0;
+  color: var(--ink);
+  font:
+    700 clamp(40px, 8.6vw, 96px)/1.12 'Noto Serif',
+    serif;
+  letter-spacing: -0.02em;
+  transform: scaleX(0.9);
+  text-shadow: 0.5px 0.4px 0 #1d1a1599;
+}
+.boot-motto {
+  margin: 2px 0 10px;
+  color: var(--ink-soft);
+  font:
+    400 clamp(14px, 1.5vw, 17px)/1.5 'Noto Serif',
+    serif;
+  font-style: italic;
+}
+.boot-issue {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 4px double var(--ink);
+  font:
+    700 12px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.boot-issue span:nth-child(2) {
+  color: var(--press-red);
+}
+
+.boot-body {
+  position: relative;
+  display: grid;
+  min-height: 250px;
+  padding: clamp(16px, 2.6vw, 26px) 0;
+}
+.boot-lobby {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: center;
+}
+.boot-lobby[hidden] {
+  display: none;
+}
+.boot-contents ol {
+  display: grid;
+  margin: 10px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+  list-style: none;
+}
+.boot-contents li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid #1d1a1540;
+}
+.boot-contents li span {
+  color: var(--press-red);
+  font:
+    700 13px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.boot-contents li b {
+  color: var(--ink);
+  font:
+    700 clamp(16px, 1.8vw, 20px)/1.35 'Noto Serif',
+    serif;
+}
+.boot-lead {
+  padding-left: clamp(18px, 3vw, 34px);
+  border-left: 1px solid #1d1a1566;
+}
+.boot-lead h2 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font:
+    700 clamp(21px, 2.5vw, 29px)/1.25 'Noto Serif',
+    serif;
+  letter-spacing: -0.01em;
+}
+.boot-lead p {
+  margin: 0;
+  color: var(--ink);
+  font:
+    400 15px/1.7 'Noto Serif',
+    serif;
+}
+.boot-lead .boot-fiction {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #1d1a1540;
+  color: var(--ink-soft);
+  font:
+    400 12.5px/1.6 'Be Vietnam Pro',
+    sans-serif;
+}
+
+/* Credits and the letter take the body of the page once the story starts. */
+.boot-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.reader-nav button svg.glyph,
+#graphics-close svg.glyph {
+  width: 20px;
+  height: 20px;
+}
+.boot-card {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+.boot-kicker {
+  margin: 0;
+  color: var(--press-red);
+  font:
+    700 13px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.boot-small {
+  margin: 10px 0 0;
+  color: var(--ink-soft);
+  font:
+    400 14px/1.6 'Noto Serif',
+    serif;
+  font-style: italic;
+}
+.boot-card[data-card='team'] .boot-kicker {
+  color: var(--ink);
+  font:
+    700 clamp(34px, 6vw, 58px)/1.1 'Noto Serif',
+    serif;
+  letter-spacing: 0.02em;
+}
+.boot-card[data-card='team'] .boot-small {
+  font-size: 17px;
+}
+.boot-card ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 28px;
+  width: min(620px, 100%);
+  margin: 16px auto 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--ink);
+  list-style: none;
+  text-align: left;
+}
+.boot-card li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #1d1a1580;
+}
+.boot-card li:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc(50% - 14px);
+}
+.boot-card li b {
+  color: var(--ink);
+  font:
+    700 clamp(15px, 1.7vw, 18px)/1.35 'Noto Serif',
+    serif;
+}
+.boot-card li span {
+  color: var(--ink-soft);
+  font:
+    400 13px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.boot-quote {
+  max-width: 20ch;
+  margin: 12px auto 0;
+  color: var(--press-red);
+  font:
+    400 clamp(30px, 4.6vw, 52px)/1.25 'Patrick Hand',
+    cursive;
+  text-wrap: balance;
+}
+.boot-quote span {
+  display: inline-block;
+}
+
+.boot-foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ink);
+}
+.boot-progress {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.boot-bar {
+  flex: 0 1 240px;
+  height: 3px;
+  overflow: hidden;
+  background: #1d1a1526;
+}
+.boot-bar i {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.boot-bar.failed i {
+  background: var(--press-red);
+}
+.boot-status {
+  flex: 1;
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--ink-soft);
+  font:
+    400 13px/1.5 'Be Vietnam Pro',
+    sans-serif;
+}
+.boot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 46px;
+}
+.boot-actions button,
+#intro .intro-actions button {
+  min-height: 46px;
+  padding: 10px 22px;
+  border: 1px solid #77262b;
+  background: #77262b;
+  color: #f7ecd4;
+  font:
+    700 15px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  cursor: pointer;
+}
+.boot-actions button:hover,
+.boot-actions button:focus-visible,
+#intro .intro-actions button:hover,
+#intro .intro-actions button:focus-visible {
+  background: #8e2f33;
+}
+.boot-actions button.secondary,
+#intro .intro-actions button.secondary {
+  background: transparent;
+  color: #77262b;
+}
+.boot-actions button.secondary:hover,
+.boot-actions button.secondary:focus-visible,
+#intro .intro-actions button.secondary:hover,
+#intro .intro-actions button.secondary:focus-visible {
+  background: #77262b14;
+}
+.boot-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 18px;
+}
+.boot-controls button {
+  min-height: 44px;
+  padding: 8px 0;
+  border: 0;
+  background: none;
+  color: var(--ink-soft);
+  font:
+    500 13px/1.5 'Be Vietnam Pro',
+    sans-serif;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.boot-controls button:hover,
+.boot-controls button:focus-visible {
+  color: var(--press-red);
+}
+.boot-controls button[hidden] {
+  display: none;
+}
+
+/* ---------- Briefing: an editor's note beside the first letter ---------- */
+#intro.intro-sheet {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: clamp(12px, 3vh, 32px) clamp(12px, 3vw, 40px);
+  border: 0;
+  box-shadow: none;
+  overflow: auto;
+  background: radial-gradient(120% 90% at 50% 40%, #33261be6, #17100bf2 78%);
+}
+#intro.intro-sheet[open] {
+  display: grid;
+  place-items: center;
+}
+#intro.intro-sheet::backdrop {
+  background: #0d0906aa;
+}
+.intro-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(250px, 0.75fr);
+  gap: clamp(22px, 4vw, 52px);
+  align-items: center;
+  width: min(1000px, 100%);
+  padding: clamp(20px, 3.4vw, 40px) clamp(18px, 4vw, 46px);
+  border: 1px solid #8b7856;
+  background: var(--paper) url('/assets/textures/archival-paper.webp') center/780px;
+  color: var(--ink);
+  box-shadow:
+    6px 8px 0 #0000002e,
+    0 22px 60px #000a;
+}
+.intro-eyebrow {
+  display: block;
+  padding-bottom: 10px;
+  border-bottom: 3px double var(--rule);
+  color: #77262b;
+  font:
+    700 12px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.08em;
+}
+#intro.intro-sheet h2 {
+  margin: 18px 0 12px;
+  color: var(--ink);
+  font:
+    700 clamp(28px, 3.8vw, 44px)/1.2 'Noto Serif',
+    serif;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+#intro.intro-sheet .intro-deck {
+  max-width: 54ch;
+  margin: 0;
+  color: var(--ink);
+  font:
+    400 16px/1.7 'Noto Serif',
+    serif;
+}
+.intro-steps {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 22px;
+  padding: 14px 0 14px 22px;
+  border-top: 1px solid #6d5b3d80;
+  border-bottom: 1px solid #6d5b3d80;
+  color: var(--ink);
+  font:
+    400 14.5px/1.6 'Noto Serif',
+    serif;
+}
+.intro-steps li::marker {
+  font-weight: 700;
+}
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+#intro .intro-actions button {
+  width: auto;
+  margin: 0;
+}
+#intro .intro-actions #start-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.intro-notice {
+  margin-top: 16px;
+  color: #4a4032;
+  font:
+    400 13px/1.7 'Be Vietnam Pro',
+    sans-serif;
+}
+.intro-notice summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.intro-notice summary::-webkit-details-marker {
+  display: none;
+}
+.intro-notice summary .glyph {
+  width: 0.9em;
+  height: 0.9em;
+  transition: transform 0.15s;
+}
+.intro-notice[open] summary .glyph {
+  transform: rotate(90deg);
+}
+#intro.intro-sheet .intro-notice p {
+  margin: 8px 0 0;
+  font:
+    400 13px/1.7 'Be Vietnam Pro',
+    sans-serif;
+}
+
+.intro-letter {
+  position: relative;
+  padding: 24px 24px 66px;
+  border: 1px solid #b9a88a;
+  background-color: #eee5d0;
+  background-image: linear-gradient(#f3ecdbd4, #f3ecdbd4), var(--newsprint);
+  background-size: 100%, 900px;
+  color: #3b2c21;
+  box-shadow: 3px 5px 0 #2e241826;
+  transform: rotate(-2deg);
+}
+.intro-letter-tag {
+  display: block;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #8f6b4b77;
+  color: #6b4d33;
+  font:
+    700 12px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#intro.intro-sheet .intro-letter p {
+  margin: 10px 0;
+  color: #42352a;
+  font:
+    400 clamp(21px, 2vw, 25px)/1.45 'Patrick Hand',
+    cursive;
+}
+#intro.intro-sheet .intro-letter .intro-letter-question {
+  margin: 16px 0;
+  color: #77262b;
+  font-size: clamp(25px, 2.4vw, 30px);
+  line-height: 1.3;
+}
+.intro-letter cite {
+  display: block;
+  margin-top: 18px;
+  color: #5c4935;
+  font:
+    400 18px/1.5 'Patrick Hand',
+    cursive;
+  text-align: right;
+}
+.intro-letter cite span {
+  display: block;
+  color: #6f5c42;
+  font:
+    400 12px/1.4 'Be Vietnam Pro',
+    sans-serif;
+}
+.intro-letter-stamp {
+  position: absolute;
+  bottom: 18px;
+  left: 22px;
+  padding: 4px 9px;
+  border: 3px double #77262b88;
+  color: #77262bbb;
+  font:
+    700 11px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.1em;
+  transform: rotate(-7deg);
+}
+
+/* Walking through the door: the sheet steps aside and the room shows through. */
+#intro.intro-sheet.entering[open] {
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+}
+#intro.intro-sheet.entering::backdrop {
+  background: transparent;
+}
+#intro.intro-sheet.entering > :not(.entry-caption) {
+  visibility: hidden;
+  pointer-events: none;
+}
+#intro.intro-sheet .entry-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 9vh;
+  margin: 0;
+  padding: 12px 22px;
+  border: 1px solid #8b7856;
+  background: var(--paper) url('/assets/textures/archival-paper.webp') center/780px;
+  color: var(--ink);
+  font:
+    700 15px/1.6 'Noto Serif',
+    serif;
+  text-align: center;
+  transform: translateX(-50%);
+}
+#intro.intro-sheet .entry-caption small {
+  display: block;
+  color: #4a4032;
+  font:
+    400 12px/1.5 'Be Vietnam Pro',
+    sans-serif;
+}
+
+@media (max-width: 740px) {
+  .boot,
+  #intro.intro-sheet[open] {
+    place-items: start center;
+  }
+  .boot-issue span:first-child {
+    display: none;
+  }
+  .boot-lobby {
+    grid-template-columns: 1fr;
+  }
+  .boot-lead {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .boot-card ul {
+    grid-template-columns: 1fr;
+  }
+  .boot-card li:last-child:nth-child(odd) {
+    width: 100%;
+  }
+  .boot-foot {
+    grid-template-columns: 1fr;
+  }
+  .boot-progress {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .boot-bar {
+    flex: none;
+  }
+  .boot-actions button {
+    flex: 1 1 auto;
+  }
+  .boot-controls {
+    justify-content: flex-start;
+  }
+  .intro-page {
+    grid-template-columns: 1fr;
+  }
+  .intro-letter {
+    width: min(100%, 380px);
+    justify-self: center;
+  }
+  #intro .intro-actions #start-button {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Short laptop screens keep the whole sheet in frame. */
+@media (min-width: 741px) and (max-height: 720px) {
+  .boot-title {
+    font-size: clamp(40px, 7vw, 72px);
+  }
+  .boot-body {
+    min-height: 220px;
+    padding: 14px 0;
+  }
+  #intro.intro-sheet h2 {
+    margin: 12px 0 8px;
+  }
+  .intro-steps {
+    margin: 12px 0 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-letter {
+    transform: none;
+  }
+}

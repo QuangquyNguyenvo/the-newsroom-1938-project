@@ -8,6 +8,7 @@ import { stations } from './stations.js';
 import { createCinematic } from './cinematic.js';
 import { normalizeGraphics } from './graphics.js';
 import { trackAssets } from './loading.js';
+import { createBenchmark } from './benchmark.js';
 
 function FrameDriver({ tick, render }) {
   useFrame((state, delta) => tick(state, delta));
@@ -33,8 +34,16 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       reactRoot.unmount();
       reject(error);
     }
-    let scene, camera, renderer, canvas, room, invalidateFrame, cinematic;
+    let scene, camera, renderer, canvas, room, invalidateFrame, cinematic, benchmark;
     let graphics = normalizeGraphics(initialGraphics);
+    let notebookDistance = graphics.dpr >= 1.65 ? 8 : 3.45;
+    const benchmarkMode = new URLSearchParams(location.search).get('benchmark');
+    const profiling = benchmarkMode === '1' || benchmarkMode === 'ambient';
+    const benchmarkSize = new URLSearchParams(location.search)
+      .get('size')
+      ?.match(/^(\d{3,4})x(\d{3,4})$/);
+    const fixedSize =
+      profiling && benchmarkSize && benchmarkSize.slice(1).every((n) => +n >= 256 && +n <= 4096);
     const canvasProps = {
       frameloop: 'demand',
       shadows: 'percentage',
@@ -43,7 +52,9 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       gl: { antialias: false, powerPreference: 'high-performance' },
       onCreated: ready,
       onPointerMissed: () => setHover(null, null),
-      style: { width: '100%', height: '100%' },
+      style: fixedSize
+        ? { width: `${benchmarkSize[1]}px`, height: `${benchmarkSize[2]}px` }
+        : { width: '100%', height: '100%' },
     };
     function renderCanvas() {
       reactRoot.render(
@@ -53,7 +64,12 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
           React.createElement('color', { attach: 'background', args: ['#3e3028'] }),
           React.createElement('fog', { attach: 'fog', args: ['#3a2d24', 9, 22] }),
           React.createElement(FrameDriver, { tick, render: renderFrame }),
-          React.createElement(Room, { onReady: roomReady, onObjectPick, onObjectHover }),
+          React.createElement(Room, {
+            onReady: roomReady,
+            onObjectPick,
+            onObjectHover,
+            notebookDistance,
+          }),
         ),
       );
     }
@@ -80,8 +96,18 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
       if (!disposed && !paused && !document.hidden) invalidateFrame?.();
     }
     function setGraphics(value) {
+      benchmark?.reset();
       graphics = normalizeGraphics(value);
-      stateRef?.setDpr(Math.min(devicePixelRatio || 1, graphics.dpr) * graphics.resolution);
+      const dpr = Math.min(devicePixelRatio || 1, graphics.dpr) * graphics.resolution;
+      const shadows = graphics.shadows > 0 ? 'percentage' : false;
+      const distance = graphics.dpr >= 1.65 ? 8 : 3.45;
+      const changed =
+        canvasProps.dpr !== dpr || canvasProps.shadows !== shadows || notebookDistance !== distance;
+      notebookDistance = distance;
+      canvasProps.dpr = dpr;
+      canvasProps.shadows = shadows;
+      stateRef?.setDpr(dpr);
+      if (changed) renderCanvas();
       if (renderer) {
         renderer.shadowMap.enabled = graphics.shadows > 0;
         cinematic?.configure(graphics);
@@ -94,8 +120,11 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
     }
     function renderFrame(state, delta) {
       if (disposed || paused || document.hidden) return;
+      const stable = container.dataset.renderMode !== 'animating';
+      benchmark?.begin(stable);
       if (cinematic) cinematic.render(state, delta, look);
       else state.gl.render(state.scene, state.camera);
+      if (benchmark?.end(stable) && benchmarkMode === '1') invalidate();
     }
     function setHover(id, mesh, event) {
       if (mesh && (paused || animation || entry)) return;
@@ -356,6 +385,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
             invalidate();
           },
           setPaused(value) {
+            benchmark?.reset();
             paused = value;
             clearTimeout(ambientTimer);
             setHover(null, null);
@@ -370,6 +400,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
             document.removeEventListener('visibilitychange', visibility);
             handlers.forEach(([name, handler]) => canvas.removeEventListener(name, handler));
             cinematic?.dispose();
+            benchmark?.dispose();
             environment?.dispose();
             reactRoot.unmount();
           },
@@ -400,6 +431,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
         renderer.shadowMap.autoUpdate = false;
         renderer.shadowMap.needsUpdate = true;
         cinematic = createCinematic(renderer, scene, camera, graphics, container);
+        if (profiling) benchmark = createBenchmark(renderer, container);
         finishSetup();
       } catch (error) {
         fail(error);

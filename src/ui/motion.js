@@ -91,14 +91,8 @@ export function createMotion(root) {
         .timeline({ defaults: { ease: 'power2.out' } })
         .fromTo(dialog, { opacity: 0 }, { opacity: 1, duration: 0.8 })
         .fromTo(
-          dialog.querySelector('.intro-light'),
-          { xPercent: -20, opacity: 0 },
-          { xPercent: 0, opacity: 1, duration: 2 },
-          0,
-        )
-        .fromTo(
           dialog.querySelectorAll(
-            '.intro-location,#intro-title,.intro-deck,.intro-subject,.intro-steps,.intro-actions,.intro-notice',
+            '.intro-eyebrow,#intro-title,.intro-deck,.intro-steps,.intro-actions,.intro-notice',
           ),
           { y: 18, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.75, stagger: 0.1, clearProps: 'transform,opacity' },
@@ -106,13 +100,13 @@ export function createMotion(root) {
         )
         .fromTo(
           dialog.querySelector('.intro-letter'),
-          { y: 30, rotation: -7, opacity: 0 },
-          { y: 0, rotation: -3, opacity: 1, duration: 1.2, clearProps: 'transform,opacity' },
+          { y: 30, rotation: -6, opacity: 0 },
+          { y: 0, rotation: -2, opacity: 1, duration: 1.2, clearProps: 'transform,opacity' },
           0.35,
         ),
     );
   }
-  // Book-style turn kept inside the page box, hinged at the spine. beginTurn
+  // Book-style turn hinged at the left edge; the leaf fades as it swings clear. beginTurn
   // returns a controller so a drag can scrub the leaf; turnPage auto-plays it.
   function beginTurn(element, replace, restore, direction) {
     const stage = element.parentElement,
@@ -149,6 +143,9 @@ export function createMotion(root) {
       return copy;
     };
     panel?.classList.add('turning-page');
+    // A reader that fits on screen can let the leaf leave its box; a scrolling one cannot.
+    const free = panel && panel.scrollHeight <= panel.clientHeight + 1;
+    panel?.classList.toggle('turn-free', !!free);
     const old = layer(element);
     replace();
     const fresh = layer(element);
@@ -181,7 +178,8 @@ export function createMotion(root) {
     // progress 0 = turn not started, 1 = finished.
     const angle = (progress) => (direction > 0 ? -180 * progress : -180 * (1 - progress));
     const apply = (progress) => {
-      gsap.set(leaf, { rotationY: angle(progress) });
+      const away = direction > 0 ? progress : 1 - progress;
+      gsap.set(leaf, { rotationY: angle(progress), opacity: away > 0.6 ? (1 - away) / 0.4 : 1 });
       gsap.set(shade, { opacity: Math.sin(progress * Math.PI) * 0.45 });
       if (under) gsap.set(under, { opacity: progress < 0.5 ? 1 : 0 });
     };
@@ -200,7 +198,7 @@ export function createMotion(root) {
       if (record) record.inert = false;
       stage.style.height = oldHeight;
       stage.classList.remove('dragging');
-      panel?.classList.remove('turning-page');
+      panel?.classList.remove('turning-page', 'turn-free');
       if (body) body.scrollTop = scrollTop;
       done?.();
     }

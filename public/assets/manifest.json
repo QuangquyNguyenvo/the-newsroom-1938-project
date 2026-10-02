@@ -41,7 +41,7 @@
       "type": "procedural-audio",
       "origin": "Locally authored Web Audio composition, 2026-09-30",
       "historicalEvidence": false,
-      "note": "Original restrained sine/triangle drone with slow gain modulation for cinematic intro. Starts after player click, respects mute/visibility and fades when entering the room. Paper/typewriter/press accents reuse the credited local recordings below. Not period music, archival sound or historical narration."
+      "note": "The opening no longer uses a synthesized drone. It plays the credited room-tone recording below at a low level, starting after the player click and respecting mute and tab visibility. Not period music, archival sound or historical narration."
     },
     {
       "path": "build:patrick-hand-font",
@@ -51,6 +51,19 @@
       "license": "SIL Open Font License 1.1; public/assets/fonts/patrick-hand-LICENSE.txt",
       "historicalEvidence": false,
       "note": "Vietnamese/Latin WOFF2 subsets for fictional reader letters. Handwriting is an interface treatment, not a reproduction of any historical person's writing. No external font requests at runtime."
+    },
+    {
+      "path": "build:letter-hand-fonts",
+      "type": "self-hosted-fonts",
+      "origin": "@fontsource/mali@5.3.0, @fontsource/pangolin@5.3.0 and @fontsource/dancing-script@5.3.0; Google Fonts",
+      "license": "SIL Open Font License 1.1",
+      "licenseFiles": [
+        "/assets/fonts/mali-LICENSE.txt",
+        "/assets/fonts/pangolin-LICENSE.txt",
+        "/assets/fonts/dancing-script-LICENSE.txt"
+      ],
+      "historicalEvidence": false,
+      "note": "Vietnamese/Latin WOFF2 subsets, one hand per fictional letter writer. Handwriting and crossed-out words are an interface treatment, not a reproduction of any historical person or document."
     },
     {
       "path": "runtime:scene-atmosphere-and-composing-tray",
@@ -501,52 +514,64 @@
       "historicalEvidence": false
     },
     {
-      "path": "/assets/audio/drawer.wav",
+      "path": "/assets/audio/drawer.mp3",
       "origin": "https://opengameart.org/node/143670",
       "license": "CC0",
       "note": "laleksic, drawer_open.wav",
-      "sha256": "0f1a31835c07e0722e9b506f1f38b726d4ed9579a947721b8e633125c46f3586",
-      "historicalEvidence": false
+      "sha256": "1e1e364cbf1464f160235c3ee3e2fc10f5708cca32df700aabc0d6446b562ea2",
+      "historicalEvidence": false,
+      "originalSha256": "0f1a31835c07e0722e9b506f1f38b726d4ed9579a947721b8e633125c46f3586",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/drawer-close.wav",
+      "path": "/assets/audio/drawer-close.mp3",
       "origin": "https://opengameart.org/node/143670",
       "license": "CC0",
       "note": "laleksic, drawer_close.wav",
-      "sha256": "a97d950015ea8300d41ea1002de0eecb17bbabdb455d454a6cc786f095b3da22",
-      "historicalEvidence": false
+      "sha256": "159fced6e6b7c5ad9fd7fd63d56f7f501d7990638dc6692a92937ef037adbd0d",
+      "historicalEvidence": false,
+      "originalSha256": "a97d950015ea8300d41ea1002de0eecb17bbabdb455d454a6cc786f095b3da22",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
       "path": "/assets/audio/press.mp3",
       "origin": "https://bigsoundbank.com/heidelberg-printing-press-6-s3409.html",
       "license": "CC0",
       "note": "Mireille B.; contemporary recording, gameplay excerpt, not archival sound",
-      "sha256": "691e90c6c591ddbbf402e2c511f638f558791a0f9674ec8c8abfafac9797adb3",
-      "historicalEvidence": false
+      "sha256": "fcf4856f5ed6356d09334bc87e65254105da24c8ff7436810c6d81a0f3d1594a",
+      "historicalEvidence": false,
+      "originalSha256": "691e90c6c591ddbbf402e2c511f638f558791a0f9674ec8c8abfafac9797adb3",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/paper-turn-0.ogg",
+      "path": "/assets/audio/paper-turn-0.mp3",
       "origin": "https://opengameart.org/content/10-book-page-flips",
       "license": "CC0",
       "note": "StarNinjas",
-      "sha256": "ba66b947b6f53f557fa8db37413e66a2168c79ced10ca55a8abdfea134550817",
-      "historicalEvidence": false
+      "sha256": "4ccc6b5c1e52716c1d67f6b3cb0a0855e69b6d80b16f11ced504cf35c782d1ca",
+      "historicalEvidence": false,
+      "originalSha256": "ba66b947b6f53f557fa8db37413e66a2168c79ced10ca55a8abdfea134550817",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/paper-turn-1.ogg",
+      "path": "/assets/audio/paper-turn-1.mp3",
       "origin": "https://opengameart.org/content/10-book-page-flips",
       "license": "CC0",
       "note": "StarNinjas",
-      "sha256": "4b66e2f2222ad5365f417cdb66a14c81254f4ccac59598e2b9cf334cbca136c4",
-      "historicalEvidence": false
+      "sha256": "2efecad005a022614572adc5f927a950e24ceff81604f3c2687a787337338550",
+      "historicalEvidence": false,
+      "originalSha256": "4b66e2f2222ad5365f417cdb66a14c81254f4ccac59598e2b9cf334cbca136c4",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/paper-turn-2.ogg",
+      "path": "/assets/audio/paper-turn-2.mp3",
       "origin": "https://opengameart.org/content/10-book-page-flips",
       "license": "CC0",
       "note": "StarNinjas",
-      "sha256": "3fd510b29e52ea6f47a87472707d1e159b09dfeada5ae9e25a3525071ecc2a6a",
-      "historicalEvidence": false
+      "sha256": "4f727ae15067cfd3f670feb26e1dd28ee391f8e59d62484728cfdf345c34001e",
+      "historicalEvidence": false,
+      "originalSha256": "3fd510b29e52ea6f47a87472707d1e159b09dfeada5ae9e25a3525071ecc2a6a",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
       "path": "/assets/models/wicker_basket_01/wicker_basket_01.bin",
@@ -669,92 +694,144 @@
       "note": "Decorative 1K model; representative prop, not evidence of the actual newspaper room."
     },
     {
-      "path": "/assets/audio/ambient-heat.ogg",
+      "path": "/assets/audio/ambient-heat.mp3",
       "origin": "https://bigsoundbank.com/sun-and-heat-1-s1779.html",
       "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
       "note": "Tropical heat and cicada ambience loop; contemporary recording, not archival",
-      "sha256": "af7e2f170532eb57bdd2a396e9665ac3b22dd7f19b3695c41a8f421840cb9f61",
-      "historicalEvidence": false
+      "sha256": "ab28f034d5c4a379236f6d905c559f513616eebaa152135a5daf7ceb51eb72a8",
+      "historicalEvidence": false,
+      "originalSha256": "af7e2f170532eb57bdd2a396e9665ac3b22dd7f19b3695c41a8f421840cb9f61",
+      "processing": "Re-encoded as MP3 with ffmpeg 6.1.1; first 3 s crossfaded into the tail for a seamless loop."
     },
     {
-      "path": "/assets/audio/clock-tick.ogg",
+      "path": "/assets/audio/clock-tick.mp3",
       "origin": "https://bigsoundbank.com/clock-s0007.html",
       "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
       "note": "Mechanical clock ticking",
-      "sha256": "2d7c17ad5530c023b15297adc37e063c439d73345607f3810332f1989d3239af",
-      "historicalEvidence": false
+      "sha256": "2b4fb8fbe5aeb760c8d62efc9bb2d8e45e7e8ceb9807a13b2db7a9c522d4aa8b",
+      "historicalEvidence": false,
+      "originalSha256": "2d7c17ad5530c023b15297adc37e063c439d73345607f3810332f1989d3239af",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/type-key.ogg",
+      "path": "/assets/audio/type-key.mp3",
       "origin": "https://bigsoundbank.com/typewriter-key-s2842.html",
       "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
       "note": "Typewriter key for thought text",
-      "sha256": "3570880fd69524b74e0a47b4c2dead81c36fe5d65de077e3f170cdfb48fe9726",
-      "historicalEvidence": false
+      "sha256": "110098f695d77f103e5b54b1378c8bb1767c59128e43b87a534b491c7b47eba3",
+      "historicalEvidence": false,
+      "originalSha256": "3570880fd69524b74e0a47b4c2dead81c36fe5d65de077e3f170cdfb48fe9726",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/bike-bell.ogg",
+      "path": "/assets/audio/bike-bell.mp3",
       "origin": "https://bigsoundbank.com/bell-bike-1-s0028.html",
       "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
       "note": "Occasional distant bicycle bell",
-      "sha256": "43df83dc7c266c66ffcce9d470a1411f8b8427d47c36de23b62c905790163575",
-      "historicalEvidence": false
+      "sha256": "bd2d7939f4aab5f5b4541c9b4dc776aae61ae6568edb315077551b63dba87a4e",
+      "historicalEvidence": false,
+      "originalSha256": "43df83dc7c266c66ffcce9d470a1411f8b8427d47c36de23b62c905790163575",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/type-bell.ogg",
+      "path": "/assets/audio/type-bell.mp3",
       "origin": "https://bigsoundbank.com/typewriter-bell-s2844.html",
       "license": "BigSoundBank free licence (commercial use allowed, same basis as press.mp3)",
       "note": "Bell when a clue is recorded",
-      "sha256": "c3aad8529a2a193b80f56790f053b5b88a1fe2768783e7ac2e2e359a802f3694",
-      "historicalEvidence": false
+      "sha256": "78de3b91d3a8cd67c8215a0bc5d700c196a19e3edd4224bd6da6e5dc40b6488e",
+      "historicalEvidence": false,
+      "originalSha256": "c3aad8529a2a193b80f56790f053b5b88a1fe2768783e7ac2e2e359a802f3694",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/paper-open.ogg",
+      "path": "/assets/audio/paper-open.mp3",
       "origin": "https://bigsoundbank.com/news-paper-manipulations-s1251.html",
       "license": "BigSoundBank free licence (commercial use allowed)",
       "note": "Newspaper handling, short excerpt for opening documents",
-      "sha256": "bbadaedb595ed0490f36598dc3f04e90e10bd2d7b7770d68c82e94dc9aef722c",
-      "historicalEvidence": false
+      "sha256": "b5f1e04ec77c4aca68288cb0b55ba68c11e3779dd3ef8b24e0d54c08a6957aa1",
+      "historicalEvidence": false,
+      "originalSha256": "bbadaedb595ed0490f36598dc3f04e90e10bd2d7b7770d68c82e94dc9aef722c",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/paper-close.ogg",
+      "path": "/assets/audio/paper-close.mp3",
       "origin": "https://bigsoundbank.com/news-paper-pages-s1250.html",
       "license": "BigSoundBank free licence (commercial use allowed)",
       "note": "Newspaper pages, short excerpt for closing",
-      "sha256": "207e39380dcf22f1b73b6055bbbd8690f4fc4b556d6332dc288f0f0371b7a2cb",
-      "historicalEvidence": false
+      "sha256": "70132c94bb62284c20c39650f890ab3194b93b21b80836bc8afa855595b2c333",
+      "historicalEvidence": false,
+      "originalSha256": "207e39380dcf22f1b73b6055bbbd8690f4fc4b556d6332dc288f0f0371b7a2cb",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/type-space.ogg",
+      "path": "/assets/audio/type-space.mp3",
       "origin": "https://bigsoundbank.com/typewriter-space-s2843.html",
       "license": "BigSoundBank free licence (commercial use allowed)",
       "note": "Typewriter space bar, UI click",
-      "sha256": "9c03d391b87d32f5e3a31e374f05c9a569972996a911bdf9db41dc8012a542ba",
-      "historicalEvidence": false
+      "sha256": "653d60f1955c356d1929336538b08180d61eaac44059e26ffe74643a744f66ce",
+      "historicalEvidence": false,
+      "originalSha256": "9c03d391b87d32f5e3a31e374f05c9a569972996a911bdf9db41dc8012a542ba",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/type-bell-2.ogg",
+      "path": "/assets/audio/type-bell-2.mp3",
       "origin": "https://bigsoundbank.com/typewriter-bell-s2845.html",
       "license": "BigSoundBank free licence (commercial use allowed)",
       "note": "Typewriter bell, success",
-      "sha256": "c8aa745a2c169c6051e75ba24f2317eaaffefba76c49bc6acb8e18b596b7eb5e",
-      "historicalEvidence": false
+      "sha256": "bb0751c1f0bac7ba7704be2c5a7efec14e18c5318f6a697d326375c277281173",
+      "historicalEvidence": false,
+      "originalSha256": "c8aa745a2c169c6051e75ba24f2317eaaffefba76c49bc6acb8e18b596b7eb5e",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/knock-error.ogg",
+      "path": "/assets/audio/knock-error.mp3",
       "origin": "https://bigsoundbank.com/knock-on-a-light-door-s0374.html",
       "license": "BigSoundBank free licence (commercial use allowed)",
       "note": "Dull knock, wrong answer",
-      "sha256": "bc1d6d51e943599a5fdcf7ffb430a729e1fb9907d934ad597fbabe948eadd938",
-      "historicalEvidence": false
+      "sha256": "717b44b3955f1f19308430eef6e3bd4b1a26948baa09791a31e417e09f5240cd",
+      "historicalEvidence": false,
+      "originalSha256": "bc1d6d51e943599a5fdcf7ffb430a729e1fb9907d934ad597fbabe948eadd938",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
     },
     {
-      "path": "/assets/audio/old-switch.ogg",
+      "path": "/assets/audio/old-switch.mp3",
       "origin": "https://bigsoundbank.com/old-switch-s0540.html",
       "license": "BigSoundBank free licence (commercial use allowed)",
       "note": "Old switch, lamp",
-      "sha256": "e76438aeea48126b6b3351e86af1988169868ddeeb78627bac7ce9514ab79c3b",
-      "historicalEvidence": false
+      "sha256": "220e416f39ae1638f89ed4a1585f42ef8bd0ef55796016696954bdda8d13b7df",
+      "historicalEvidence": false,
+      "originalSha256": "e76438aeea48126b6b3351e86af1988169868ddeeb78627bac7ce9514ab79c3b",
+      "processing": "Excerpt of the source recording: leading silence removed, trimmed to the cue the game plays, peak set to -1 dBFS, mono MP3 (ffmpeg 6.1.1)."
+    },
+    {
+      "path": "/assets/stories/cloth.jpg",
+      "type": "illustrative-photo",
+      "origin": "https://commons.wikimedia.org/wiki/File:Child%27s_Sleeping_Mat_(boro_Shikimono),_late_19th_century_(CH_1108827543).jpg",
+      "credit": "Cooper Hewitt, Smithsonian Design Museum",
+      "license": "Public domain",
+      "historicalEvidence": false,
+      "sha256": "64c5eb69103f24da32f7507425181b0f9397a8b1c72ffb9644a89442be3d94bc",
+      "note": "Patched and stitched cotton cloth (Japanese boro mat, late 19th century). Stands in for the mended cloth of the fictional story; not a Vietnamese object from 1938. Cropped to 528x384 from the Wikimedia Commons file."
+    },
+    {
+      "path": "/assets/stories/sandal.jpg",
+      "type": "illustrative-photo",
+      "origin": "https://commons.wikimedia.org/wiki/File:Reels_(AM_14029).jpg",
+      "credit": "Auckland War Memorial Museum",
+      "license": "CC BY 4.0",
+      "historicalEvidence": false,
+      "sha256": "85c24f54f3cccb6fc91d427a3fd7ff3eb014de6d1de73fc81345bb2d187eec6e",
+      "note": "Reels of sewing thread from a museum collection. Stands in for the thread of the fictional story. Cropped and resized; licence https://creativecommons.org/licenses/by/4.0 Cropped to 528x384 from the Wikimedia Commons file."
+    },
+    {
+      "path": "/assets/stories/coinbox.jpg",
+      "type": "illustrative-photo",
+      "origin": "https://commons.wikimedia.org/wiki/File:1_Centime_-_French_Indo-China_(1939)_MA-Shops.jpg",
+      "credit": "Phủ Toàn quyền Đông Dương / MA-Shops",
+      "license": "Public domain",
+      "historicalEvidence": false,
+      "sha256": "2db1df9cd451a9d1722f5d07508351840f3154980ecb5f1fa2b2298392a95411",
+      "note": "One-centime coin of French Indochina dated 1939, both faces. A real coin of the period shown as an example of the small change in the fictional story. Cropped to 528x384 from the Wikimedia Commons file."
     }
   ],
   "pending": [

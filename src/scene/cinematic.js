@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
+import { CachedAOPass } from './cached-ao.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { BokehPass } from 'three/addons/postprocessing/BokehPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
@@ -81,10 +81,6 @@ export function createCinematic(renderer, scene, camera, initial, container) {
     lookupListeners.length = 0;
     for (const pass of passes) {
       pass.dispose?.();
-      if (pass.isGTAO) {
-        pass.gtaoMaterial.dispose();
-        pass.blendMaterial.dispose();
-      }
     }
     composer?.dispose();
     passes = [];
@@ -100,8 +96,8 @@ export function createCinematic(renderer, scene, camera, initial, container) {
     };
     add(new RenderPass(scene, camera));
     if (settings.ao !== 'off') {
-      ao = add(new GTAOPass(scene, camera, 1, 1));
-      ao.isGTAO = true;
+      ao = add(new CachedAOPass(scene, camera, 1, 1));
+      ao.cacheEnabled = new URLSearchParams(location.search).get('aoCache') !== '0';
       ao.blendIntensity = 0.62;
       excludeTransparent(ao);
       ao.updateGtaoMaterial({
@@ -169,6 +165,11 @@ export function createCinematic(renderer, scene, camera, initial, container) {
     container.dataset.renderResolution = `${Math.round(w * dpr)} × ${Math.round(h * dpr)}`;
   }
   configure(initial);
+  const restore = () => {
+    ao?.invalidate();
+    requestFrame();
+  };
+  renderer.domElement.addEventListener('webglcontextrestored', restore);
   return {
     configure,
     render(state, delta, target) {
@@ -201,7 +202,12 @@ export function createCinematic(renderer, scene, camera, initial, container) {
       }
       container.dataset.drawCalls = String(renderer.info.render.calls);
       container.dataset.triangles = String(renderer.info.render.triangles);
+      if (ao) container.dataset.aoCache = ao.reused ? 'reused' : 'updated';
+      else delete container.dataset.aoCache;
     },
-    dispose: disposePasses,
+    dispose() {
+      renderer.domElement.removeEventListener('webglcontextrestored', restore);
+      disposePasses();
+    },
   };
 }

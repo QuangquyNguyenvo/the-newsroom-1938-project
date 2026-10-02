@@ -1,0 +1,756 @@
+/* Final layer for everything the player picks up and reads. Each prop keeps its own
+   material: a clipped manuscript, a ruled notebook, a filed card, a photo print. */
+
+/* ---------- Evidence documents ---------- */
+#panel[data-item]:not([data-kind='knowledge']) {
+  width: min(540px, calc(100vw - 24px));
+  padding: 18px 24px 22px;
+  border: 1px solid #5d4834;
+  background: radial-gradient(120% 80% at 50% 0, #3b2c21, #231a14 75%), #231a14;
+  box-shadow: 6px 9px 0 #0000004d;
+  color: #efe3c8;
+}
+#panel[data-item]:not([data-kind='knowledge'])::before {
+  content: none;
+}
+#panel[data-item]:not([data-kind='knowledge']) > .dialog-head .eyebrow,
+#panel[data-item]:not([data-kind='knowledge']) > .dialog-head button,
+#panel[data-item]:not([data-kind='knowledge']) > #panel-title {
+  color: #efe3c8;
+}
+#panel[data-item]:not([data-kind='knowledge']) > .dialog-head .eyebrow {
+  color: #d8b878;
+}
+#panel[data-item]:not([data-kind='knowledge']) #panel-title {
+  margin: 2px 0 16px;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-stage {
+  margin: 0 6px;
+}
+#panel[data-item]:not([data-kind='knowledge']) .page-bed {
+  inset: 5px -5px -5px 5px;
+  background: #cfc2a6;
+  box-shadow: none;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-stage .document {
+  aspect-ratio: auto;
+  min-height: 330px;
+  padding: 26px 30px 28px;
+  border: 0;
+  background-color: #f1ead8;
+  background-image: linear-gradient(#f3ecdbd9, #f3ecdbd9), var(--newsprint);
+  background-size: 100%, 900px;
+  box-shadow: 0 6px 18px #0006;
+  color: #2b251b;
+  transform: none;
+}
+.doc-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2b251b66;
+  color: #5a4a37;
+  font:
+    700 11px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.doc-label i {
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+#panel[data-item]:not([data-kind='knowledge']) .document h3 {
+  margin: 0 0 10px;
+  color: #2b251b;
+  font:
+    700 22px/1.3 'Noto Serif',
+    serif;
+}
+#panel[data-item]:not([data-kind='knowledge']) .document .doc-text {
+  margin: 0;
+  color: #2b251b;
+  font:
+    400 16px/1.75 'Noto Serif',
+    serif;
+}
+#panel[data-item]:not([data-kind='knowledge']) .document details.source {
+  margin-top: 14px;
+  padding-top: 0;
+  border: 0;
+  font:
+    400 12px/1.5 'Be Vietnam Pro',
+    sans-serif;
+}
+/* The editor's pencil note: where the fact meets the person waiting for an answer. */
+.doc-note {
+  margin: 20px 0 0;
+  padding: 10px 4px 2px 16px;
+  border-left: 2px solid #8c1f1c99;
+  transform: rotate(-0.5deg);
+  transform-origin: left top;
+}
+.doc-note b {
+  display: block;
+  margin-bottom: 2px;
+  color: #8c1f1c;
+  font:
+    700 10.5px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+#panel[data-item]:not([data-kind='knowledge']) .document .doc-note p {
+  margin: 0 0 6px;
+  color: #6b2a2c;
+  font:
+    400 19px/1.4 'Patrick Hand',
+    cursive;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-nav {
+  margin-top: 14px;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-count,
+#panel[data-item]:not([data-kind='knowledge']) .reader-nav button {
+  color: #e3cfaa;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-record {
+  display: grid;
+  justify-items: center;
+  margin: 14px 6px 0;
+  color: #e3cfaa;
+  font:
+    400 14px/1.5 'Be Vietnam Pro',
+    sans-serif;
+  text-align: center;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-record:empty {
+  display: none;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-record button {
+  width: 100%;
+  min-height: 46px;
+  margin: 0;
+  border: 1px solid #b88b5c;
+  background: #77262b;
+  color: #f7ecd4;
+  font:
+    700 15px/1.4 'Be Vietnam Pro',
+    sans-serif;
+}
+#panel[data-item]:not([data-kind='knowledge']) .reader-record button:hover,
+#panel[data-item]:not([data-kind='knowledge']) .reader-record button:focus-visible {
+  background: #8e2f33;
+}
+
+/* Manuscript: loose sheets under a paper clip. */
+#panel[data-kind='paper'] .reader-stage .document::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 9px;
+  width: 13px;
+  height: 50px;
+  border: 2px solid #9aa0a4;
+  border-radius: 9px;
+  box-shadow:
+    inset 0 0 0 3px #f1ead8,
+    inset 0 0 0 5px #9aa0a4,
+    1px 2px 2px #0004;
+}
+/* The press-side proof carries the checker's marks. */
+#panel[data-item='proof'][data-kind='paper'] .reader-stage .document {
+  padding-bottom: 70px;
+  outline: 1px dashed #8c1f1c99;
+  outline-offset: -12px;
+}
+#panel[data-item='proof'][data-kind='paper'] .reader-stage .document::after {
+  content: 'CHỜ ĐỐI CHIẾU';
+  position: absolute;
+  right: 26px;
+  bottom: 24px;
+  padding: 4px 9px;
+  border: 3px double #8c1f1c99;
+  color: #8c1f1cbb;
+  font:
+    700 11px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.1em;
+  transform: rotate(-6deg);
+}
+
+/* Notebook: cloth cover, ruled pages, everything in the keeper's hand. */
+#panel[data-item][data-kind='notebook'] {
+  border-color: #361216;
+  background: #571f24 url('/assets/textures/notebook-cloth.webp') center/600px;
+}
+#panel[data-item][data-kind='notebook'] .page-bed {
+  background: #e3dac3;
+}
+#panel[data-item][data-kind='notebook'] .reader-stage .document {
+  padding: 22px 26px 26px 58px;
+  border-left: 0;
+  background-color: #f2ecdb;
+  background-image:
+    linear-gradient(90deg, transparent 43px, #b5494c 43px, #b5494c 44px, transparent 44px),
+    repeating-linear-gradient(transparent 0 31px, #8fa7b866 31px 32px);
+  background-size: auto;
+  background-position:
+    0 0,
+    0 14px;
+}
+#panel[data-kind='notebook'] .document .doc-label {
+  margin-bottom: 14px;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+#panel[data-item][data-kind='notebook'] .document h3 {
+  margin-bottom: 0;
+  color: #23324a;
+  font:
+    400 27px/32px 'Patrick Hand',
+    cursive;
+}
+#panel[data-item][data-kind='notebook'] .document .doc-text {
+  color: #23324a;
+  font:
+    400 21px/32px 'Patrick Hand',
+    cursive;
+}
+#panel[data-kind='notebook'] .doc-note {
+  margin-top: 32px;
+}
+
+/* Filed papers: a manila folder holding a typed card. */
+#panel[data-item][data-kind='folder'] {
+  border: 1px solid #7a5d3c;
+  border-top: 14px solid #8a6a45;
+  background: #c8ad7e var(--folder) center/900px;
+  color: #2b251b;
+}
+#panel[data-item][data-kind='folder'] > .dialog-head .eyebrow,
+#panel[data-item][data-kind='folder'] > .dialog-head button,
+#panel[data-item][data-kind='folder'] > #panel-title,
+#panel[data-item][data-kind='folder'] .reader-count,
+#panel[data-item][data-kind='folder'] .reader-nav button,
+#panel[data-item][data-kind='folder'] .reader-record {
+  color: #2b1d10;
+}
+#panel[data-item][data-kind='folder'] > #panel-title {
+  font-weight: 700;
+}
+#panel[data-item][data-kind='folder'] .page-bed {
+  background: #e4d9bf;
+}
+#panel[data-item][data-kind='folder'] .reader-stage .document {
+  border-top: 5px solid #8c1f1c;
+  background-color: #f6f1e4;
+  background-image: repeating-linear-gradient(transparent 0 27px, #7f9bb033 27px 28px);
+  background-size: auto;
+  box-shadow: 0 5px 14px #3a2a1a66;
+}
+/* The drawer file sits in the desk, not on the shelf. */
+#panel[data-item='drawer'][data-kind='folder'] {
+  border: 10px solid #4a3323;
+  background: #c8ad7e var(--folder) center/900px;
+  box-shadow:
+    inset 0 0 0 1px #2a1c12,
+    6px 9px 0 #0000004d;
+}
+
+/* Photograph: a print with a white border, and its pencilled back. */
+#panel[data-item][data-kind='photo'] {
+  border: 1px solid #4b4035;
+  background: #262220;
+}
+#panel[data-item][data-kind='photo'] .page-bed {
+  display: none;
+}
+#panel[data-item][data-kind='photo'] .reader-stage .document {
+  background: #f4efe3;
+  padding: 18px 18px 24px;
+  transform: rotate(-0.8deg);
+}
+#panel[data-kind='photo'] .document .reference-photo {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  margin: 0 0 14px;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.25) contrast(1.05);
+}
+#panel[data-kind='photo'] .document[data-face='front'] .doc-label {
+  display: none;
+}
+#panel[data-item][data-kind='photo'] .document[data-face='front'] h3 {
+  font:
+    400 15px/1.4 'Noto Serif',
+    serif;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+#panel[data-item][data-kind='photo'] .document[data-face='front'] .doc-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+#panel[data-item][data-kind='photo'] .reader-stage .document[data-face='back'] {
+  padding: 26px 30px 28px;
+  background: #e6dfcd;
+  transform: rotate(0.6deg);
+}
+#panel[data-item][data-kind='photo'] .document[data-face='back'] h3 {
+  color: #2f2a3d;
+  font:
+    400 26px/1.3 'Patrick Hand',
+    cursive;
+}
+#panel[data-item][data-kind='photo'] .document[data-face='back'] .doc-text {
+  color: #2f2a3d;
+  font:
+    400 21px/1.5 'Patrick Hand',
+    cursive;
+}
+
+/* ---------- Side stories: one keepsake, one voice ---------- */
+#panel[data-kind='side-story'] {
+  --side-accent: #77262b;
+}
+#panel[data-kind='side-story'][data-reader='ba'] {
+  --side-accent: #35513f;
+}
+#panel[data-kind='side-story'][data-reader='nam'] {
+  --side-accent: #2f466b;
+}
+.side-head {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.side-head .side-origin {
+  margin: 0;
+  font-style: italic;
+}
+.side-object {
+  margin: 0;
+}
+.side-object img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 5px solid #f4efe3;
+  box-shadow: 3px 4px 0 #2b251b33;
+  transform: rotate(-2deg);
+}
+.side-object figcaption {
+  margin-top: 8px;
+  color: #5a4a37;
+  font:
+    400 10.5px/1.4 'Be Vietnam Pro',
+    sans-serif;
+}
+#panel[data-kind='side-story'] .side-stages button[aria-pressed='true'] {
+  border-color: var(--side-accent);
+  background: var(--side-accent);
+  color: #f7ecd4;
+}
+#panel[data-kind='side-story'] .side-story > .eyebrow,
+#panel[data-kind='side-story'] .side-dialogue cite,
+#panel[data-kind='side-story'] .side-reflection b {
+  color: var(--side-accent);
+}
+#panel[data-kind='side-story'] .side-dialogue {
+  border-left-color: var(--side-accent);
+}
+#panel[data-kind='side-story'] .side-questions button[aria-pressed='true'] {
+  border-color: var(--side-accent);
+  color: var(--side-accent);
+}
+#panel[data-kind='side-story'] .side-reflection {
+  border-color: var(--side-accent);
+}
+@media (max-width: 560px) {
+  .side-head {
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+/* ---------- Optional dossiers: the page takes the form its label names ---------- */
+#panel[data-kind='knowledge'] .knowledge-page {
+  position: relative;
+}
+/* Sổ: ruled ledger pages. */
+#panel[data-item='reading-public'] .knowledge-page,
+#panel[data-item='newsroom-work'] .knowledge-page {
+  padding-left: 62px;
+  background-color: #f2ecdb;
+  background-image:
+    linear-gradient(90deg, transparent 43px, #b5494c 43px, #b5494c 44px, transparent 44px),
+    repeating-linear-gradient(transparent 0 31px, #8fa7b84d 31px 32px);
+}
+#panel[data-item='reading-public'] .knowledge-page p,
+#panel[data-item='newsroom-work'] .knowledge-page p {
+  line-height: 32px;
+}
+/* Bìa số 1: a broadsheet front with its nameplate. */
+#panel[data-item='first-issue'] .knowledge-page {
+  background-color: var(--newsprint-tone);
+  background-image: linear-gradient(#eee9dfb8, #eee9dfb8), var(--newsprint);
+  background-size: 100%, 900px;
+}
+#panel[data-item='first-issue'] .knowledge-page::before {
+  content: 'DÂN-CHÚNG';
+  display: block;
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 4px double #1d1a15;
+  color: #1d1a15;
+  font:
+    700 clamp(30px, 4vw, 46px)/1 'Noto Serif',
+    serif;
+  letter-spacing: -0.03em;
+  text-align: center;
+  transform: scaleX(0.9);
+}
+#panel[data-item='first-issue'] .knowledge-page h3 {
+  text-align: center;
+}
+/* Bản đồ: squared paper. */
+#panel[data-item='democratic-front'] .knowledge-page {
+  background-color: #f4efe0;
+  background-image:
+    linear-gradient(#7f9bb026 1px, transparent 1px),
+    linear-gradient(90deg, #7f9bb026 1px, transparent 1px);
+  background-size: 24px 24px;
+  outline: 1px solid #7f9bb080;
+  outline-offset: -10px;
+}
+/* Sách: a book page with a gutter and a running head. */
+#panel[data-item='self-criticism'] .knowledge-page {
+  padding-left: 54px;
+  background: linear-gradient(90deg, #00000026, transparent 30px), #f3ecd9;
+}
+#panel[data-item='self-criticism'] .knowledge-page h3 {
+  font-style: italic;
+  text-align: center;
+}
+#panel[data-item='self-criticism'] .knowledge-page h3::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  margin: 12px auto 0;
+  background: #2b251b;
+}
+/* Hồ sơ: a card with a red file rule; the seizure file is stamped. */
+#panel[data-item='press-origins'] .knowledge-page,
+#panel[data-item='legal-press'] .knowledge-page,
+#panel[data-item='censorship'] .knowledge-page {
+  border-top: 5px solid #8c1f1c;
+}
+#panel[data-item='censorship'] .knowledge-page::after {
+  content: 'HỒ SƠ KHÁM XÉT';
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  padding: 4px 9px;
+  border: 3px double #8c1f1c99;
+  color: #8c1f1cbb;
+  font:
+    700 11px/1.4 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.1em;
+  transform: rotate(5deg);
+}
+
+@media (max-width: 560px) {
+  #panel[data-item]:not([data-kind='knowledge']) {
+    padding: 14px 14px 18px;
+  }
+  #panel[data-item]:not([data-kind='knowledge']) .reader-stage .document {
+    padding: 22px 20px 24px;
+  }
+  #panel[data-item][data-kind='notebook'] .reader-stage .document {
+    padding-left: 54px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .doc-note,
+  .side-object img,
+  #panel[data-item][data-kind='photo'] .reader-stage .document {
+    transform: none;
+  }
+}
+
+/* The sticky head keeps the colour of the cover it sits on. */
+#panel[data-item]:not([data-kind='knowledge']) > .dialog-head {
+  background: #33261c;
+}
+#panel[data-item][data-kind='notebook'] > .dialog-head {
+  background: #571f24;
+}
+#panel[data-item][data-kind='folder'] > .dialog-head {
+  background: #c8ad7e;
+}
+#panel[data-item][data-kind='photo'] > .dialog-head {
+  background: #262220;
+}
+#panel[data-kind='paper'] .document .doc-label {
+  padding-left: 16px;
+}
+
+/* ---------- Page turn: the leaf may leave the sheet ---------- */
+#panel.turn-free,
+#panel[data-item].turn-free #panel-body,
+#panel.turn-free .reader-stage,
+#panel.turn-free .page-turn-layer {
+  overflow: visible;
+}
+
+/* ---------- Letters: one hand per writer ---------- */
+.reader-letter .letter-text s {
+  color: #352d2480;
+  text-decoration-thickness: 2px;
+}
+.reader-letter[data-reader='tu'] .letter-text,
+.reader-letter[data-reader='tu'] .letter-from {
+  color: #27304d;
+  font-family: 'Mali', 'Patrick Hand', cursive;
+  font-size: 20px;
+  line-height: 1.65;
+}
+.reader-letter[data-reader='ba'] .letter-text,
+.reader-letter[data-reader='ba'] .letter-from {
+  color: #37312a;
+  font-family: 'Pangolin', 'Patrick Hand', cursive;
+  font-size: 22px;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+.reader-letter[data-reader='nam'] .letter-text,
+.reader-letter[data-reader='nam'] .letter-from {
+  color: #382d68;
+  font-family: 'Dancing Script', 'Patrick Hand', cursive;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+.reader-letter .letter-from {
+  color: var(--press-red);
+}
+
+/* ---------- Mission card: what the player is doing and what comes next ---------- */
+#mission-goal,
+#mission-next {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font:
+    400 13px/1.55 'Be Vietnam Pro',
+    sans-serif;
+}
+#mission-goal b,
+#mission-next b {
+  display: block;
+  color: #77262b;
+  font:
+    700 10.5px/1.5 'Be Vietnam Pro',
+    sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+#mission-next {
+  margin: 12px 0;
+  padding: 8px 10px;
+  border-left: 3px solid #77262b;
+  background: #77262b12;
+}
+.object-list button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+#mission-goal,
+#mission-next {
+  grid-column: 1 / -1;
+  max-width: none;
+}
+.mission .reader-link[hidden] {
+  display: none;
+}
+
+/* ---------- Opening letter follows the current reader ---------- */
+.boot-card.revealed .boot-quote span {
+  animation: boot-word 0.5s ease-out both;
+  animation-delay: calc(var(--i) * 0.12s);
+}
+@keyframes boot-word {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+.boot-quote[data-reader='tu'],
+#intro.intro-sheet .intro-letter[data-reader='tu'] p,
+.intro-letter[data-reader='tu'] cite {
+  font-family: 'Mali', 'Patrick Hand', cursive;
+}
+.boot-quote[data-reader='ba'],
+#intro.intro-sheet .intro-letter[data-reader='ba'] p,
+.intro-letter[data-reader='ba'] cite {
+  font-family: 'Pangolin', 'Patrick Hand', cursive;
+}
+.boot-quote[data-reader='nam'],
+#intro.intro-sheet .intro-letter[data-reader='nam'] p,
+.intro-letter[data-reader='nam'] cite {
+  font-family: 'Dancing Script', 'Patrick Hand', cursive;
+  font-weight: 500;
+}
+#intro.intro-sheet .intro-letter[data-reader='tu'] p {
+  font-size: clamp(18px, 1.7vw, 21px);
+}
+#intro.intro-sheet .intro-letter[data-reader='tu'] .intro-letter-question {
+  font-size: clamp(21px, 2vw, 25px);
+}
+.boot-quote[data-reader='tu'] {
+  font-size: clamp(26px, 4vw, 44px);
+}
+
+/* ---------- Close-up on an object that is not open yet ---------- */
+#leave-closeup {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-right: 8px;
+  padding: 8px 14px;
+  font:
+    700 13px/1.4 'Be Vietnam Pro',
+    sans-serif;
+}
+#leave-closeup[hidden] {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .boot-card.revealed .boot-quote span {
+    animation: none;
+  }
+}
+
+/* Paper keepsakes stay drawn: a photo of someone else's handwriting would pass for theirs. */
+.side-drawn {
+  position: relative;
+  height: 122px;
+  overflow: hidden;
+  border: 5px solid #f4efe3;
+  box-shadow: 3px 4px 0 #2b251b33;
+  transform: rotate(-2deg);
+}
+.side-drawn::before,
+.side-drawn::after {
+  content: '';
+  position: absolute;
+}
+[data-story='copybook'] .side-drawn,
+[data-story='questionbook'] .side-drawn {
+  background:
+    linear-gradient(90deg, transparent 25px, #b5494c 25px, #b5494c 26px, transparent 26px),
+    repeating-linear-gradient(transparent 0 22px, #8fa7b88c 22px 23px), #f2ecdb;
+}
+[data-story='copybook'] .side-drawn::before {
+  content: 'T  T  T  T';
+  left: 36px;
+  top: 14px;
+  color: #27304d;
+  font:
+    400 34px/44px 'Mali',
+    cursive;
+  white-space: pre;
+  transform: rotate(-4deg);
+}
+[data-story='copybook'] .side-drawn::after {
+  content: 'T  T';
+  left: 36px;
+  top: 62px;
+  color: #27304d99;
+  font:
+    400 34px/44px 'Mali',
+    cursive;
+  white-space: pre;
+  transform: rotate(6deg);
+}
+[data-story='questionbook'] .side-drawn::before {
+  content: '?';
+  left: 6px;
+  top: 8px;
+  color: #b5494c;
+  font:
+    500 26px/30px 'Dancing Script',
+    cursive;
+  text-shadow:
+    0 36px #b5494c,
+    0 72px #b5494c;
+}
+[data-story='questionbook'] .side-drawn::after {
+  left: 36px;
+  right: 14px;
+  top: 20px;
+  height: 82px;
+  background: repeating-linear-gradient(#382d68cc 0 2px, transparent 2px 23px);
+  clip-path: polygon(0 0, 100% 0, 100% 12%, 62% 12%, 62% 36%, 100% 36%, 100% 100%, 0 100%);
+}
+[data-story='rent-slip'] .side-drawn {
+  background:
+    linear-gradient(90deg, transparent 62%, #b5494c 62%, #b5494c calc(62% + 1px), transparent 0),
+    linear-gradient(90deg, transparent 80%, #b5494c 80%, #b5494c calc(80% + 1px), transparent 0),
+    repeating-linear-gradient(transparent 0 22px, #6f86958c 22px 23px), #efe7d2;
+}
+[data-story='rent-slip'] .side-drawn::before {
+  left: 10px;
+  right: 46%;
+  top: 30px;
+  height: 58px;
+  background: repeating-linear-gradient(#37312acc 0 2px, transparent 2px 23px);
+}
+[data-story='rent-slip'] .side-drawn::after {
+  left: 64%;
+  width: 30%;
+  top: 74px;
+  height: 9px;
+  border-top: 2px solid #37312a;
+  border-bottom: 2px solid #37312a;
+  transform: rotate(-8deg);
+}
+@media (max-width: 560px) {
+  .side-drawn {
+    height: 82px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .side-drawn {
+    transform: none;
+  }
+}
+/* The way out of a close-up is a labelled button, not one of the square icon buttons. */
+.navigation > #leave-closeup {
+  display: inline-flex;
+  flex: none;
+  width: auto;
+  max-width: none;
+  padding: 8px 14px 8px 10px;
+  white-space: nowrap;
+}
+.navigation > #leave-closeup[hidden] {
+  display: none;
+}
+.navigation > #leave-closeup svg {
+  width: 18px;
+  height: 18px;
+}

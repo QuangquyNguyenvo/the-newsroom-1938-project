@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { getAssetProgress } from '../scene/loading.js';
+import { chapters } from '../content/chapters.js';
 
 // A player gesture starts the opening and sound while asset loading continues.
 // Failed WebGL or assets expose a retry action instead of trapping a black screen.
@@ -14,27 +15,47 @@ export const credits = {
   ],
 };
 
+// The opening is one sheet of newsprint: the masthead stays, the body turns from the
+// front page to the credits and ends on the reader letter that starts the game.
 export function bootMarkup() {
   return `<section id="boot" class="boot" aria-live="polite">
-    <div class="boot-reel" aria-hidden="true"><img src="/assets/references/dan-chung.jpg" alt=""><div class="boot-light"></div><div class="boot-ink">DÂN CHÚNG<br>1938 · 1939</div></div>
-    <div class="boot-grain" aria-hidden="true"></div>
-    <div class="boot-lobby"><div class="boot-lobby-meta"><span class="boot-kicker">SÀI GÒN · 1938</span><span>HỒ SƠ BIÊN TẬP · 01</span></div><h1 class="boot-title">GIỮ<br><em>TIẾNG NÓI</em></h1><p>Một trang báo có thể đưa lời của ai đi xa?</p><span class="boot-fiction">Trò chơi lịch sử Đảng · Câu chuyện mô phỏng</span><span class="boot-lobby-rule" aria-hidden="true"></span></div>
-    <div class="boot-stage">
-      <div class="boot-card" data-card="prelude"><span class="boot-kicker">MỘT LÁ THƯ TỚI TÒA SOẠN</span><p class="boot-quote">${'Báo các anh có nói chuyện của người như tôi không?'
-        .split(' ')
-        .map((word) => `<span>${word}</span>`)
-        .join(' ')}</p><p class="boot-small">Út ghi hộ lời chị Tư · Nhân vật hư cấu</p></div>
-      <div class="boot-card" data-card="team"><span class="boot-kicker">${credits.team}</span><p class="boot-small">trân trọng giới thiệu</p></div>
-      <div class="boot-card" data-card="members"><span class="boot-kicker">THỰC HIỆN</span><ul>${credits.members.map(([id, name]) => `<li><b>${name}</b><span>${id}</span></li>`).join('')}</ul></div>
-      <div class="boot-card" data-card="title"><p class="boot-place">Sài Gòn, 1938</p><h1 class="boot-title">GIỮ TIẾNG NÓI</h1><span class="boot-rule"></span><p class="boot-small">Một trò chơi về báo chí cách mạng của Đảng, 1936 đến 1939</p></div>
-    </div>
-    <div class="boot-foot">
-      <div class="boot-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Tiến độ tải"><i></i></div>
-      <p class="boot-status">Đang dựng căn phòng biên tập…</p>
-      <div class="boot-actions"></div>
-      <div class="boot-controls"><button id="boot-sound" type="button" aria-pressed="true">Âm thanh: bật</button><button type="button" data-open-graphics aria-haspopup="dialog">Đồ họa</button><button id="boot-skip" type="button" hidden>Bỏ qua mở đầu</button></div>
+    <div class="boot-sheet">
+      <header class="boot-masthead">
+        <h1 class="boot-title">GIỮ TIẾNG NÓI</h1>
+        <p class="boot-motto">Một trang báo có thể đưa lời của ai đi xa?</p>
+        <div class="boot-issue"><span>Sài Gòn, 1938</span><span>Trò chơi Lịch sử Đảng</span><span>${credits.team}</span></div>
+      </header>
+      <div class="boot-body">
+        <div class="boot-lobby">
+          <div class="boot-contents"><p class="boot-kicker">Ba bản tin trong số này</p><ol>${chapters.map((chapter) => `<li><span>${chapter.number}</span><b>${chapter.title}</b></li>`).join('')}</ol></div>
+          <div class="boot-lead"><h2>Vào vai người biên tập một tờ báo cách mạng</h2><p>Tìm tư liệu trong tòa soạn, chọn từng lời cho bản tin và đối chiếu nguồn trước khi đưa in.</p><p class="boot-fiction">Nhân vật và lời thư trong trò chơi là hư cấu. Sự kiện lịch sử có dẫn nguồn để đối chiếu.</p></div>
+        </div>
+        <div class="boot-stage">
+          <div class="boot-card" data-card="team"><p class="boot-kicker">${credits.team}</p><p class="boot-small">trân trọng giới thiệu</p></div>
+          <div class="boot-card" data-card="members"><p class="boot-kicker">Thực hiện</p><ul>${credits.members.map(([id, name]) => `<li><b>${name}</b><span>${id}</span></li>`).join('')}</ul></div>
+          <div class="boot-card" data-card="prelude"><p class="boot-kicker">Một lá thư tới tòa soạn</p><p class="boot-quote"></p><p class="boot-small"></p></div>
+        </div>
+      </div>
+      <div class="boot-foot">
+        <div class="boot-progress"><div class="boot-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Tiến độ tải"><i></i></div><p class="boot-status">Đang dựng căn phòng biên tập…</p></div>
+        <div class="boot-actions"></div>
+        <div class="boot-controls"><button id="boot-sound" type="button" aria-pressed="true">Âm thanh: bật</button><button type="button" data-open-graphics aria-haspopup="dialog">Đồ họa</button><button id="boot-skip" type="button" hidden>Bỏ qua mở đầu</button></div>
+      </div>
     </div>
   </section>`;
+}
+
+// The letter on the last card follows the chapter the player is in.
+export function setBootReader(element, key, reader) {
+  if (!element) return;
+  const quote = element.querySelector('.boot-quote');
+  quote.dataset.reader = key;
+  quote.innerHTML = reader.question
+    .split(' ')
+    .map((word, index) => `<span style="--i:${index}">${word}</span>`)
+    .join(' ');
+  element.querySelector('[data-card="prelude"] .boot-small').textContent =
+    `${reader.signature} · Nhân vật hư cấu`;
 }
 
 export function startBoot(element) {
@@ -56,53 +77,25 @@ export function startBoot(element) {
     defaults: { ease: 'power2.out' },
     onComplete: () => resolveCredits(),
   });
+  const [team, members, letter] = cards;
   gsap.set(cards, { autoAlpha: 0 });
   if (!reduced) {
     timeline
-      .addLabel('letter', 0)
-      .to(
-        element.querySelector('.boot-reel'),
-        { scale: 1.1, xPercent: -3, duration: 13, ease: 'none' },
-        0,
-      )
-      .fromTo(
-        element.querySelector('.boot-light'),
-        { xPercent: -130 },
-        { xPercent: 160, duration: 13, ease: 'none' },
-        0,
-      )
-      .fromTo(cards[0], { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 'letter')
-      .fromTo(
-        cards[0].querySelectorAll('.boot-quote span'),
-        { opacity: 0, y: 5 },
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 },
-        0.5,
-      )
-      .call(() => sound?.play('paper', { volume: 0.24 }), [], 0.1)
-      .call(() => sound?.tick('type'), [], 0.7)
-      .call(() => sound?.tick('type'), [], 1.1)
-      .call(() => sound?.tick('type'), [], 1.5)
-      .to(cards[0], { autoAlpha: 0, y: -10, duration: 0.5 }, 3.7)
-      .addLabel('team', 4.2)
-      .fromTo(cards[1], { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 'team')
-      .to(cards[1], { autoAlpha: 0, duration: 0.4 }, 5.7)
-      .fromTo(cards[2], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.7 }, 6.2)
-      .from(
-        cards[2].querySelectorAll('li'),
-        { opacity: 0, x: -12, duration: 0.5, stagger: 0.17 },
-        6.3,
-      )
-      .to(cards[2], { autoAlpha: 0, duration: 0.5 }, 9.6)
-      .addLabel('title', 10.2)
-      .fromTo(cards[3], { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.9 }, 'title')
-      .from(
-        cards[3].querySelector('.boot-title'),
-        { scale: 1.12, duration: 1.4, ease: 'power3.out' },
-        'title',
-      )
-      .from(cards[3].querySelector('.boot-rule'), { scaleX: 0, duration: 0.8 }, 10.7)
-      .call(() => sound?.play('press', { volume: 0.12 }), [], 10.2)
-      .call(() => sound?.play('record', { volume: 0.12 }), [], 11.4);
+      .fromTo(team, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.2)
+      .to(team, { autoAlpha: 0, duration: 0.4 }, 2)
+      .fromTo(members, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.7 }, 2.5)
+      .from(members.querySelectorAll('li'), { opacity: 0, y: 8, duration: 0.5, stagger: 0.17 }, 2.6)
+      .call(() => sound?.play('press', { volume: 0.12 }), [], 2.5)
+      .to(members, { autoAlpha: 0, duration: 0.5 }, 6.4)
+      .addLabel('letter', 7)
+      .fromTo(letter, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.8 }, 'letter')
+      .call(() => letter.classList.add('revealed'), [], 7.5)
+      .call(() => sound?.play('paper', { volume: 0.24 }), [], 7.1)
+      .call(() => sound?.tick('type'), [], 7.7)
+      .call(() => sound?.tick('type'), [], 8.1)
+      .call(() => sound?.tick('type'), [], 8.5)
+      .call(() => sound?.play('record', { volume: 0.12 }), [], 9.2)
+      .to({}, { duration: 0.6 }, 9.4);
   }
   const skip = () => {
     if (!started) return;
@@ -186,7 +179,8 @@ export function startBoot(element) {
   }
   return {
     // engine is null when WebGL failed. Resolves once the player moves on.
-    async ready(engine, error, audio) {
+    // A returning player chooses between the saved newspaper and a fresh one.
+    async ready(engine, error, audio, { hasProgress = false, onNewGame } = {}) {
       sound = audio;
       const soundButton = element.querySelector('#boot-sound');
       const soundLabel = () => {
@@ -210,7 +204,17 @@ export function startBoot(element) {
         return new Promise(() => {});
       }
       const assets = waitForAssets();
-      await choose('Một câu chuyện đang chờ bạn.', [['Bắt đầu câu chuyện', 'start', true]], () => {
+      const opening = hasProgress
+        ? [
+            'Trang báo của bạn còn dang dở.',
+            [
+              ['Tiếp tục', 'continue', true],
+              ['Chơi mới (xóa tiến độ cũ)', 'new'],
+            ],
+          ]
+        : ['Một câu chuyện đang chờ bạn.', [['Bắt đầu câu chuyện', 'start', true]]];
+      await choose(...opening, (value) => {
+        if (value === 'new') onNewGame?.();
         started = true;
         element.classList.add('started');
         element.querySelector('.boot-lobby').hidden = true;

@@ -12,6 +12,10 @@ export const storyStages = ['Lời gửi đầu tiên', 'Sau một bản tin', '
 export const sideStories = [
   {
     id: 'cloth',
+    photo: {
+      src: '/assets/stories/cloth.jpg',
+      credit: 'Cooper Hewitt, Smithsonian Design Museum · phạm vi công cộng',
+    },
     station: 'desk',
     label: 'Mảnh vải vá',
     reader: 'tu',
@@ -282,6 +286,10 @@ export const sideStories = [
   },
   {
     id: 'sandal',
+    photo: {
+      src: '/assets/stories/sandal.jpg',
+      credit: 'Auckland War Memorial Museum · CC BY 4.0',
+    },
     station: 'shelf',
     label: 'Quai dép và sợi chỉ',
     reader: 'ba',
@@ -371,6 +379,10 @@ export const sideStories = [
   },
   {
     id: 'coinbox',
+    photo: {
+      src: '/assets/stories/coinbox.jpg',
+      credit: 'Phủ Toàn quyền Đông Dương / MA-Shops · phạm vi công cộng',
+    },
     station: 'press',
     label: 'Hộp xu mua tập',
     reader: 'nam',

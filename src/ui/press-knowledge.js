@@ -1,3 +1,4 @@
+import { icons } from './icons.js';
 import { pressKnowledge } from '../content/press-knowledge.js';
 import {
   loadKnowledgeState,
@@ -31,7 +32,7 @@ export function createPressKnowledge({
   const has = (id) => pressKnowledge.some((item) => item.id === id);
   const solved = (item) => memory.answers[item.id] === item.challenge.answer;
   const sourceMarkup = (source) =>
-    `<a class="knowledge-source" href="${escape(source.url)}" target="_blank" rel="noopener noreferrer">Nguồn: ${escape(source.title)} ↗</a>`;
+    `<a class="knowledge-source" href="${escape(source.url)}" target="_blank" rel="noopener noreferrer">Nguồn: ${escape(source.title)} ${icons.arrowOut}</a>`;
   const stats = () => ({
     opened: Object.values(memory.read).filter((pages) => pages.length).length,
     solved: pressKnowledge.filter(solved).length,
@@ -107,8 +108,10 @@ export function createPressKnowledge({
         .split('\n\n')
         .map((text) => `<p>${escape(text)}</p>`)
         .join('')}${[page.source, ...(page.relatedSources || [])].map(sourceMarkup).join('')}`;
-      next.textContent =
-        pageIndex === item.pages.length - 1 ? 'Thử đối chiếu →' : 'Đọc trang tiếp →';
+      next.innerHTML =
+        pageIndex === item.pages.length - 1
+          ? `Thử đối chiếu ${icons.arrowRight}`
+          : `Đọc trang tiếp ${icons.arrowRight}`;
       next.onclick = () => {
         if (pageIndex < item.pages.length - 1) {
           pageIndex++;
@@ -136,7 +139,7 @@ export function createPressKnowledge({
         if (answer === undefined) return;
         const correct = solved(item);
         response.dataset.result = correct ? 'correct' : 'retry';
-        response.innerHTML = `<b>${correct ? '✓ Đã đối chiếu' : '↺ Cần đối chiếu lại'}</b><p>${escape(correct ? challenge.explanation : challenge.hint || 'Cách hiểu này chưa khớp hồ sơ. Đọc lại các mốc và phân biệt điều nguồn xác nhận với điều mình suy đoán.')}</p>`;
+        response.innerHTML = `<b>${correct ? '✓ Đã đối chiếu' : `${icons.retry} Cần đối chiếu lại`}</b><p>${escape(correct ? challenge.explanation : challenge.hint || 'Cách hiểu này chưa khớp hồ sơ. Đọc lại các mốc và phân biệt điều nguồn xác nhận với điều mình suy đoán.')}</p>`;
       };
       article.querySelectorAll('[data-knowledge-answer]').forEach((choice) =>
         choice.addEventListener('click', () => {

@@ -34,6 +34,8 @@ export const sources = {
   },
 };
 
+// `note` is the editor's own margin note. `reader` ties the page to the fictional letter
+// of one chapter and only shows once that letter has arrived. Neither adds a historical claim.
 export const objects = [
   {
     id: 'letter',
@@ -44,16 +46,31 @@ export const objects = [
     pages: [
       {
         title: 'Từ nghị quyết đến trang báo',
+        note: 'Một nghị quyết nằm trong phòng họp thì người thợ không đọc được. Tờ báo là quãng đường còn lại.',
+        reader: {
+          chapter: 'voices',
+          text: 'Chị Tư hỏi báo có nói chuyện của người như chị không. Câu trả lời bắt đầu từ đây: cơm áo đứng ngay trong mục tiêu trước mắt.',
+        },
         text: 'Tháng 7/1936, Ban Chấp hành Trung ương Đảng họp và xác định mục tiêu trước mắt: chống phát xít, chống chiến tranh, đòi tự do, dân chủ, cơm áo, hòa bình. Muốn chủ trương ấy đến được với nhân dân, cần một tờ báo công khai.',
         source: 'movement',
       },
       {
         title: 'Tiếng nói trên trang báo',
+        note: 'Giải thích chủ trương, rồi vận động đấu tranh. Hai việc đi cùng nhau trên một trang giấy.',
+        reader: {
+          chapter: 'voices',
+          text: 'Chị dặn dùng lời dễ hiểu, vì chị còn kể lại cho mấy chị cùng làm. Mình viết cho cả người nghe đọc, không chỉ cho người tự đọc.',
+        },
         text: 'Báo Dân Chúng đăng bài giải thích chủ trương của Đảng, vận động đấu tranh đòi cơm áo, hòa bình và các quyền tự do, dân chủ.',
         source: 'museum',
       },
       {
         title: 'Ghi chú ở mặt sau',
+        note: 'Mấy cụm từ này phải còn nguyên trên bản in. Khoanh lại, kẻo lúc dàn trang bị cắt mất.',
+        reader: {
+          chapter: 'voices',
+          text: 'Lương không đủ đong gạo: đó là cơm áo. Muốn con lớn lên không phải cúi đầu: đó là dân chủ. Chị Tư đã nói những điều này trước, bằng lời của chị.',
+        },
         text: 'Yêu cầu cần giữ trên bản in: cơm áo, hòa bình, tự do và dân chủ.',
         evidence: 'demands',
       },
@@ -68,11 +85,21 @@ export const objects = [
     pages: [
       {
         title: 'Đường dây biên tập',
+        note: 'Hai cái tên này cho biết tờ báo không đứng một mình.',
+        reader: {
+          chapter: 'publication',
+          text: 'Anh Ba hỏi ai đứng sau tờ báo. Trang này mới cho biết người chỉ đạo. Còn là tiếng nói của tổ chức nào thì phải tìm ở tập hồ sơ trên kệ.',
+        },
         text: 'Dân Chúng được tổ chức và xuất bản dưới sự chỉ đạo trực tiếp của Nguyễn Văn Cừ và Hà Huy Tập.',
         source: 'museum',
       },
       {
         title: 'Mốc đã đối chiếu',
+        note: 'Ngày tháng là thứ dễ chép sai nhất. Ghi vào sổ tay ngay.',
+        reader: {
+          chapter: 'publication',
+          text: 'Anh Ba sẽ kể lại cho cả dãy trọ. Mình sai một con số thì anh mang cái sai ấy đi theo.',
+        },
         text: 'Báo Dân Chúng số 1 ra ngày 22/7/1938 tại Sài Gòn. Báo được tổ chức và xuất bản dưới sự chỉ đạo trực tiếp của Nguyễn Văn Cừ và Hà Huy Tập.',
         evidence: 'first-issue',
         source: 'museum',
@@ -88,12 +115,22 @@ export const objects = [
     pages: [
       {
         title: 'Một tờ báo của Đảng',
+        note: 'Đây là câu trả lời thẳng nhất: tiếng nói của Trung ương Đảng, ra công khai, không xin phép.',
+        reader: {
+          chapter: 'publication',
+          text: 'Chủ xe bảo báo này xúi người ta làm bậy. Mình không cãi thay anh Ba được. Mình chỉ có thể nói rõ đây là lời của ai, để anh tự cân nhắc.',
+        },
         text: 'Dân Chúng là cơ quan ngôn luận của Trung ương Đảng Cộng sản Đông Dương, xuất bản công khai không xin phép ở Sài Gòn.',
         evidence: 'party',
         source: 'museum',
       },
       {
         title: 'Báo lớn lên cùng bạn đọc',
+        note: 'Từ khoảng 2.000 lên 15.000 bản. Sau mỗi con số là người đọc, không phải giấy.',
+        reader: {
+          chapter: 'publication',
+          text: 'Một tờ báo còn qua nhiều tay, như tờ anh Ba gấp tư mang về dãy trọ để đọc chung.',
+        },
         text: 'Số in tăng từ khoảng 2.000 lên 15.000 bản vào số Xuân 1939. Nguyễn Ái Quốc nhận xét đây là tờ báo đầu tiên ra mà không xin phép trước, và có lẽ là tờ được đọc nhiều nhất ở Đông Dương.',
         source: 'cityParty',
       },
@@ -108,10 +145,16 @@ export const objects = [
     pages: [
       {
         title: 'Ảnh sưu tập báo',
+        note: 'Những số báo còn giữ được. Lật mặt sau xem ai đã ghi gì.',
         text: 'Các số Dân Chúng còn được lưu giữ. Phía sau ảnh có ghi ngày tòa soạn bị khám xét.',
       },
       {
         title: 'Ngày bàn biên tập im tiếng',
+        note: 'Người bị bắt, tài sản bị tịch thu. Nhưng dòng này chưa nói tờ báo dừng lại.',
+        reader: {
+          chapter: 'pressure',
+          text: 'Năm lo tuần sau không còn gì để đọc. Mình chưa trả lời em được, chừng nào chưa biết số báo cuối ra ngày nào.',
+        },
         text: 'Ngày 7/3/1939, chính quyền thuộc địa bắt giam những người làm ở tòa soạn và tịch thu tài sản của báo.',
         evidence: 'arrest',
         source: 'museum',
@@ -127,12 +170,22 @@ export const objects = [
     pages: [
       {
         title: 'Sau bước ngoặt',
+        note: 'Từ 7/3 đến 30/8/1939: hơn năm tháng báo vẫn ra sau vụ bắt giữ. Hai mốc này phải đứng cạnh nhau trên bản tin.',
+        reader: {
+          chapter: 'pressure',
+          text: 'Vậy là có câu trả lời cho Năm: sau tháng 3, báo vẫn còn ra.',
+        },
         text: 'Dân Chúng có 80 số. Số 80, số cuối cùng, ra ngày 30/8/1939. Vụ bắt giữ tháng 3 không phải mốc báo kết thúc ngay lập tức.',
         evidence: 'last-issue',
         source: 'museum',
       },
       {
         title: 'Bạn đọc không im lặng',
+        note: 'Người giữ tờ báo sống là bạn đọc: họ mít tinh, họ góp tiền.',
+        reader: {
+          chapter: 'pressure',
+          text: 'Năm gửi kèm thư mấy xu để dành mua tập. Em đang làm đúng việc trang này ghi lại, theo sức của một cậu học trò.',
+        },
         text: 'Ba ngày sau vụ khám xét, ngày 10/3/1939, Trung ương Đảng ra lời kêu gọi. Trong khoảng một tháng có 28 cuộc mít tinh phản đối, bạn đọc quyên góp hơn 400 đồng trong một tuần để giữ tờ báo.',
         source: 'cityParty',
       },
@@ -147,6 +200,7 @@ export const objects = [
     pages: [
       {
         title: 'Kiểm tra trước khi in',
+        note: 'Chữ đẹp mà sai nguồn thì vẫn là sai. Đối chiếu xong mới in.',
         text: 'Đọc lại từng mốc ngày. Kiểm tra nguồn của thông tin. Chỉ đưa lên trang khi bản thảo và bằng chứng khớp nhau.',
       },
     ],

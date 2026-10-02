@@ -1,3 +1,4 @@
+import { icons } from '../ui/icons.js';
 import { evidenceLabels, sources, objects } from '../content/chapters.js';
 import { editorial } from '../content/editorial.js';
 import { editorialReview } from '../content/editorial-review.js';
@@ -17,7 +18,7 @@ export function newspaperMarkup(chapter) {
     <header class="paper-top">
       <div class="paper-ear"><b>BẢN TIN HỌC TẬP</b><span>Số ${chapter.number}</span></div>
       <div class="paper-title"><div class="paper-name">DÂN-CHÚNG</div><div class="paper-motto">Phục dựng giáo dục · Sài Gòn 1938–1939</div></div>
-      <figure class="paper-ear paper-archive"><img src="/assets/references/dan-chung.jpg" alt="Ảnh tham khảo các số báo Dân Chúng"><figcaption>Ảnh sưu tập báo</figcaption></figure>
+      <div class="paper-ear"><b>PHỤC DỰNG</b><span>Không phải báo gốc</span></div>
     </header>
     <div class="paper-issue"><span>Mặt trận Dân chủ Đông Dương</span><span>✦</span><span>Dân sinh · Dân chủ · Hòa bình</span></div>
     <div class="paper-kicker">${kickers[index]}</div>
@@ -32,7 +33,7 @@ export function newspaperMarkup(chapter) {
           return `<article class="paper-column"><h4>${html(column.heading)}</h4><p class="column-scene" data-column-copy="${i}">${html(column.scene)}</p><div class="column-sentence"><span class="sentence-prefix">${html(column.before)}</span><button type="button" class="word-slot" id="slot-${i}" data-slot="${i}" aria-pressed="false" aria-label="Chọn cột: ${html(slot.label)}"><span class="slot-number">BIÊN TẬP CỘT ${i + 1}</span><span class="slot-text">··········</span><span class="slot-result" aria-live="polite"></span></button><span class="sentence-tail">${html(column.after)}</span></div><button type="button" class="clear-slot" data-clear="${i}" aria-label="Gỡ chữ cột ${i + 1}" hidden>Sửa chữ</button></article>`;
         })
         .join('')}
-    </div><div class="paper-bottom"><span>Bài viết phục dựng học tập, không phải bài báo gốc</span><button type="button" id="context-button">Đọc câu chuyện & nguồn ↗</button></div>
+    </div><div class="paper-bottom"><span>Bài viết phục dựng học tập, không phải bài báo gốc</span><button type="button" id="context-button">Đọc câu chuyện & nguồn ${icons.arrowOut}</button></div>
   </section>`;
 }
 
@@ -134,12 +135,14 @@ export function mountNewspaper(
         : 'incorrect'
       : 'unfilled';
     container.querySelector('#editorial-insight').innerHTML = word
-      ? `<span class="insight-label">${correct ? 'VÌ SAO DÒNG NÀY CÓ Ý NGHĨA' : 'ĐỌC LẠI Ý CỦA CỘT BÁO'}</span><p>${html(correct ? column.why : column.misread)}</p>${correct ? `<p class="reader-connection"><b>${html(chapter.letter.name)} · Hư cấu</b>${html(column.reader)}</p><a class="insight-source" href="${html(source.url)}" target="_blank" rel="noopener noreferrer">Đối chiếu tư liệu lịch sử ↗</a>` : ''}`
+      ? `<span class="insight-label">${correct ? 'VÌ SAO DÒNG NÀY CÓ Ý NGHĨA' : 'ĐỌC LẠI Ý CỦA CỘT BÁO'}</span><p>${html(correct ? column.why : column.misread)}</p>${correct ? `<p class="reader-connection"><b>${html(chapter.letter.name)} · Hư cấu</b>${html(column.reader)}</p><a class="insight-source" href="${html(source.url)}" target="_blank" rel="noopener noreferrer">Đối chiếu tư liệu lịch sử ${icons.arrowOut}</a>` : ''}`
       : `<span class="insight-label">NGƯỜI ĐANG CHỜ BẢN TIN</span><p class="reader-connection"><b>${html(chapter.letter.name)} · Hư cấu</b>${html(column.scene)}</p><p class="insight-instruction">Bấm chữ để hoàn thành câu trên báo. Bấm cột khác để đổi mục đang biên tập.</p>`;
     const nextButton = container.querySelector('#next-column');
     nextButton.hidden = !correct;
-    nextButton.textContent =
-      correctCount === slots.length ? 'Kiểm chứng bản tin →' : 'Biên tập cột tiếp →';
+    nextButton.innerHTML =
+      correctCount === slots.length
+        ? `Kiểm chứng bản tin ${icons.arrowRight}`
+        : `Biên tập cột tiếp ${icons.arrowRight}`;
     container
       .querySelector('.newspaper')
       .style.setProperty('--assembly', `${(correctCount / slots.length) * 100}%`);
@@ -162,7 +165,7 @@ export function mountNewspaper(
       const sourceKey = page?.source || object?.pages.find((page) => page.source)?.source;
       preview.hidden = !page;
       preview.innerHTML = page
-        ? `<span class="eyebrow">NỘI DUNG GHI CHÉP ĐANG CHỌN</span><p>${html(page.text)}</p>${sourceKey ? `<a href="${html(sources[sourceKey].url)}" target="_blank" rel="noopener noreferrer">${html(sources[sourceKey].title)} ↗</a>` : ''}`
+        ? `<span class="eyebrow">NỘI DUNG GHI CHÉP ĐANG CHỌN</span><p>${html(page.text)}</p>${sourceKey ? `<a href="${html(sources[sourceKey].url)}" target="_blank" rel="noopener noreferrer">${html(sources[sourceKey].title)} ${icons.arrowOut}</a>` : ''}`
         : '';
     }
     onChange?.({ selections: [...selections], proof, reviews: { ...reviews } });
@@ -182,7 +185,7 @@ export function mountNewspaper(
     slots[i].querySelector('.slot-result').textContent = word
       ? correct
         ? '✓ ĐÃ GHÉP Ý'
-        : '↺ ĐỌC LẠI'
+        : 'ĐỌC LẠI'
       : '';
     const paragraph = container.querySelector(`[data-column-copy="${i}"]`);
     paragraph.textContent = correct ? copy.columns[i].article : copy.columns[i].scene;
@@ -340,7 +343,7 @@ export function mountNewspaper(
   container.querySelector('#review-button').addEventListener('click', () => {
     openNotes(
       'Đọc thử trước khi đưa lên trang báo',
-      `<p class="review-intro">Hai tình huống biên tập để kiểm tra cách hiểu, ngoài ba cột báo chính. Mỗi lựa chọn có phản hồi và nguồn để đọc lại. Bạn có thể trở về bản thảo bất cứ lúc nào.</p><div class="editorial-review">${reviewTasks.map((task, index) => `<article class="review-task" data-review-task="${task.id}"><span class="eyebrow">ĐỐI CHIẾU ${index + 1} / ${reviewTasks.length} · TỰ CHỌN</span><h4>${html(task.prompt)}</h4><div>${task.choices.map((choice, i) => `<button type="button" class="secondary" data-review-choice="${i}" aria-pressed="false"><b>${String.fromCharCode(65 + i)}</b>${html(choice)}</button>`).join('')}</div><div class="review-feedback" role="status" aria-live="polite"></div><a href="${html(sources[task.source].url)}" target="_blank" rel="noopener noreferrer">${html(sources[task.source].title)} ↗</a></article>`).join('')}</div>`,
+      `<p class="review-intro">Hai tình huống biên tập để kiểm tra cách hiểu, ngoài ba cột báo chính. Mỗi lựa chọn có phản hồi và nguồn để đọc lại. Bạn có thể trở về bản thảo bất cứ lúc nào.</p><div class="editorial-review">${reviewTasks.map((task, index) => `<article class="review-task" data-review-task="${task.id}"><span class="eyebrow">ĐỐI CHIẾU ${index + 1} / ${reviewTasks.length} · TỰ CHỌN</span><h4>${html(task.prompt)}</h4><div>${task.choices.map((choice, i) => `<button type="button" class="secondary" data-review-choice="${i}" aria-pressed="false"><b>${String.fromCharCode(65 + i)}</b>${html(choice)}</button>`).join('')}</div><div class="review-feedback" role="status" aria-live="polite"></div><a href="${html(sources[task.source].url)}" target="_blank" rel="noopener noreferrer">${html(sources[task.source].title)} ${icons.arrowOut}</a></article>`).join('')}</div>`,
     );
     reviewTasks.forEach((task) => {
       const card = notes.querySelector(`[data-review-task="${task.id}"]`);
@@ -360,7 +363,7 @@ export function mountNewspaper(
         response.innerHTML =
           value === undefined
             ? ''
-            : `<b>${correct ? '✓ Cách hiểu có căn cứ' : '↺ Đọc lại chi tiết'}</b><p>${html(correct ? task.explanation : task.hint)}</p>`;
+            : `<b>${correct ? '✓ Cách hiểu có căn cứ' : `${icons.retry} Đọc lại chi tiết`}</b><p>${html(correct ? task.explanation : task.hint)}</p>`;
       };
       card.querySelectorAll('[data-review-choice]').forEach((choice) =>
         choice.addEventListener('click', () => {

@@ -873,8 +873,9 @@ function Document({
   );
 }
 
-function Notebook({ m, register, addLod }) {
+function Notebook({ m, register, addLod, distance }) {
   const ref = useRef();
+  const distances = useMemo(() => [0, distance], [distance]);
   useLayoutEffect(() => addLod(ref.current), [addLod]);
   return (
     <Target id="notebook" register={register}>
@@ -882,7 +883,7 @@ function Notebook({ m, register, addLod }) {
         ref={ref}
         position={[-2.85, 1.45 + (0.57 * 0.7) / 2, -2.16]}
         scale={0.7}
-        distances={[0, 3.45]}
+        distances={distances}
       >
         <BoundBook size={[0.18, 0.57, 0.43]} m={m} />
         <group>
@@ -990,7 +991,7 @@ function Calendar({ m, register, materialRef, mapRef }) {
   );
 }
 
-export function Room({ onReady, onObjectPick, onObjectHover }) {
+export function Room({ onReady, onObjectPick, onObjectHover, notebookDistance = 3.45 }) {
   const invalidate = useThree((state) => state.invalidate);
   const gl = useThree((state) => state.gl);
   const m = useMemo(() => makeMaterials(() => invalidate()), [invalidate]);
@@ -1084,14 +1085,14 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
         }
         if (windowBounceRef.current)
           windowBounceRef.current.intensity = settings.preset === 'low' ? 0 : 0.65;
-        // Preserve the bound notebook's silhouette across the room at higher quality.
-        for (const lod of lods.current)
-          if (lod.levels[1]) lod.levels[1].distance = settings.dpr >= 1.65 ? 8 : 3.45;
         gl.shadowMap.needsUpdate = true;
         invalidate();
       },
       setEntryDoor(open) {
-        if (doorRefs.current[0]) doorRefs.current[0].rotation.y = 1.42 * open;
+        const door = doorRefs.current[0];
+        const angle = 1.42 * open;
+        if (!door || door.rotation.y === angle) return;
+        door.rotation.y = angle;
         gl.shadowMap.needsUpdate = true;
         invalidate();
       },
@@ -1331,7 +1332,7 @@ export function Room({ onReady, onObjectPick, onObjectHover }) {
         <Asset>
           <Model asset="wooden_crate_01" size={[0.5, 0.3, 0.36]} position={[-2.64, 1.16, -2.13]} />
         </Asset>
-        <Notebook m={m} register={register} addLod={addLod} />
+        <Notebook m={m} register={register} addLod={addLod} distance={notebookDistance} />
         <Archive m={m} register={register} />
         <ShelfDressing m={m} Target={Target} register={register} lidRef={shelfLidRef} />
         <ModelAt

@@ -82,12 +82,16 @@ export function makeMaterials(invalidate = () => {}) {
       for (let x = 0; x < 512; x++) {
         const u = (x / 512) * Math.PI * 2,
           v = (y / 512) * Math.PI * 2;
+        // Hand-brushed lime: broad uneven coats, faint vertical brush drag, a few pale blooms.
         const wash =
-          2 * Math.sin(u + Math.sin(v)) * Math.cos(v * 2) + 1.2 * Math.sin(u * 3 + v * 2);
+          5 * Math.sin(u + Math.sin(v)) * Math.cos(v * 2) +
+          3 * Math.sin(u * 3 + v * 2) +
+          2.2 * Math.sin(u * 23 + 1.5 * Math.sin(v * 3)) +
+          3 * Math.sin(u * 2 + 1.7) * Math.sin(v * 5 + u);
         const i = (y * 512 + x) * 4;
-        image.data[i] = 238 + wash;
-        image.data[i + 1] = 234 + wash;
-        image.data[i + 2] = 224 + wash;
+        image.data[i] = 236 + wash;
+        image.data[i + 1] = 233 + wash;
+        image.data[i + 2] = 226 + wash * 1.15;
         image.data[i + 3] = 255;
       }
     ctx.putImageData(image, 0, 0);
@@ -107,16 +111,60 @@ export function makeMaterials(invalidate = () => {}) {
   });
   edges.anisotropy = 8;
   owned.add(edges);
+  // Late-1930s Saigon shophouse interior: yellow limewash above a darker painted dado,
+  // with damp at the skirting and lamp soot under the ceiling. The band is placed by world
+  // height so it lines up across every wall segment and around the openings.
+  const wall = new THREE.MeshStandardMaterial({
+    color: '#efd9a2',
+    map: limewash,
+    roughness: 0.97,
+    bumpMap: relief('plaster'),
+    bumpScale: 0.0016,
+  });
+  const dado = {
+    uDadoHeight: { value: 0.98 },
+    uDadoColor: { value: new THREE.Color('#6f7f68') },
+    uDadoLine: { value: new THREE.Color('#3f4a3c') },
+  };
+  wall.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, dado);
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', `#include <common>\nvarying vec3 vWallPosition;`)
+      .replace(
+        '#include <project_vertex>',
+        `#include <project_vertex>\nvWallPosition = (modelMatrix * vec4(transformed, 1.0)).xyz;`,
+      );
+    shader.fragmentShader = shader.fragmentShader
+      .replace(
+        '#include <common>',
+        `#include <common>
+        varying vec3 vWallPosition;
+        uniform float uDadoHeight;
+        uniform vec3 uDadoColor;
+        uniform vec3 uDadoLine;`,
+      )
+      .replace(
+        '#include <map_fragment>',
+        `#include <map_fragment>
+        {
+          float height = vWallPosition.y;
+          float wear = 0.012 * sin(vWallPosition.x * 9.0 + vWallPosition.z * 7.0);
+          float above = smoothstep(uDadoHeight - 0.003, uDadoHeight + 0.003, height);
+          float line = smoothstep(uDadoHeight - 0.03, uDadoHeight - 0.024, height) * (1.0 - above);
+          float coat = dot(diffuseColor.rgb, vec3(0.333)) / 0.72;
+          vec3 lower = mix(uDadoColor, uDadoLine, line) * coat;
+          diffuseColor.rgb = mix(lower, diffuseColor.rgb, above);
+          float damp = 1.0 - smoothstep(0.0, 0.42 + wear * 6.0, height);
+          float soot = smoothstep(2.75, 3.4, height);
+          diffuseColor.rgb *= 1.0 - 0.2 * damp - 0.1 * soot;
+        }`,
+      );
+  };
+  wall.customProgramCacheKey = () => 'limewash-dado';
   const materials = {
     wood: pbr('wood_table_001', { roughness: 0.85, normalScale: new THREE.Vector2(0.3, 0.3) }),
-    wall: new THREE.MeshStandardMaterial({
-      color: '#f5f1e9',
-      map: limewash,
-      roughness: 0.97,
-      bumpMap: relief('plaster'),
-      bumpScale: 0.0012,
-    }),
-    ceiling: new THREE.MeshStandardMaterial({ map: limewash, roughness: 1, color: '#d9d5ca' }),
+    wall,
+    ceiling: new THREE.MeshStandardMaterial({ map: limewash, roughness: 1, color: '#ded8c6' }),
     tile: new THREE.MeshStandardMaterial({
       color: '#cbc5b7',
       roughness: 0.91,

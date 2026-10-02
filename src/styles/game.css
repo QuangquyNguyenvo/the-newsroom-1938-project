@@ -395,19 +395,6 @@ video {
 .final-page + .small {
   margin-top: 20px;
 }
-#intro {
-  max-width: 530px;
-  padding: 38px;
-}
-#intro h2 {
-  font-size: 43px;
-  margin: 20px 0;
-  line-height: 1.08;
-}
-#intro button {
-  width: 100%;
-  margin-top: 15px;
-}
 .webgl-fallback {
   margin: 25vh auto 0;
   width: min(450px, 90%);
@@ -510,12 +497,6 @@ video {
   }
   dialog h2 {
     font-size: 25px;
-  }
-  #intro {
-    padding: 25px;
-  }
-  #intro h2 {
-    font-size: 36px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -783,22 +764,6 @@ figcaption {
   transform: rotate(-9deg);
   animation: ink-stamp 0.75s ease both;
 }
-.story-image {
-  margin: 0 0 22px;
-  overflow: hidden;
-  background: #d6c19a;
-}
-.story-image img {
-  height: 220px;
-  max-width: 100%;
-  object-fit: contain;
-  filter: sepia(0.35);
-  mix-blend-mode: multiply;
-  animation: image-arrive 0.8s ease both;
-}
-.story-image figcaption {
-  padding: 6px;
-}
 .story-frame {
   background: #ecdfc1;
 }
@@ -912,7 +877,6 @@ figcaption {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .story-image img,
   .newspaper.printing::after {
     animation: none !important;
   }
@@ -1254,15 +1218,6 @@ dialog .small {
 .story-frame h3 {
   font-size: 28px;
 }
-.story-image {
-  background: transparent;
-  text-align: center;
-  border-bottom: 1px solid #8e7753;
-  padding-bottom: 12px;
-}
-.story-image img {
-  animation: none;
-}
 .stamp {
   font-family: 'Noto Serif', serif;
   letter-spacing: 0.06em;
@@ -1285,30 +1240,6 @@ dialog .small {
 .final-page {
   background: transparent;
   border: 1px solid #756044;
-}
-#intro {
-  padding: 30px 36px;
-  max-width: 540px;
-  border: 1px solid #826c4a;
-}
-#intro > .eyebrow {
-  border-bottom: 3px double #786444;
-  padding-bottom: 10px;
-}
-#intro h2 {
-  font-size: 39px;
-  line-height: 1.25;
-  color: #2b251b;
-  margin: 20px 0;
-}
-#intro p {
-  font-size: 14px;
-}
-#intro button {
-  border: 3px double #eed7a5;
-  background: #77262b;
-  outline: 1px solid #77262b;
-  font-size: 14px;
 }
 .editor-panel {
   background: var(--paper) url('/assets/textures/archival-paper.webp') center/780px;
@@ -1387,12 +1318,6 @@ dialog .small {
   }
   .editor-panel {
     padding: 16px 12px;
-  }
-  #intro {
-    padding: 25px;
-  }
-  #intro h2 {
-    font-size: 32px;
   }
 }
 
@@ -1754,25 +1679,11 @@ dialog {
   .note p {
     font-size: 15px;
   }
-  #intro {
-    padding: 24px;
-    width: calc(100% - 24px);
-  }
-  #intro h2 {
-    font-size: clamp(28px, 8vw, 37px);
-    margin: 16px 0;
-  }
-  #intro p {
-    font-size: 14px;
-  }
   .story-frame {
     padding: 18px 0;
   }
   .story-frame h3 {
     font-size: 25px;
-  }
-  .story-image img {
-    height: 180px;
   }
   .editor-panel {
     padding: 15px;
@@ -3049,58 +2960,6 @@ dialog,
 #panel[data-item] .reader-stage.dragging {
   cursor: grabbing;
 }
-#intro.entering {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  max-width: none;
-  height: 100dvh;
-  max-height: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  overflow: hidden;
-}
-#intro.entering::backdrop {
-  background: transparent;
-  backdrop-filter: none;
-}
-#intro.entering > :not(.entry-caption) {
-  visibility: hidden;
-  pointer-events: none;
-}
-body:has(#intro.entering[open]) .masthead,
-body:has(#intro.entering[open]) .mission,
-body:has(#intro.entering[open]) .navigation,
-body:has(#intro.entering[open]) .thought,
-body:has(#intro.entering[open]) #hover-label {
-  visibility: hidden;
-}
-#intro .entry-caption {
-  position: absolute;
-  bottom: 11%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: calc(100vw - 32px);
-  margin: 0;
-  padding: 10px 20px;
-  text-align: center;
-  color: #eee2c8;
-  background: #241b17ad;
-  border: 1px solid #bda77d66;
-  text-shadow: 0 2px 5px #000;
-  font-family: 'Noto Serif', serif;
-  pointer-events: none;
-}
-.entry-caption small {
-  display: block;
-  margin-top: 10px;
-  font-size: 11px;
-  color: #c7baa2;
-}
 .thought[aria-busy='true'] #thought-text::after {
   content: '▏';
   color: #c3a56a;
@@ -3393,8 +3252,7 @@ dialog .eyebrow,
   letter-spacing: 0.16em;
   color: var(--press-red);
 }
-#panel-title,
-#intro h2 {
+#panel-title {
   font-family: 'Noto Serif', serif;
   font-weight: 700;
   letter-spacing: -0.015em;
@@ -3535,166 +3393,6 @@ summary:focus:not(:focus-visible) {
   grid-column: 1/-1;
 }
 
-/* ---------- Opening credits + loading ---------- */
-.boot {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  background: radial-gradient(90% 80% at 50% 45%, #2a1d14, #0d0906);
-  color: #efe3c6;
-  cursor: pointer;
-  overflow: hidden;
-}
-.boot-stage {
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-.boot-card {
-  position: absolute;
-  text-align: center;
-  padding: 0 24px;
-}
-.boot-kicker {
-  display: block;
-  font:
-    700 clamp(28px, 5vw, 54px)/1.1 'Noto Serif',
-    serif;
-  letter-spacing: 0.28em;
-  color: #f3e8cf;
-}
-.boot-small {
-  font:
-    400 15px/1.6 'Noto Serif',
-    serif;
-  color: #cdbb97;
-  margin: 12px 0 0;
-}
-.boot-card ul {
-  list-style: none;
-  margin: 20px 0 0;
-  padding: 0;
-  display: grid;
-  gap: 10px;
-}
-.boot-card li {
-  display: grid;
-  gap: 2px;
-}
-.boot-card li b {
-  font:
-    700 clamp(22px, 3.4vw, 34px)/1.2 'Noto Serif',
-    serif;
-  color: #f6ecd4;
-}
-.boot-card li span {
-  font:
-    700 12px 'Be Vietnam Pro',
-    sans-serif;
-  letter-spacing: 0.32em;
-  color: #d9a520;
-}
-.boot-card[data-card='members'] .boot-kicker {
-  font-size: 13px;
-  letter-spacing: 0.4em;
-  color: #d9a520;
-}
-.boot-place {
-  font:
-    400 18px 'Noto Serif',
-    serif;
-  color: #cdbb97;
-  margin: 0 0 10px;
-}
-.boot-title {
-  margin: 0;
-  font:
-    700 clamp(44px, 9vw, 112px)/1 'Noto Serif',
-    serif;
-  letter-spacing: -0.02em;
-  color: #f3e8cf;
-  text-shadow: 0 0 40px #8c1f1c66;
-}
-.boot-rule {
-  display: block;
-  width: min(360px, 60vw);
-  height: 3px;
-  margin: 18px auto 0;
-  background: linear-gradient(90deg, transparent, #a3261f, #d9a520, #a3261f, transparent);
-  transform-origin: center;
-}
-.boot-foot {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  padding: 0 24px max(34px, env(safe-area-inset-bottom));
-}
-.boot-bar {
-  width: min(360px, 80vw);
-  height: 2px;
-  background: #efe3c622;
-  overflow: hidden;
-}
-.boot-bar i {
-  display: block;
-  height: 100%;
-  background: #d9a520;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-.boot-bar.failed i {
-  background: #a3261f;
-}
-.boot-status {
-  margin: 0;
-  font:
-    400 13px 'Be Vietnam Pro',
-    sans-serif;
-  letter-spacing: 0.06em;
-  color: #cdbb97;
-  min-height: 1.4em;
-  text-align: center;
-}
-.boot-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  min-height: 44px;
-}
-.boot-actions button {
-  min-height: 44px;
-  padding: 10px 22px;
-  border: 1px solid #d9a520;
-  background: #8c1f1c;
-  color: #f6ecd4;
-  font:
-    700 14px 'Noto Serif',
-    serif;
-  cursor: pointer;
-}
-.boot-actions button.secondary {
-  background: transparent;
-  border-color: #efe3c655;
-}
-.boot-actions button:hover,
-.boot-actions button:focus-visible {
-  background: #a3261f;
-  outline: 2px solid #d9a520;
-  outline-offset: 2px;
-}
-.boot-grain {
-  position: absolute;
-  inset: -50%;
-  pointer-events: none;
-  opacity: 0.12;
-  background-image: var(--grain);
-  animation: grain 1s steps(6) infinite;
-}
-
 /* ---------- Period film grain over the whole game ---------- */
 :root {
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .38 0 0 0 1.2 -.1'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -3734,8 +3432,7 @@ summary:focus:not(:focus-visible) {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .game-shell::after,
-  .boot-grain {
+  .game-shell::after {
     animation: none;
   }
 }

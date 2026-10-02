@@ -1,3 +1,4 @@
+import { icons } from './icons.js';
 import {
   graphicsPresets,
   presetGraphics,
@@ -25,7 +26,7 @@ export function createGraphicsSettings(root, getEngine, onAtmosphere) {
   root.querySelector('.game-shell').insertAdjacentHTML(
     'beforeend',
     `<dialog id="graphics-settings" aria-labelledby="graphics-title">
-    <div class="graphics-sheet"><header><div><span class="eyebrow">ÁNH SÁNG & HÌNH ẢNH</span><h2 id="graphics-title">Đồ hoạ</h2></div><button type="button" id="graphics-close" aria-label="Đóng cài đặt đồ hoạ">×</button></header>
+    <div class="graphics-sheet"><header><div><span class="eyebrow">ÁNH SÁNG & HÌNH ẢNH</span><h2 id="graphics-title">Đồ hoạ</h2></div><button type="button" id="graphics-close" aria-label="Đóng cài đặt đồ hoạ">${icons.close}</button></header>
     <div class="graphics-content"><p class="graphics-deck">Chọn cách căn phòng hiện lên. Thay đổi ngay để xem ánh sáng phía sau.</p>
     <div class="graphics-presets" role="group" aria-label="Chế độ đồ hoạ">${Object.entries(
       graphicsPresets,

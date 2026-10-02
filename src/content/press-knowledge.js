@@ -48,6 +48,7 @@ export const pressKnowledgeSources = sources;
 export const pressKnowledge = [
   {
     id: 'press-origins',
+    unlock: 'voices',
     station: 'desk',
     label: 'Hồ sơ tái dựng về Báo Thanh Niên',
     title: 'Trước khi tiếng nói đến Sài Gòn',
@@ -93,6 +94,7 @@ export const pressKnowledge = [
   },
   {
     id: 'legal-press',
+    unlock: 'voices',
     station: 'shelf',
     label: 'Hồ sơ tái dựng về những cách ra báo',
     title: 'Cửa công khai có nhiều then cài',
@@ -138,6 +140,7 @@ export const pressKnowledge = [
   },
   {
     id: 'first-issue',
+    unlock: 'publication',
     station: 'shelf',
     label: 'Bìa tái dựng số 1 Báo Dân Chúng',
     title: 'Ngày một tờ báo xuất hiện',
@@ -183,6 +186,7 @@ export const pressKnowledge = [
   },
   {
     id: 'reading-public',
+    unlock: 'publication',
     station: 'shelf',
     label: 'Sổ tái dựng theo dõi bạn đọc',
     title: 'Một tờ báo có người cầm và người nghe',
@@ -228,6 +232,7 @@ export const pressKnowledge = [
   },
   {
     id: 'newsroom-work',
+    unlock: 'publication',
     station: 'desk',
     label: 'Sổ tay tái dựng của tòa soạn',
     title: 'Tòa soạn không chỉ có người viết',
@@ -275,6 +280,7 @@ export const pressKnowledge = [
   },
   {
     id: 'democratic-front',
+    unlock: 'voices',
     station: 'desk',
     label: 'Bản đồ tái dựng Mặt trận Dân chủ',
     title: 'Từ khẩu hiệu đến tổ chức',
@@ -319,6 +325,7 @@ export const pressKnowledge = [
   },
   {
     id: 'self-criticism',
+    unlock: 'pressure',
     station: 'shelf',
     label: 'Bản tái dựng sách Tự chỉ trích',
     title: 'Khi một phong trào phải tự hỏi mình',
@@ -364,6 +371,7 @@ export const pressKnowledge = [
   },
   {
     id: 'censorship',
+    unlock: 'pressure',
     station: 'press',
     label: 'Hồ sơ tái dựng vụ khám xét',
     title: 'Đừng gộp tháng 3 với tháng 9',
