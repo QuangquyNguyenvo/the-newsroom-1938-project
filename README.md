@@ -1,4 +1,6 @@
-# Giữ tiếng nói
+# The Newsroom 1938 Project
+
+**Giữ tiếng nói**
 
 Trò chơi giải đố 3D trên trình duyệt về báo chí cách mạng của Đảng trong phong trào dân chủ 1936–1939, lấy báo **Dân Chúng** (Sài Gòn, 1938–1939) làm trục lịch sử.
 
