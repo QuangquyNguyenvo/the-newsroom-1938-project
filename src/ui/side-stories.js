@@ -68,7 +68,7 @@ export function createSideStories({
       story.label,
       'CHUYỆN TRONG PHÒNG · HƯ CẤU',
       `<article class="side-story">
-      <header class="side-head">${story.photo ? `<figure class="side-object"><img src="${story.photo.src}" alt="" width="528" height="384"><figcaption>Ảnh minh họa: ${escape(story.photo.credit)}</figcaption></figure>` : '<div class="side-object side-drawn" aria-hidden="true"></div>'}<p class="side-origin">${escape(story.arrival)}</p></header>
+      <header class="side-head">${story.photo ? `<figure class="side-object"><img src="${import.meta.env.BASE_URL}${story.photo.src}" alt="" width="528" height="384"><figcaption>Ảnh minh họa: ${escape(story.photo.credit)}</figcaption></figure>` : '<div class="side-object side-drawn" aria-hidden="true"></div>'}<p class="side-origin">${escape(story.arrival)}</p></header>
       <nav class="side-stages" aria-label="Các chặng câu chuyện">${story.scenes.map((_, i) => (i <= stage() ? `<button data-stage="${i}" aria-pressed="${i === index}">${escape(storyStages[i])}</button>` : '')).join('')}</nav>
       <span class="eyebrow">${escape(readerForStory(story).name)} · ${index + 1}/3 CHẶNG</span><h3>${escape(entry.title)}</h3>
       <p class="side-scene">${escape(entry.scene)}</p><div>${entry.lines.map(quote).join('')}</div>

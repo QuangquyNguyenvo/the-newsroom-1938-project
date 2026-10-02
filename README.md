@@ -4,6 +4,8 @@
 
 Trò chơi giải đố 3D trên trình duyệt về báo chí cách mạng của Đảng trong phong trào dân chủ 1936–1939, lấy báo **Dân Chúng** (Sài Gòn, 1938–1939) làm trục lịch sử.
 
+**Chơi ngay:** https://quangquynguyenvo.github.io/the-newsroom-1938-project/
+
 Sản phẩm dự án môn Lịch sử Đảng Cộng sản Việt Nam của Nhóm 10.
 
 ## Chủ đề lịch sử
