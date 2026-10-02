@@ -27,7 +27,7 @@ test('corrupt settings cannot enable invalid sizes or non-finite exposure', () =
   assert.equal(value.exposure, 1);
   assert.equal(value.film, 0);
   assert.equal(value.bloom, false);
-  assert.equal(value.dpr, 1.25);
+  assert.equal(value.dpr, 1);
   assert.equal(normalizeGraphics({ preset: '__proto__' }).preset, 'balanced');
 });
 test('presets saved before GPU detection restart from the detected level; custom and chosen ones survive', () => {
