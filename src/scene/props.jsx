@@ -1,10 +1,16 @@
 import React, { useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { detail } from './detail.js';
 
 // Small illustrative props. Dimensions stay in room units, with real edge silhouettes.
 export function BevelBox({ size, radius = 0.004, material, ...props }) {
-  const geometry = useMemo(() => new RoundedBoxGeometry(...size, 2, radius), [...size, radius]);
+  // A bevelled box is 300 triangles, a plain one 12; hundreds of books and slats add up.
+  const geometry = useMemo(
+    () =>
+      detail.low ? new THREE.BoxGeometry(...size) : new RoundedBoxGeometry(...size, 2, radius),
+    [...size, radius],
+  );
   useEffect(() => () => geometry.dispose(), [geometry]);
   return <mesh geometry={geometry} material={material} castShadow receiveShadow {...props} />;
 }

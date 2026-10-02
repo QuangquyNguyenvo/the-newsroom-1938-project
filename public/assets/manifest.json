@@ -832,6 +832,186 @@
       "historicalEvidence": false,
       "sha256": "2db1df9cd451a9d1722f5d07508351840f3154980ecb5f1fa2b2298392a95411",
       "note": "One-centime coin of French Indochina dated 1939, both faces. A real coin of the period shown as an example of the small change in the fictional story. Cropped to 528x384 from the Wikimedia Commons file."
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/mantel_clock_01_lod.gltf",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "370fe49cd2880052ef5b0d749eae349c3b841c983a029b7139b4dfb911bbde65",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/mantel_clock_01_lod.bin",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "7a247781b871b94decc15566ecf4e3b3b7acf2a09c809c517bdb99e74df7f0bc",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/mantel_clock_01/textures/mantel_clock_01_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/mantel_clock_01",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "92e5614e74e4849da42e737a66925a703d753f51f03b3e565ef36b4eaedd7548",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/wicker_basket_01_lod.gltf",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "58cdfe720912d4e658a1d9dcc7d29fc73e5db901ab5f92eaf323ef16d5bda9c4",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/wicker_basket_01_lod.bin",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "f392a43d4b3ce5b5d4c07ed83d66abfd297a0feef53b2e58c50beee12fae9656",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wicker_basket_01/textures/wicker_basket_01_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wicker_basket_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "1f90e865ab7dcf4a06a86724c92ed08e4a607463fc618ca99ca6743dc5d61f51",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/wooden_bookshelf_worn_lod.gltf",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "b17791c2be93bf1c693a3f1a980e1cc361ba14104933d6a81355a409f7136ab4",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/wooden_bookshelf_worn_lod.bin",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "8d3566ef39bf304445b48009900c4d506032acfa5b648cb48d8a71a06057396b",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wooden_bookshelf_worn/textures/wooden_bookshelf_worn_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_bookshelf_worn",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "11374b2f18f006553734fb57218a8d8998c03060c69943b034ba342229879f1d",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/vintage_oil_lamp_lod.gltf",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "e59d992db8c8fdeb6c116bb06f09727f743b27e6d164ce15b49ea86910e64459",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/vintage_oil_lamp_lod.bin",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "23b9a7a3c80b49c789bb21bb4d7ffb3b8b5c5ac553256a5ae94c9727b990c231",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_glass_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "47040f9cd585878113d77cf9cb25e66df344505e66d8e2c606bded3e62bfa39b",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "89deb4f397f631e272a96b17d9dab14803c08e68cb4523fc193b8e955e42c886",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/vintage_oil_lamp/textures/vintage_oil_lamp_flame_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/vintage_oil_lamp",
+      "license": "CC0-1.0",
+      "historicalEvidence": false,
+      "sha256": "9a54ce576c9ae66531d93237f55974aff48fceebf988f6e54aaf2517709b9015",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/jug_01/jug_01_lod.gltf",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "00ed696fa6b3ad38434f309dcfa2cb4a2d9e0d4cff19a4775da0acb00df77b4f",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/jug_01/jug_01_lod.bin",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "6c68a2d121bf088f2702419c6dfcffa016ecfb8db41d7a0d5d33685a32b1a774",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/jug_01/textures/jug_01_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/jug_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "2a4728c69334ddada8869530aed7245cad62d9ee29a194a9f6623a2f9ec266c1",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/wooden_crate_01_lod.gltf",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "2a252972bb795251c8f0f8ffeab339af41f95fc2077eade0a6b78cda9c760204",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/wooden_crate_01_lod.bin",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "ef31e1f83e15e5153b9114598201ab424de6298b708d94c6d06a024c6a7ddf42",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
+    },
+    {
+      "path": "/assets/models/wooden_crate_01/textures/wooden_crate_01_diff_512.jpg",
+      "type": "derived-model-asset",
+      "origin": "https://polyhaven.com/a/wooden_crate_01",
+      "license": "CC0",
+      "historicalEvidence": false,
+      "sha256": "c2e368ae7a684a0e2063264887207a137f904c4b99605fcf93cce7b56780657f",
+      "note": "Low-detail version of the same Poly Haven model for the lighter graphics presets: simplified mesh (meshoptimizer) and a 512 px colour map only."
     }
   ],
   "pending": [

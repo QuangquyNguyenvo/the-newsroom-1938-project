@@ -10,6 +10,7 @@ import { normalizeGraphics } from './graphics.js';
 import { trackAssets } from './loading.js';
 import { createBenchmark } from './benchmark.js';
 import { createSimpleShading } from './simple-shading.js';
+import { detail } from './detail.js';
 
 function FrameDriver({ tick, render }) {
   useFrame((state, delta) => tick(state, delta));
@@ -37,6 +38,7 @@ export function createEngine(container, onPick, onHover, initialGraphics) {
     }
     let scene, camera, renderer, canvas, room, invalidateFrame, cinematic, benchmark;
     let graphics = normalizeGraphics(initialGraphics);
+    detail.low = graphics.lighting !== 'full';
     let notebookDistance = graphics.dpr >= 1.65 ? 8 : 3.45;
     const benchmarkMode = new URLSearchParams(location.search).get('benchmark');
     const profiling = benchmarkMode === '1' || benchmarkMode === 'ambient';

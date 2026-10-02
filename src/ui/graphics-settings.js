@@ -36,9 +36,12 @@ export function createGraphicsSettings(root, getEngine, onAtmosphere) {
       storage?.setItem(graphicsManualKey, '1');
     } catch {}
   };
-  let settings = loadGraphics(storage, compact, tier),
+  let startedLight,
+    settings = loadGraphics(storage, compact, tier),
     returnFocus,
     announcement;
+  // Model detail is chosen when the room is built, so remember which side we started on.
+  startedLight = settings.lighting !== 'full';
   const icon =
     '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 9h22M5 16h22M5 23h22"/><circle cx="12" cy="9" r="3"/><circle cx="22" cy="16" r="3"/><circle cx="10" cy="23" r="3"/></svg>';
   root
@@ -114,9 +117,11 @@ export function createGraphicsSettings(root, getEngine, onAtmosphere) {
     const saved = saveGraphics(storage, settings);
     clearTimeout(announcement);
     announcement = setTimeout(() => {
-      dialog.querySelector('#graphics-status').textContent = saved
-        ? 'Đã áp dụng và lưu cài đặt.'
-        : 'Đã áp dụng cho lần chơi này.';
+      dialog.querySelector('#graphics-status').textContent =
+        (saved ? 'Đã áp dụng và lưu cài đặt.' : 'Đã áp dụng cho lần chơi này.') +
+        ((settings.lighting !== 'full') !== startedLight
+          ? ' Độ chi tiết mô hình sẽ đổi sau khi tải lại trang.'
+          : '');
     }, 250);
   }
   dialog.querySelectorAll('[data-preset]').forEach((el) =>

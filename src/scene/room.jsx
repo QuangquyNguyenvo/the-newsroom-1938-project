@@ -23,13 +23,14 @@ import { StoryProps } from './story-props.jsx';
 import { ShelfDressing } from './shelf-dressing.jsx';
 import { KnowledgeProps } from './knowledge-props.jsx';
 import { roomProps } from '../content/room-props.js';
+import { detail, lowDetailModels } from './detail.js';
 
 const ambientIds = new Set(roomProps.map((prop) => prop.id));
 const InteractionContext = React.createContext(null);
 const base = import.meta.env.BASE_URL;
 RectAreaLightUniformsLib.init();
 const assetUrl = (asset) =>
-  `${base}assets/models/${asset}/${asset === 'proofing-press' ? 'proofing-press.glb' : asset + '_1k.gltf'}`;
+  `${base}assets/models/${asset}/${asset === 'proofing-press' ? 'proofing-press.glb' : asset + (detail.low && lowDetailModels.has(asset) ? '_lod.gltf' : '_1k.gltf')}`;
 
 function boxGeometry(size, tiles) {
   const geometry = new THREE.BoxGeometry(...size);

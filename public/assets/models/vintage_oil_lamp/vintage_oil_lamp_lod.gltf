@@ -1,0 +1,318 @@
+{
+  "asset": {
+    "generator": "glTF-Transform v4.5.1",
+    "version": "2.0"
+  },
+  "accessors": [
+    {
+      "type": "SCALAR",
+      "componentType": 5123,
+      "count": 1407,
+      "bufferView": 0,
+      "byteOffset": 0
+    },
+    {
+      "type": "SCALAR",
+      "componentType": 5123,
+      "count": 6144,
+      "bufferView": 0,
+      "byteOffset": 2816
+    },
+    {
+      "type": "SCALAR",
+      "componentType": 5123,
+      "count": 24,
+      "bufferView": 0,
+      "byteOffset": 15104
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 368,
+      "max": [
+        0.02294541522860527,
+        0.8016371726989746,
+        0.02286430075764656
+      ],
+      "min": [
+        -0.022945230826735497,
+        0.42623430490493774,
+        -0.022945260629057884
+      ],
+      "bufferView": 1,
+      "byteOffset": 0
+    },
+    {
+      "type": "VEC2",
+      "componentType": 5126,
+      "count": 368,
+      "bufferView": 1,
+      "byteOffset": 12
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 368,
+      "bufferView": 1,
+      "byteOffset": 20
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 1342,
+      "max": [
+        0.10999996960163116,
+        0.471133291721344,
+        0.10999996960163116
+      ],
+      "min": [
+        -0.11000002920627594,
+        -1.822867901069003e-8,
+        -0.11000002175569534
+      ],
+      "bufferView": 2,
+      "byteOffset": 0
+    },
+    {
+      "type": "VEC2",
+      "componentType": 5126,
+      "count": 1342,
+      "bufferView": 2,
+      "byteOffset": 12
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 1342,
+      "bufferView": 2,
+      "byteOffset": 20
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 16,
+      "max": [
+        0.012247968465089798,
+        0.5270751714706421,
+        0.012247966602444649
+      ],
+      "min": [
+        -0.012247968465089798,
+        0.46773654222488403,
+        -0.012247967533767223
+      ],
+      "bufferView": 3,
+      "byteOffset": 0
+    },
+    {
+      "type": "VEC2",
+      "componentType": 5126,
+      "count": 16,
+      "bufferView": 3,
+      "byteOffset": 12
+    },
+    {
+      "type": "VEC3",
+      "componentType": 5126,
+      "count": 16,
+      "bufferView": 3,
+      "byteOffset": 20
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 15152,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 15152,
+      "byteLength": 11776,
+      "byteStride": 32,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 26928,
+      "byteLength": 42944,
+      "byteStride": 32,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 69872,
+      "byteLength": 512,
+      "byteStride": 32,
+      "target": 34962
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "textures": [
+    {
+      "source": 0,
+      "sampler": 0
+    },
+    {
+      "source": 1,
+      "sampler": 0
+    },
+    {
+      "source": 3,
+      "sampler": 0
+    },
+    {
+      "source": 2,
+      "sampler": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "vintage_oil_lamp_glass_diff-vintage_oil_lamp_glass_alpha",
+      "mimeType": "image/jpeg",
+      "uri": "textures/vintage_oil_lamp_glass_diff_512.jpg"
+    },
+    {
+      "name": "vintage_oil_lamp_diff",
+      "mimeType": "image/jpeg",
+      "uri": "textures/vintage_oil_lamp_diff_512.jpg"
+    },
+    {
+      "name": "vintage_oil_lamp_flame_diff",
+      "mimeType": "image/jpeg",
+      "uri": "textures/vintage_oil_lamp_flame_diff_1k.jpg"
+    },
+    {
+      "name": "vintage_oil_lamp_flame_diff-vintage_oil_lamp_flame_alpha",
+      "mimeType": "image/jpeg",
+      "uri": "textures/vintage_oil_lamp_flame_diff_512.jpg"
+    }
+  ],
+  "buffers": [
+    {
+      "uri": "vintage_oil_lamp_lod.bin",
+      "byteLength": 70384
+    }
+  ],
+  "materials": [
+    {
+      "name": "vintage_oil_lamp_glass",
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        }
+      }
+    },
+    {
+      "name": "vintage_oil_lamp",
+      "doubleSided": true,
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        }
+      }
+    },
+    {
+      "name": "vintage_oil_lamp_flame",
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "pbrMetallicRoughness": {
+        "roughnessFactor": 0,
+        "metallicFactor": 0,
+        "baseColorTexture": {
+          "index": 2
+        }
+      },
+      "emissiveFactor": [
+        1,
+        1,
+        1
+      ],
+      "emissiveTexture": {
+        "index": 3
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Glass.001",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 3,
+            "TEXCOORD_0": 4,
+            "NORMAL": 5
+          },
+          "mode": 4,
+          "material": 0,
+          "indices": 0
+        }
+      ]
+    },
+    {
+      "name": "Circle.003",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 6,
+            "TEXCOORD_0": 7,
+            "NORMAL": 8
+          },
+          "mode": 4,
+          "material": 1,
+          "indices": 1
+        }
+      ]
+    },
+    {
+      "name": "Plane.003",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 9,
+            "TEXCOORD_0": 10,
+            "NORMAL": 11
+          },
+          "mode": 4,
+          "material": 2,
+          "indices": 2
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "vintage_oil_lamp_glass",
+      "mesh": 0
+    },
+    {
+      "name": "vintage_oil_lamp",
+      "mesh": 1
+    },
+    {
+      "name": "vintage_oil_lamp_flame",
+      "mesh": 2
+    }
+  ],
+  "scenes": [
+    {
+      "name": "blend_export",
+      "nodes": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "scene": 0
+}
