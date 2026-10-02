@@ -27,7 +27,7 @@
       "type": "procedural-illustration",
       "origin": "Locally authored deterministic canvas height maps, 2026-10-01",
       "historicalEvidence": false,
-      "note": "Smooth low-contrast limewash colour and continuous shallow plaster relief replace the noisy generated wall map. Matte cement grout, paper fibres and book page edges in materials.js. Educational surface treatment, not scans of the original office."
+      "note": "Smooth low-contrast limewash colour and continuous shallow plaster relief replace the earlier noisy wall map. Matte cement grout, paper fibres and book page edges in materials.js. Educational surface treatment, not scans of the original office."
     },
     {
       "path": "runtime:detailed-editorial-props",
@@ -76,7 +76,7 @@
       "path": "/assets/textures/archival-paper.webp",
       "type": "illustrative-texture",
       "historicalEvidence": false,
-      "note": "Inspected visually; seamless edge behavior is not independently certified. Used as base-color only, not a PBR material set.",
+      "note": "Seamless edge behavior is not independently certified. Used as base-color only, not a PBR material set.",
       "originalSha256": "c436a56ddea11e43a079867e3704f6da925f63d532ce3739ad825c6894bb3cae",
       "sha256": "f81de02f955916efbe1c500325231180f54f4eff7a3314cc50febfbed453fb82",
       "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
@@ -165,7 +165,7 @@
       "type": "illustrative-texture",
       "historicalEvidence": false,
       "sha256": "8d1e439b5960980a090cff6a92d93bca63540e7b66af8e273f952a7485b0f5ef",
-      "note": "New matte cement tile design inspired by early twentieth-century Saigon encaustic floors; not an exact archival pattern. Rendered at an illustrative 50 cm tile size.",
+      "note": "Matte cement tile design inspired by early twentieth-century Saigon encaustic floors; not an exact archival pattern. Rendered at an illustrative 50 cm tile size.",
       "originalSha256": "ee99841384c704f77492560e0bd4da2a0c32f3292be3ee53a61dfcd10b1bcc7d",
       "encoding": "Lossless WebP; same dimensions and pixels as the original PNG."
     },
