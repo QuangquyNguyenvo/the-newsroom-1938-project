@@ -41,6 +41,23 @@ const sources = {
       'Báo Dân Chúng, dấu son trong lịch sử báo chí cách mạng Việt Nam, Thành ủy Thành phố Hồ Chí Minh',
     url: 'https://www.hcmcpv.org.vn/tin-tuc/bao-dan-chung-dau-son-trong-lich-su-bao-chi-cach-mang-viet-nam-1491880968',
   },
+  movement: {
+    title: 'Phong trào Dân chủ Đông Dương (1936-1939), Wikipedia tiếng Việt',
+    url: 'https://vi.wikipedia.org/wiki/Phong_tr%C3%A0o_D%C3%A2n_ch%E1%BB%A7_%C4%90%C3%B4ng_D%C6%B0%C6%A1ng_(1936%E2%80%931939)',
+  },
+  partyHistory: {
+    title:
+      'Chủ trương của Đảng Cộng sản Đông Dương trong xây dựng lực lượng cách mạng giai đoạn 1936-1939, Tạp chí Lịch sử Đảng',
+    url: 'https://tapchilichsudang.vn/chu-truong-cua-dang-cong-san-dong-duong-trong-xay-dung-luc-luong-cach-mang-giai-doan-1936-1939.html',
+  },
+  cu: {
+    title: 'Nguyễn Văn Cừ, Wikipedia tiếng Việt',
+    url: 'https://vi.wikipedia.org/wiki/Nguy%E1%BB%85n_V%C4%83n_C%E1%BB%AB',
+  },
+  sixthPlenum: {
+    title: 'Chỉ đạo chiến lược của Đảng trong cuộc Cách mạng tháng Tám 1945, Báo Thanh Tra',
+    url: 'https://thanhtra.com.vn/doi-noi-52FA82FBF/chi-dao-chien-luoc-cua-dang-trong-cuoc-cach-mang-thang-tam-1945-CDA9CD28.html',
+  },
 };
 
 export const pressKnowledgeSources = sources;
@@ -210,6 +227,11 @@ export const pressKnowledge = [
         source: sources.danChung,
       },
       {
+        title: 'Học chữ để đọc được báo',
+        body: 'Cuối năm 1937, Đảng phát động phong trào truyền bá chữ Quốc ngữ để người dân đọc được sách báo. Với những bạn đọc ít chữ như chị Tư, nhân vật hư cấu trong trò chơi, biết chữ quyết định việc một tờ báo đến thẳng tay mình hay phải nhờ người khác đọc giùm.',
+        source: sources.movement,
+      },
+      {
         title: 'Đọc báo là một hành động xã hội',
         body: 'Một con số phát hành không kể hết ai đã đọc, ai nghe nhờ người khác và ai chuyền tờ báo đi tiếp. Từ những gì nguồn ghi về số lượng và nội dung, người chơi có thể đặt câu hỏi: một bài báo trở thành tiếng nói chung bằng cách nào, và ai vẫn có thể bị bỏ sót?',
         source: sources.danChung,
@@ -289,6 +311,18 @@ export const pressKnowledge = [
       'Các cụm từ trên trang báo không tự biến thành hành động. Phần đọc thêm này nối nội dung báo chí với những hình thức tổ chức và những người lao động mà báo muốn hướng tới.',
     pages: [
       {
+        title: 'Từ Moskva đến Thượng Hải',
+        body: 'Đại hội VII Quốc tế Cộng sản (7/1935) xác định kẻ thù nguy hiểm trước mắt của nhân dân thế giới là chủ nghĩa phát xít. Đoàn đại biểu Đảng Cộng sản Đông Dương do Lê Hồng Phong dẫn đầu lần đầu dự Đại hội. Ở Pháp, trước sức ép của Đảng Cộng sản Pháp và phong trào cánh tả, nhà cầm quyền phải thay đổi một số chính sách, trong đó có việc thả tù chính trị. Tháng 7/1936, Hội nghị Trung ương do Lê Hồng Phong chủ trì họp ở Thượng Hải để định đường lối mới cho Đông Dương.',
+        source: sources.movement,
+        relatedSources: [sources.partyHistory],
+      },
+      {
+        title: 'Chiến lược giữ nguyên, mục tiêu trước mắt đổi',
+        body: 'Hội nghị tháng 7/1936 giữ nhiệm vụ chiến lược là chống đế quốc và phong kiến. Mục tiêu trước mắt được đặt cụ thể hơn: chống phát xít, chống chiến tranh đế quốc, chống bọn phản động thuộc địa và tay sai, đòi tự do, dân chủ, cơm áo, hòa bình. Mặt trận nhân dân phản đế được hiểu là cuộc liên hợp hết các giai cấp trong toàn dân tộc bị áp bức. Hiểu hai tầng nhiệm vụ này giúp tránh nghĩ rằng Đảng đã bỏ mục tiêu độc lập dân tộc.',
+        source: sources.partyHistory,
+        relatedSources: [sources.movement],
+      },
+      {
         title: 'Một nhiệm vụ trung tâm',
         body: 'Một bài viết của Thành ủy Thành phố Hồ Chí Minh dẫn lại Hội nghị Trung ương ngày 29 và 30/3/1938, trong đó việc thực hiện Mặt trận dân chủ thống nhất được xác định là nhiệm vụ trung tâm của Đảng trong giai đoạn ấy. Báo công khai được đặt vào trong nhiệm vụ vận động rộng rãi đó.',
         source: sources.cityParty,
@@ -307,6 +341,12 @@ export const pressKnowledge = [
         title: 'Một trang báo có thể làm nhiều việc',
         body: 'Theo nguồn bảo tàng, báo chí thời kỳ này vừa tuyên truyền, vừa phổ biến chủ trương, vừa thúc đẩy các cuộc đấu tranh hưởng ứng lẫn nhau giữa nhiều địa phương. Vì thế một bài báo không chỉ truyền tin, nó còn cố làm cho những yêu cầu rời rạc nhận ra nhau.',
         source: sources.press1936,
+      },
+      {
+        title: 'Những cuộc vận động lớn',
+        body: 'Phong trào Đông Dương Đại hội bắt đầu từ một sáng kiến ở Sài Gòn rồi lan ra cả nước; riêng Nam Kỳ, đến cuối tháng 9/1936 đã có hơn 600 ủy ban hành động của công nhân, nông dân, viên chức. Ngày 1/1/1937, ở Nam Kỳ hơn 20.000 người đủ các giới tham gia cuộc đón Gôđa (Godart), phái viên của Chính phủ Pháp. Ngày 1/5/1938, ngày Quốc tế Lao động lần đầu được kỷ niệm công khai ở Đông Dương; tại nhà Đấu Xảo Hà Nội có trên 2 vạn người dự mít tinh.',
+        source: sources.movement,
+        relatedSources: [sources.partyHistory],
       },
     ],
     challenge: {
@@ -398,6 +438,11 @@ export const pressKnowledge = [
         title: 'Ngày đóng cửa trong tháng 9',
         body: 'Bài viết của Thành ủy ghi ngày 7/9/1939 nhà cầm quyền Pháp tại Sài Gòn ra lệnh đóng cửa Dân Chúng, tịch thu tài sản và truy lùng ban biên tập cùng cộng tác viên. Đây là mốc sau số 80 và nằm trong bối cảnh chiến tranh thế giới bùng nổ, khi báo chí cách mạng chuyển vào hoạt động bí mật.',
         source: sources.cityParty,
+      },
+      {
+        title: 'Người chỉ đạo không còn ngồi bên bàn báo',
+        body: 'Sau Hội nghị Trung ương tháng 11/1939, ngày 17/1/1940 Tổng Bí thư Nguyễn Văn Cừ bị bắt ở Sài Gòn cùng nhiều tài liệu quan trọng. Ngày 28/8/1941, ông bị xử bắn cùng một số đảng viên khác, trong đó có Hà Huy Tập..',
+        source: sources.cu,
       },
     ],
     challenge: {

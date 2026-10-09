@@ -34,7 +34,7 @@ export const editorial = {
         before: 'Trước nguy cơ chiến tranh, đòi',
         after: 'là yêu cầu chung.',
         article:
-          'Chống phát xít và chống chiến tranh gắn với những yêu cầu dân sinh, dân chủ trong giai đoạn này.',
+          'Đại hội VII Quốc tế Cộng sản (7/1935) xác định chủ nghĩa phát xít là kẻ thù nguy hiểm trước mắt. Vì vậy chống phát xít, chống chiến tranh gắn với những yêu cầu dân sinh, dân chủ trong giai đoạn này.',
         why: 'Cột báo mở rộng từ một mái nhà ra hoàn cảnh thế giới. Chọn đúng chữ là giữ mối liên hệ giữa cuộc sống thường ngày và nguy cơ chiến tranh.',
         reader:
           'Trong câu chuyện hư cấu, chị Tư muốn con được lớn lên và đi học. Mong muốn ấy giúp bạn hiểu một khẩu hiệu qua đời sống cụ thể.',
@@ -111,13 +111,13 @@ export const editorial = {
         before: 'Vai trò của Dân Chúng:',
         after: '.',
         article:
-          'Qua báo chí công khai, đường lối của Đảng được phổ biến và các yêu cầu dân chủ được vận động.',
+          'Hội nghị Trung ương ngày 29 và 30/3/1938 xác định thực hiện Mặt trận dân chủ thống nhất là nhiệm vụ trung tâm. Qua báo chí công khai, đường lối ấy được phổ biến và các yêu cầu dân chủ được vận động.',
         why: 'Bạn phân biệt cơ quan ngôn luận với một ghi chép nội bộ. Viết rõ vai trò giúp người đọc hiểu vị trí chính trị của thông tin mình tiếp nhận.',
         reader:
           'Biết nguồn không khiến anh Ba hết sợ sức ép của chủ xe. Nhưng anh có thể nói rõ đâu là thông tin đã đối chiếu, đâu là lời người khác kể.',
         misread:
           'Hồ sơ xác nhận cơ quan chủ quản. Một bản nháp hay chuyện khổ giấy không nói được tổ chức đứng sau tờ báo.',
-        source: 'museum',
+        source: 'cityParty',
       },
     ],
   },

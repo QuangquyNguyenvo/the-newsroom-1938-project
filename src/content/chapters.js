@@ -32,6 +32,11 @@ export const sources = {
     url: 'https://vi.wikipedia.org/wiki/Phong_tr%C3%A0o_D%C3%A2n_ch%E1%BB%A7_%C4%90%C3%B4ng_D%C6%B0%C6%A1ng_(1936%E2%80%931939)',
     checked: '2026-09-30',
   },
+  sixthPlenum: {
+    title: 'Chỉ đạo chiến lược của Đảng trong cuộc Cách mạng tháng Tám 1945, Báo Thanh Tra',
+    url: 'https://thanhtra.com.vn/doi-noi-52FA82FBF/chi-dao-chien-luoc-cua-dang-trong-cuoc-cach-mang-thang-tam-1945-CDA9CD28.html',
+    checked: '2026-10-10',
+  },
 };
 
 // `note` is the editor's own margin note. `reader` ties the page to the fictional letter
@@ -225,7 +230,7 @@ export const chapters = [
       'Tờ báo của Đảng vận động những yêu cầu nào? Mở bản thảo trên bàn, lật đến ghi chú cuối rồi khoanh ba cụm từ.',
     letter: readers.tu,
     narration:
-      'Sài Gòn, 1938. Từ năm 1936, Đảng đã tận dụng điều kiện mới để vận động công khai, hợp pháp; tháng 3/1938, Mặt trận Dân chủ Đông Dương được thành lập. Bản thảo trên bàn phải nói đúng điều Đảng muốn dân nghe.',
+      'Sài Gòn, 1938. Đại hội VII Quốc tế Cộng sản (7/1935) đã chỉ ra kẻ thù nguy hiểm trước mắt là chủ nghĩa phát xít. Tháng 7/1936, Hội nghị Trung ương do Lê Hồng Phong chủ trì ở Thượng Hải đưa Đảng sang vận động công khai, hợp pháp; tháng 3/1938, Mặt trận Dân chủ Đông Dương ra đời. Bản thảo trên bàn phải nói đúng điều Đảng muốn dân nghe.',
     slots: [
       {
         label: 'Yêu cầu đời sống',
@@ -257,6 +262,9 @@ export const chapters = [
     impact:
       'Bản tin của bạn đưa ba yêu cầu mà Hội nghị Trung ương tháng 7/1936 đề ra thành lời lẽ giản dị: cơm áo, hòa bình, dân chủ. Người thợ, người dân đọc báo biết mình được đòi những gì, và biết đòi một cách công khai, hợp pháp.',
     impactSource: 'movement',
+    history:
+      'Hội nghị Trung ương tháng 7/1936 giữ nhiệm vụ chiến lược là chống đế quốc và phong kiến, nhưng đặt mục tiêu trước mắt là tự do, dân chủ, cơm áo, hòa bình, và chủ trương lập Mặt trận Thống nhất nhân dân phản đế Đông Dương. Từ một sáng kiến ở Sài Gòn, phong trào Đông Dương Đại hội lan ra cả nước; riêng Nam Kỳ, đến cuối tháng 9/1936 đã có hơn 600 ủy ban hành động. Tháng 3/1938, mặt trận được đổi thành Mặt trận Dân chủ Đông Dương.',
+    historySources: ['movement', 'partyHistory'],
     video: null,
     poster: null,
     source: 'museum',
@@ -269,7 +277,7 @@ export const chapters = [
       'Dân Chúng là cơ quan ngôn luận của tổ chức nào, và số đầu ra ngày nào? Bắt đầu ở kệ tư liệu.',
     letter: readers.ba,
     narration:
-      'Có người hỏi: ai đứng sau tờ báo này? Câu trả lời phải chính xác. Sổ đỏ và hồ sơ trên kệ giữ dấu vết của Trung ương Đảng.',
+      'Ngày 29/3/1938, Hội nghị Trung ương bầu Nguyễn Văn Cừ, khi ấy 26 tuổi, làm Tổng Bí thư. Bốn tháng sau, Dân Chúng ra số đầu giữa Sài Gòn. Có người hỏi: ai đứng sau tờ báo này? Câu trả lời phải chính xác. Sổ đỏ và hồ sơ trên kệ giữ dấu vết của Trung ương Đảng.',
     slots: [
       {
         label: 'Tờ báo',
@@ -305,6 +313,9 @@ export const chapters = [
     impact:
       'Bạn đọc biết tờ báo họ cầm là tiếng nói của Trung ương Đảng, do Nguyễn Văn Cừ và Hà Huy Tập trực tiếp chỉ đạo. Số in của báo tăng từ khoảng 2.000 bản lên 15.000 bản vào số Xuân 1939.',
     impactSource: 'cityParty',
+    history:
+      'Dân Chúng ra đời khi phong trào công khai đang lên cao. Ngày 1/5/1938, lần đầu tiên ở Đông Dương, ngày Quốc tế Lao động được kỷ niệm công khai, rầm rộ; riêng tại nhà Đấu Xảo Hà Nội có trên 2 vạn người dự mít tinh. Đảng đưa người của Mặt trận Dân chủ ra ứng cử vào Viện dân biểu Bắc Kỳ, Trung Kỳ và Hội đồng quản hạt Nam Kỳ. Bên cạnh Dân Chúng còn có nhiều tờ báo công khai khác như Tin Tức, Đời Nay, Phổ Thông, Lao Động.',
+    historySources: ['movement', 'partyHistory'],
     video: null,
     poster: null,
     source: 'museum',
@@ -317,7 +328,7 @@ export const chapters = [
       'Tòa soạn bị bắt, nhưng báo còn ra sau đó bao lâu? Đối chiếu ngày trên ảnh với số cuối trong ngăn kéo.',
     letter: readers.nam,
     narration:
-      'Tháng 3/1939, chính quyền thuộc địa bắt giam những người làm ở tòa soạn. Nhưng sổ lưu ghi Dân Chúng còn ra tới tháng 8. Điều gì đã giữ tờ báo sống thêm năm tháng?',
+      'Tháng 3/1939, chính quyền thuộc địa bắt giam những người làm ở tòa soạn. Châu Âu đang trượt dần về phía chiến tranh. Nhưng sổ lưu ghi Dân Chúng còn ra tới tháng 8. Điều gì đã giữ tờ báo sống thêm năm tháng?',
     slots: [
       { label: 'Vụ bắt giữ', choices: ['7/3/1939', '30/8/1939', '22/7/1938'], answer: '7/3/1939' },
       { label: 'Số báo cuối', choices: ['Số 80', 'Số 1', 'Bản nháp'], answer: 'Số 80' },
@@ -342,6 +353,9 @@ export const chapters = [
     impact:
       'Bản tin của bạn cho thấy bắt người không bắt được tiếng nói. Sau Thông báo khẩn cấp của Trung ương ngày 10/3/1939, bạn đọc mít tinh phản đối và quyên góp giúp báo. Dân Chúng ra đến số 80 ngày 30/8/1939 rồi rút vào bí mật. Tháng 9/1939, khi chiến tranh thế giới bùng nổ, nhà cầm quyền Pháp ra lệnh đóng cửa báo; Đảng chuyển vào hoạt động bí mật.',
     impactSource: 'cityParty',
+    history:
+      'Ngày 1/9/1939, Chiến tranh thế giới thứ hai bùng nổ. Ngày 6/11/1939, Hội nghị Trung ương lần thứ 6 họp tại Bà Điểm (Hóc Môn, Gia Định) do Tổng Bí thư Nguyễn Văn Cừ chủ trì. Hội nghị nhận định giải phóng dân tộc là nhiệm vụ hàng đầu và cấp bách nhất, lập Mặt trận Dân tộc thống nhất phản đế Đông Dương thay cho Mặt trận Dân chủ. Đảng chuyển từ đấu tranh đòi dân sinh, dân chủ sang đấu tranh trực tiếp đánh đổ chính quyền của đế quốc và tay sai.',
+    historySources: ['sixthPlenum'],
     video: null,
     poster: null,
     source: 'museum',
@@ -350,6 +364,7 @@ export const chapters = [
 
 // Fictional composite readers give the player someone to write for. Epilogue facts are sourced.
 export const epilogue = {
-  text: 'Tháng 9/1939, chiến tranh thế giới nổ ra, Dân Chúng bị đóng cửa. Tháng 11/1939, Hội nghị Trung ương dưới sự chỉ đạo của Tổng Bí thư Nguyễn Văn Cừ chuyển hướng, đặt nhiệm vụ giải phóng dân tộc lên hàng đầu. Nguyễn Văn Cừ bị bắt đầu năm 1940 và hy sinh ngày 28/8/1941. Phong trào dân chủ 1936–1939, trong đó có báo chí công khai như Dân Chúng, được coi là cuộc tổng diễn tập thứ hai, chuẩn bị lực lượng cho Cách mạng Tháng Tám 1945.',
+  text: 'Tháng 9/1939, chiến tranh thế giới nổ ra, Dân Chúng bị đóng cửa. Tháng 11/1939, Hội nghị Trung ương dưới sự chủ trì của Tổng Bí thư Nguyễn Văn Cừ chuyển hướng, đặt nhiệm vụ giải phóng dân tộc lên hàng đầu. Ngày 17/1/1940, Nguyễn Văn Cừ bị bắt ở Sài Gòn; ngày 28/8/1941, ông bị xử bắn cùng một số đảng viên khác, trong đó có Hà Huy Tập, người cùng chỉ đạo tờ báo. Phong trào dân chủ 1936–1939, trong đó có báo chí công khai như Dân Chúng, được coi là một cuộc tổng diễn tập, chuẩn bị cho Cách mạng Tháng Tám 1945.',
   source: 'cu',
+  relatedSources: ['movement'],
 };
