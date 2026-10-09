@@ -6,12 +6,17 @@ import { chapters } from '../content/chapters.js';
 // Failed WebGL or assets expose a retry action instead of trapping a black screen.
 export const credits = {
   team: 'NHÓM 10',
-  members: [
-    ['25110055', 'Nguyễn Võ Quang Quý'],
-    ['25110042', 'Đào Nghiệm Minh'],
-    ['23116037', 'Lê Minh Triết'],
-    ['23116034', 'Nguyễn Thị Hồng Thắm'],
-    ['23116003', 'Trần Nguyễn Trọng Bảo'],
+  groups: [
+    ['Thực hiện chính', [['25110055', 'Nguyễn Võ Quang Quý']]],
+    ['Hỗ trợ tư liệu và nội dung', [['25110042', 'Đào Nghiệm Minh']]],
+    [
+      'Chơi thử và góp ý',
+      [
+        ['23116037', 'Lê Minh Triết'],
+        ['23116034', 'Nguyễn Thị Hồng Thắm'],
+        ['23116003', 'Trần Nguyễn Trọng Bảo'],
+      ],
+    ],
   ],
 };
 
@@ -32,7 +37,7 @@ export function bootMarkup() {
         </div>
         <div class="boot-stage">
           <div class="boot-card" data-card="team"><p class="boot-kicker">${credits.team}</p><p class="boot-small">trân trọng giới thiệu</p></div>
-          <div class="boot-card" data-card="members"><p class="boot-kicker">Thực hiện</p><ul>${credits.members.map(([id, name]) => `<li><b>${name}</b><span>${id}</span></li>`).join('')}</ul></div>
+          <div class="boot-card" data-card="members">${credits.groups.map(([role, people]) => `<div class="boot-role"><p class="boot-kicker">${role}</p><ul>${people.map(([id, name]) => `<li><b>${name}</b><span>${id}</span></li>`).join('')}</ul></div>`).join('')}</div>
           <div class="boot-card" data-card="prelude"><p class="boot-kicker">Một lá thư tới tòa soạn</p><p class="boot-quote"></p><p class="boot-small"></p></div>
         </div>
       </div>

@@ -194,29 +194,25 @@ svg.glyph {
 .boot-card[data-card='team'] .boot-small {
   font-size: 17px;
 }
+.boot-role + .boot-role {
+  margin-top: 18px;
+}
 .boot-card ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 32px;
   width: min(620px, 100%);
-  margin: 16px auto 0;
-  padding: 14px 0 0;
+  margin: 8px auto 0;
+  padding: 10px 0 0;
   border-top: 1px solid var(--ink);
   list-style: none;
-  text-align: left;
 }
 .boot-card li {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px dotted #1d1a1580;
-}
-.boot-card li:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  justify-self: center;
-  width: calc(50% - 14px);
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
 }
 .boot-card li b {
   color: var(--ink);
@@ -593,10 +589,7 @@ svg.glyph {
     border-left: 0;
   }
   .boot-card ul {
-    grid-template-columns: 1fr;
-  }
-  .boot-card li:last-child:nth-child(odd) {
-    width: 100%;
+    flex-direction: column;
   }
   .boot-foot {
     grid-template-columns: 1fr;

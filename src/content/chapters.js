@@ -51,7 +51,7 @@ export const objects = [
           chapter: 'voices',
           text: 'Chị Tư hỏi báo có nói chuyện của người như chị không. Câu trả lời bắt đầu từ đây: cơm áo đứng ngay trong mục tiêu trước mắt.',
         },
-        text: 'Tháng 7/1936, Ban Chấp hành Trung ương Đảng họp và xác định mục tiêu trước mắt: chống phát xít, chống chiến tranh, đòi tự do, dân chủ, cơm áo, hòa bình. Muốn chủ trương ấy đến được với nhân dân, cần một tờ báo công khai.',
+        text: 'Tháng 7/1936, Ban Chấp hành Trung ương Đảng họp và xác định mục tiêu trước mắt: chống phát xít, chống chiến tranh đế quốc, chống bọn phản động thuộc địa và tay sai, đòi tự do, dân chủ, cơm áo, hòa bình. Muốn chủ trương ấy đến được với nhân dân, cần báo chí công khai.',
         source: 'movement',
       },
       {
@@ -131,7 +131,7 @@ export const objects = [
           chapter: 'publication',
           text: 'Một tờ báo còn qua nhiều tay, như tờ anh Ba gấp tư mang về dãy trọ để đọc chung.',
         },
-        text: 'Số in tăng từ khoảng 2.000 lên 15.000 bản vào số Xuân 1939. Nguyễn Ái Quốc nhận xét đây là tờ báo đầu tiên ra mà không xin phép trước, và có lẽ là tờ được đọc nhiều nhất ở Đông Dương.',
+        text: 'Số in tăng từ khoảng 2.000 lên 15.000 bản vào số Xuân 1939. Nguyễn Ái Quốc nhận xét đây là tờ báo đầu tiên đã bất chấp đạo luật cấm phát hành, và cho rằng đây cũng là tờ báo được nhiều người đọc nhất Đông Dương.',
         source: 'cityParty',
       },
     ],
@@ -186,7 +186,7 @@ export const objects = [
           chapter: 'pressure',
           text: 'Năm gửi kèm thư mấy xu để dành mua tập. Em đang làm đúng việc trang này ghi lại, theo sức của một cậu học trò.',
         },
-        text: 'Ba ngày sau vụ khám xét, ngày 10/3/1939, Trung ương Đảng ra lời kêu gọi. Trong khoảng một tháng có 28 cuộc mít tinh phản đối, bạn đọc quyên góp hơn 400 đồng trong một tuần để giữ tờ báo.',
+        text: 'Ba ngày sau vụ khám xét, ngày 10/3/1939, Trung ương Đảng ra Thông báo khẩn cấp. Trong tháng sau đó có 28 cuộc mít tinh phản đối, và một cuộc lạc quyên giúp tờ báo thu được hơn 400 đồng trong một tuần.',
         source: 'cityParty',
       },
     ],
@@ -225,7 +225,7 @@ export const chapters = [
       'Tờ báo của Đảng vận động những yêu cầu nào? Mở bản thảo trên bàn, lật đến ghi chú cuối rồi khoanh ba cụm từ.',
     letter: readers.tu,
     narration:
-      'Sài Gòn, 1938. Mặt trận Dân chủ Đông Dương vừa thành lập, Đảng được lên tiếng công khai lần đầu sau nhiều năm bí mật. Bản thảo trên bàn phải nói đúng điều Đảng muốn dân nghe.',
+      'Sài Gòn, 1938. Từ năm 1936, Đảng đã tận dụng điều kiện mới để vận động công khai, hợp pháp; tháng 3/1938, Mặt trận Dân chủ Đông Dương được thành lập. Bản thảo trên bàn phải nói đúng điều Đảng muốn dân nghe.',
     slots: [
       {
         label: 'Yêu cầu đời sống',
@@ -303,7 +303,7 @@ export const chapters = [
     ],
     summary: 'Dân Chúng gắn trực tiếp với hoạt động lãnh đạo, tuyên truyền và vận động của Đảng.',
     impact:
-      'Bạn đọc biết tờ báo họ cầm là tiếng nói của Trung ương Đảng, do Hà Huy Tập và Nguyễn Văn Cừ chỉ đạo. Nhờ vậy báo lớn nhanh: từ khoảng 2.000 bản lên 15.000 bản vào số Xuân 1939.',
+      'Bạn đọc biết tờ báo họ cầm là tiếng nói của Trung ương Đảng, do Nguyễn Văn Cừ và Hà Huy Tập trực tiếp chỉ đạo. Số in của báo tăng từ khoảng 2.000 bản lên 15.000 bản vào số Xuân 1939.',
     impactSource: 'cityParty',
     video: null,
     poster: null,
@@ -317,7 +317,7 @@ export const chapters = [
       'Tòa soạn bị bắt, nhưng báo còn ra sau đó bao lâu? Đối chiếu ngày trên ảnh với số cuối trong ngăn kéo.',
     letter: readers.nam,
     narration:
-      'Tháng 3/1939, mật thám ập vào tòa soạn. Nhưng sổ lưu ghi Dân Chúng còn ra tới tháng 8. Điều gì đã giữ tờ báo sống thêm năm tháng?',
+      'Tháng 3/1939, chính quyền thuộc địa bắt giam những người làm ở tòa soạn. Nhưng sổ lưu ghi Dân Chúng còn ra tới tháng 8. Điều gì đã giữ tờ báo sống thêm năm tháng?',
     slots: [
       { label: 'Vụ bắt giữ', choices: ['7/3/1939', '30/8/1939', '22/7/1938'], answer: '7/3/1939' },
       { label: 'Số báo cuối', choices: ['Số 80', 'Số 1', 'Bản nháp'], answer: 'Số 80' },
@@ -340,7 +340,7 @@ export const chapters = [
     summary:
       'Tư liệu còn lưu lại giúp ta hiểu những khó khăn của báo chí cách mạng và vai trò của tờ báo trong phong trào dân chủ.',
     impact:
-      'Bản tin của bạn cho thấy bắt người không bắt được tiếng nói. Sau lời kêu gọi của Trung ương ngày 10/3/1939, bạn đọc mít tinh phản đối và góp tiền nuôi báo. Dân Chúng ra đến số 80. Khi chiến tranh thế giới nổ ra tháng 9/1939, báo bị đóng cửa và Đảng chuyển vào hoạt động bí mật, mang theo lực lượng đã rèn luyện qua những trang báo này.',
+      'Bản tin của bạn cho thấy bắt người không bắt được tiếng nói. Sau Thông báo khẩn cấp của Trung ương ngày 10/3/1939, bạn đọc mít tinh phản đối và quyên góp giúp báo. Dân Chúng ra đến số 80 ngày 30/8/1939 rồi rút vào bí mật. Tháng 9/1939, khi chiến tranh thế giới bùng nổ, nhà cầm quyền Pháp ra lệnh đóng cửa báo; Đảng chuyển vào hoạt động bí mật.',
     impactSource: 'cityParty',
     video: null,
     poster: null,
@@ -350,6 +350,6 @@ export const chapters = [
 
 // Fictional composite readers give the player someone to write for. Epilogue facts are sourced.
 export const epilogue = {
-  text: 'Tháng 9/1939, chiến tranh thế giới nổ ra, Dân Chúng bị đóng cửa. Tháng 11/1939, Hội nghị Trung ương dưới sự chỉ đạo của Tổng Bí thư Nguyễn Văn Cừ chuyển hướng, đặt nhiệm vụ giải phóng dân tộc lên hàng đầu. Nguyễn Văn Cừ bị bắt đầu năm 1940 và hy sinh ngày 28/8/1941. Những người từng viết, in và đọc báo trở thành lực lượng cho chặng đường tới Cách mạng Tháng Tám 1945.',
+  text: 'Tháng 9/1939, chiến tranh thế giới nổ ra, Dân Chúng bị đóng cửa. Tháng 11/1939, Hội nghị Trung ương dưới sự chỉ đạo của Tổng Bí thư Nguyễn Văn Cừ chuyển hướng, đặt nhiệm vụ giải phóng dân tộc lên hàng đầu. Nguyễn Văn Cừ bị bắt đầu năm 1940 và hy sinh ngày 28/8/1941. Phong trào dân chủ 1936–1939, trong đó có báo chí công khai như Dân Chúng, được coi là cuộc tổng diễn tập thứ hai, chuẩn bị lực lượng cho Cách mạng Tháng Tám 1945.',
   source: 'cu',
 };

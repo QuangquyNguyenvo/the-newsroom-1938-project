@@ -102,10 +102,10 @@ Xuất xứ và giấy phép của từng mô hình, hình ảnh, âm thanh và 
 
 Nhóm 10
 
-| MSSV     | Họ và tên             |
-| -------- | --------------------- |
-| 25110055 | Nguyễn Võ Quang Quý   |
-| 25110042 | Đào Nghiệm Minh       |
-| 23116037 | Lê Minh Triết         |
-| 23116034 | Nguyễn Thị Hồng Thắm  |
-| 23116003 | Trần Nguyễn Trọng Bảo |
+| MSSV     | Họ và tên             | Vai trò                    |
+| -------- | --------------------- | -------------------------- |
+| 25110055 | Nguyễn Võ Quang Quý   | Thực hiện chính            |
+| 25110042 | Đào Nghiệm Minh       | Hỗ trợ tư liệu và nội dung |
+| 23116037 | Lê Minh Triết         | Chơi thử và góp ý          |
+| 23116034 | Nguyễn Thị Hồng Thắm  | Chơi thử và góp ý          |
+| 23116003 | Trần Nguyễn Trọng Bảo | Chơi thử và góp ý          |
